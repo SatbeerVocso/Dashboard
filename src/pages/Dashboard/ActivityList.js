@@ -7,7 +7,7 @@ function ActivityList() {
     <div>
       <Card
         className="mini-stat bg-white text-dark shadow-sm"
-        style={{ height: "600px", border: "1px solid black" }}
+        style={{ height: "600px"}}
       >
         <h4 className="d-flex justify-content-center mt-2">
           PROJECT ACTIVITES
