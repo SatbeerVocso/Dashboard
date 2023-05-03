@@ -11,7 +11,6 @@ function RequestList() {
   const [showDataUpcoming, setShowDataUpcoming] = useState(false)
   const [showDataOthers, setshowDataOthers] = useState(false)
 
-
   const toggleShowData = () => {
     setShowData(!showData)
   }
@@ -19,19 +18,23 @@ function RequestList() {
   const toggleShowDataOthers = () => {
     setshowDataOthers(!showDataOthers)
   }
-  
+
   return (
     <div>
       <Card
         className="mini-stat bg-white text-dark"
-        style={{ height: '700px' }}
+        style={{ height: "700px" }}
       >
         <CardBody>
           <h4 className="mb-3">REQUEST LIST</h4>
           <div className="d-flex justify-content-start align-items-center">
             <i
               className={`ti-angle-${showData ? "up" : "right"}`}
-              style={{ fontSize: "1rem", cursor: "pointer",marginRight:'0.2rem' }}
+              style={{
+                fontSize: "1rem",
+                cursor: "pointer",
+                marginRight: "0.2rem",
+              }}
               onClick={toggleShowData}
             ></i>
             <h5>Today({TodayRequestListData.length})</h5>
@@ -48,14 +51,16 @@ function RequestList() {
                   >
                     <div className="d-flex mb-3">
                       <span style={{ marginRight: "2rem" }}>{item.title}</span>
-                      <img
-                        className="rounded-circle header-profile-user "
-                        src={item.assignee_avatar}
-                        alt="Header Avatar"
-                      />
-                      <span style={{ marginLeft: ".5rem" }}>
-                        {item.assigned_to}
-                      </span>
+                      <div>
+                        <img
+                          className="rounded-circle header-profile-user "
+                          src={item.assignee_avatar}
+                          alt="Header Avatar"
+                        />
+                        <span style={{ marginLeft: ".5rem" }}>
+                          {item.assigned_to}
+                        </span>
+                      </div>
 
                       <div style={{ marginLeft: "2rem" }}>
                         <i className="ti-calendar"></i>
@@ -63,6 +68,7 @@ function RequestList() {
                           {item.due_date}
                         </span>
                       </div>
+                      <span className={`text-${item.variant}`} style={{marginLeft:'3rem'}}>{item.priority}</span>
                     </div>
                   </motion.div>
                 </div>
@@ -71,7 +77,11 @@ function RequestList() {
           <div className="d-flex justify-content-start align-items-center">
             <i
               className={`ti-angle-${showDataUpcoming ? "up" : "right"}`}
-              style={{ fontSize: "1rem", cursor: "pointer" ,marginRight:'0.2rem'}}
+              style={{
+                fontSize: "1rem",
+                cursor: "pointer",
+                marginRight: "0.2rem",
+              }}
               onClick={toggleShowDataUpcoming}
             ></i>
             <h5 className="mb-4 mt-4">
@@ -88,16 +98,18 @@ function RequestList() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={showDataUpcoming ? { opacity: 1, y: 0 } : {}}
                   >
-                    <div className="d-flex mb-3">
+                    <div className="d-flex  mb-3">
                       <span style={{ marginRight: "2rem" }}>{item.title}</span>
-                      <img
-                        className="rounded-circle header-profile-user "
-                        src={item.assignee_avatar}
-                        alt="Header Avatar"
-                      />
-                      <span style={{ marginLeft: ".5rem" }}>
-                        {item.assigned_to}
-                      </span>
+                      <div>
+                        <img
+                          className="rounded-circle header-profile-user "
+                          src={item.assignee_avatar}
+                          alt="Header Avatar"
+                        />
+                        <span style={{ marginLeft: ".5rem" }}>
+                          {item.assigned_to}
+                        </span>
+                      </div>
 
                       <div style={{ marginLeft: "2rem" }}>
                         <i className="ti-calendar"></i>
@@ -105,6 +117,8 @@ function RequestList() {
                           {item.due_date}
                         </span>
                       </div>
+                      <span className={`text-${item.variant}`} style={{marginLeft:'3rem'}}>{item.priority}</span>
+
                     </div>
                   </motion.div>
                 </div>
@@ -113,7 +127,11 @@ function RequestList() {
           <div className="d-flex justify-content-start align-items-center">
             <i
               className={`ti-angle-${showDataOthers ? "up" : "right"}`}
-              style={{ fontSize: "1rem", cursor: "pointer",marginRight:'0.2rem' }}
+              style={{
+                fontSize: "1rem",
+                cursor: "pointer",
+                marginRight: "0.2rem",
+              }}
               onClick={toggleShowDataOthers}
             ></i>
             <h5>Others({OtherRequestListData.length})</h5>
@@ -144,6 +162,8 @@ function RequestList() {
                           {item.due_date}
                         </span>
                       </div>
+                      <span className={`text-${item.variant}`} style={{marginLeft:'3rem'}}>{item.priority}</span>
+
                     </div>
                   </motion.div>
                 </div>

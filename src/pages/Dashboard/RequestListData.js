@@ -14,6 +14,7 @@ const TodayRequestListData = [
     due_date: "Today 10am",
     completed: false,
     priority: "High",
+    variant:"danger"
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const TodayRequestListData = [
     completed: false,
     stage: "In-progress",
     priority: "High",
+    variant:"danger"
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ const TodayRequestListData = [
     completed: false,
     stage: "In-progress",
     priority: "Medium",
+    variant:"success"
   },
 ]
 
@@ -47,6 +50,7 @@ const UpcomingRequestListData = [
     stage: "Todo",
     completed: false,
     priority: "Low",
+    variant:"info"
   },
   {
     id: 2,
@@ -57,6 +61,7 @@ const UpcomingRequestListData = [
     completed: false,
     stage: "Review",
     priority: "Low",
+    variant:"info"
   },
   {
     id: 3,
@@ -67,6 +72,7 @@ const UpcomingRequestListData = [
     completed: false,
     stage: "Review",
     priority: "Medium",
+    variant:"success"
   },
 ]
 
@@ -80,6 +86,7 @@ const OtherRequestListData = [
     stage: "Todo",
     completed: false,
     priority: "High",
+    variant:"danger"
   },
   {
     id: 2,
@@ -90,6 +97,7 @@ const OtherRequestListData = [
     due_date: "30 Aug 10am",
     completed: false,
     priority: "Low",
+    variant:"info"
   },
   {
     id: 3,
@@ -100,6 +108,7 @@ const OtherRequestListData = [
     stage: "Done",
     completed: false,
     priority: "Medium",
+    variant:"success"
   },
   {
     id: 4,
@@ -110,6 +119,7 @@ const OtherRequestListData = [
     completed: false,
     stage: "Done",
     priority: "Medium",
+    variant:"success"
   }
 ]
 
