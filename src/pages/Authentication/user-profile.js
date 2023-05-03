@@ -74,7 +74,7 @@ const UserProfile = props => {
     }
   });
 
-  document.title = "Profile | Veltrix - React Admin & Dashboard Template";
+  // document.title = "Profile | Veltrix - React Admin & Dashboard Template";
   return (
     <React.Fragment>
       <div className="page-content">
