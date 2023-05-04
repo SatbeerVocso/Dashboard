@@ -55,7 +55,7 @@ const UpcomingRequestListData = [
   {
     id: 2,
     title: "Enable analytics tracking",
-    assigned_to: "James B",
+    assigned_to: "James stark",
     assignee_avatar: avatarImg5,
     due_date: "27 Aug 10am",
     completed: false,

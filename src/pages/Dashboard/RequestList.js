@@ -18,23 +18,25 @@ function RequestList() {
   const toggleShowDataOthers = () => {
     setshowDataOthers(!showDataOthers)
   }
+  const iconstyle = {
+    fontSize: "1rem",
+    cursor: "pointer",
+    marginRight: "0.2rem",
+    fontSize:'1.3em'
+  }
 
   return (
     <div>
       <Card
         className="mini-stat bg-white text-dark"
-        style={{ height: "700px" }}
+        style={{ height: "850px" }}
       >
         <CardBody>
-          <h4 className="mb-3">REQUEST LIST</h4>
-          <div className="d-flex justify-content-start align-items-center">
+          <h4 className="mb-4">REQUEST LIST</h4>
+          <div className="d-flex justify-content-start align-items-center mb-3">
             <i
               className={`ti-angle-${showData ? "up" : "right"}`}
-              style={{
-                fontSize: "1rem",
-                cursor: "pointer",
-                marginRight: "0.2rem",
-              }}
+              style={iconstyle}
               onClick={toggleShowData}
             ></i>
             <h5>Today({TodayRequestListData.length})</h5>
@@ -49,44 +51,64 @@ function RequestList() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={showData ? { opacity: 1, y: 0 } : {}}
                   >
-                    <div className="d-flex mb-3">
-                      <span style={{ marginRight: "2rem" }}>{item.title}</span>
-                      <div>
+                    <div className="d-flex justify-content-between ">
+                      <div style={{ width: "45%" }}>
+                        <span>{item.title}</span>
+                      </div>
+
+                      <div style={{ width: "20%" }}>
                         <img
                           className="rounded-circle header-profile-user "
                           src={item.assignee_avatar}
                           alt="Header Avatar"
                         />
-                        <span style={{ marginLeft: ".5rem" }}>
+                        <span style={{ paddingLeft: "8px" }}>
                           {item.assigned_to}
                         </span>
                       </div>
 
-                      <div style={{ marginLeft: "2rem" }}>
+                      <div style={{ width: "20%" }}>
                         <i className="ti-calendar"></i>
-                        <span style={{ marginLeft: "0.3rem" }}>
+                        <span style={{ paddingLeft: "5px" }}>
                           {item.due_date}
                         </span>
                       </div>
-                      <span className={`text-${item.variant}`} style={{marginLeft:'3rem'}}>{item.priority}</span>
+
+                      <div style={{ width: "15%", marginLeft: "20px" }}>
+                        <span
+                          className={`text-${item.variant} `}
+                          style={{
+                            backgroundColor:
+                              item.variant === "success"
+                                ? "#D1FAE5"
+                                : item.variant === "danger"
+                                ? "#FECACA"
+                                : item.variant === "info"
+                                ? "#D1E5F0"
+                                : "#E0E7FF",
+                            padding: "5px",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          {item.priority}
+                        </span>
+                      </div>
                     </div>
+                    <hr />
                   </motion.div>
                 </div>
               )
             })}
-          <div className="d-flex justify-content-start align-items-center">
+
+          {/* Upcoming data */}
+
+          <div className="d-flex justify-content-start align-items-center mb-3 ">
             <i
               className={`ti-angle-${showDataUpcoming ? "up" : "right"}`}
-              style={{
-                fontSize: "1rem",
-                cursor: "pointer",
-                marginRight: "0.2rem",
-              }}
+              style={iconstyle}
               onClick={toggleShowDataUpcoming}
             ></i>
-            <h5 className="mb-4 mt-4">
-              Upcoming({UpcomingRequestListData.length})
-            </h5>
+            <h5>Upcoming({UpcomingRequestListData.length})</h5>
           </div>
 
           {showDataUpcoming &&
@@ -98,73 +120,118 @@ function RequestList() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={showDataUpcoming ? { opacity: 1, y: 0 } : {}}
                   >
-                    <div className="d-flex  mb-3">
-                      <span style={{ marginRight: "2rem" }}>{item.title}</span>
-                      <div>
+                    <div className="d-flex justify-content-between ">
+                      <div style={{ width: "45%" }}>
+                        <span>{item.title}</span>
+                      </div>
+
+                      <div style={{ width: "20%" }}>
                         <img
                           className="rounded-circle header-profile-user "
                           src={item.assignee_avatar}
                           alt="Header Avatar"
                         />
-                        <span style={{ marginLeft: ".5rem" }}>
+                        <span style={{ paddingLeft: "8px" }}>
                           {item.assigned_to}
                         </span>
                       </div>
 
-                      <div style={{ marginLeft: "2rem" }}>
+                      <div style={{ width: "20%" }}>
                         <i className="ti-calendar"></i>
-                        <span style={{ marginLeft: "0.3rem" }}>
+                        <span style={{ paddingLeft: "5px" }}>
                           {item.due_date}
                         </span>
                       </div>
-                      <span className={`text-${item.variant}`} style={{marginLeft:'3rem'}}>{item.priority}</span>
 
+                      <div style={{ width: "15%", marginLeft: "20px" }}>
+                        <span
+                          className={`text-${item.variant} `}
+                          style={{
+                            backgroundColor:
+                              item.variant === "success"
+                                ? "#D1FAE5"
+                                : item.variant === "danger"
+                                ? "#FECACA"
+                                : item.variant === "info"
+                                ? "#D1E5F0"
+                                : "#E0E7FF",
+                            padding: "5px",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          {item.priority}
+                        </span>
+                      </div>
                     </div>
+                    <hr />
                   </motion.div>
                 </div>
               )
             })}
-          <div className="d-flex justify-content-start align-items-center">
+
+          {/* otherdata */}
+          <div className="d-flex justify-content-start align-items-center mb-2">
             <i
               className={`ti-angle-${showDataOthers ? "up" : "right"}`}
-              style={{
-                fontSize: "1rem",
-                cursor: "pointer",
-                marginRight: "0.2rem",
-              }}
+              style={iconstyle}
               onClick={toggleShowDataOthers}
             ></i>
             <h5>Others({OtherRequestListData.length})</h5>
           </div>
+
           {showDataOthers &&
             OtherRequestListData.map((item, index) => {
               return (
-                <div key={index} className="d-flex mb-3 ">
+                <div key={index}>
                   <motion.div
                     className="data-container"
                     initial={{ opacity: 0, y: 20 }}
                     animate={showDataOthers ? { opacity: 1, y: 0 } : {}}
                   >
-                    <div className="d-flex mb-3">
-                      <span style={{ marginRight: "2rem" }}>{item.title}</span>
-                      <img
-                        className="rounded-circle header-profile-user "
-                        src={item.assignee_avatar}
-                        alt="Header Avatar"
-                      />
-                      <span style={{ marginLeft: ".5rem" }}>
-                        {item.assigned_to}
-                      </span>
+                    <div className="d-flex justify-content-between ">
+                      <div style={{ width: "45%" }}>
+                        <span>{item.title}</span>
+                      </div>
 
-                      <div style={{ marginLeft: "2rem" }}>
+                      <div style={{ width: "20%" }}>
+                        <img
+                          className="rounded-circle header-profile-user "
+                          src={item.assignee_avatar}
+                          alt="Header Avatar"
+                        />
+                        <span style={{ paddingLeft: "8px" }}>
+                          {item.assigned_to}
+                        </span>
+                      </div>
+
+                      <div style={{ width: "20%" }}>
                         <i className="ti-calendar"></i>
-                        <span style={{ marginLeft: "0.3rem" }}>
+                        <span style={{ paddingLeft: "5px" }}>
                           {item.due_date}
                         </span>
                       </div>
-                      <span className={`text-${item.variant}`} style={{marginLeft:'3rem'}}>{item.priority}</span>
 
+                      <div style={{ width: "15%", marginLeft: "20px" }}>
+                        <span
+                          className={`text-${item.variant} `}
+                          style={{
+                            backgroundColor:
+                              item.variant === "success"
+                                ? "#D1FAE5"
+                                : item.variant === "danger"
+                                ? "#FECACA"
+                                : item.variant === "info"
+                                ? "#D1E5F0"
+                                : "#E0E7FF",
+                            padding: "5px",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          {item.priority}
+                        </span>
+                      </div>
                     </div>
+                    <hr />
                   </motion.div>
                 </div>
               )
