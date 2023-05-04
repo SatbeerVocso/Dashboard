@@ -46,10 +46,12 @@ import Request from "pages/Request/Request";
 
 // Processes Component
 import Processes from "pages/Processes/Processes";
+
 //OrganizationChart
-import Employees from "pages/Organization/Employees";
+import Employees from "pages/Organization/Employee/Employees";
 import Designation from "pages/Organization/Designation";
 import OrganizationChart from "pages/Organization/OrganizationChart";
+
 // import Department from "pages/Organization/Department";
 // Charts
 import ChartApex from "../pages/Charts/Apexcharts";

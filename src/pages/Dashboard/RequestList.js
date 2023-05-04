@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState,useRef,useEffect } from "react"
 import { Card, CardBody } from "reactstrap"
 import {
   TodayRequestListData,
@@ -10,6 +10,7 @@ function RequestList() {
   const [showData, setShowData] = useState(true)
   const [showDataUpcoming, setShowDataUpcoming] = useState(false)
   const [showDataOthers, setshowDataOthers] = useState(false)
+  const [cardHeight, setCardHeight] = useState(0)
 
   const toggleShowData = () => {
     setShowData(!showData)
@@ -19,17 +20,23 @@ function RequestList() {
     setshowDataOthers(!showDataOthers)
   }
   const iconstyle = {
-    fontSize: "1rem",
     cursor: "pointer",
     marginRight: "0.2rem",
     fontSize:'1.3em'
   }
+  const cardBodyRef = useRef(null)
+  useEffect(() => {
+    // Calculate the height of the CardBody element and set the Card height accordingly
+    if (cardBodyRef.current) {
+      setCardHeight(cardBodyRef.current.scrollHeight)
+    }
+  }, [showData, showDataUpcoming, showDataOthers])
 
   return (
     <div>
       <Card
         className="mini-stat bg-white text-dark"
-        style={{ height: "850px" }}
+        style={{ height: cardHeight }}
       >
         <CardBody>
           <h4 className="mb-4">REQUEST LIST</h4>
