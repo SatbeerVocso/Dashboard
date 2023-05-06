@@ -523,7 +523,6 @@ const DatatableTables = () => {
                     the construction function:{" "}
                     <code>&lt;MDBDataTable /&gt;</code>.
                   </p>
-
                   <MDBDataTable responsive bordered data={data} />
                 </CardBody>
               </Card>

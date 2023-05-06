@@ -1,100 +1,166 @@
-import React from "react"
-// import avatarImg1 from "../../../assets/images/users/avatar-1.jpg"
-// import avatarImg2 from "../../../assets/images/users/avatar-2.jpg"
-// import avatarImg3 from "../../../assets/images/users/avatar-3.jpg"
-// import avatarImg4 from "../../../assets/images/users/avatar-4.jpg"
-// import avatarImg5 from "../../../assets/images/users/avatar-5.jpg"
-// import avatarImg6 from "../../../assets/images/users/avatar-6.jpg"
+// import React from "react"
+import avatarImg1 from "../../../assets/images/users/avatar-1.jpg"
+import avatarImg2 from "../../../assets/images/users/avatar-2.jpg"
+import avatarImg3 from "../../../assets/images/users/avatar-3.jpg"
+import avatarImg4 from "../../../assets/images/users/avatar-4.jpg"
+import avatarImg5 from "../../../assets/images/users/avatar-5.jpg"
+import avatarImg6 from "../../../assets/images/users/avatar-6.jpg"
 
-export const EmployeeData = [
-  {
-    userId: "1",
-    jobTitleName: "Developer",
-    firstName: "Romin",
-    lastName: "Irani",
-    preferredFullName: "Romin Irani",
-    employeeCode: "E1",
-    phoneNumber: "408-1234567",
-    emailAddress: "romin.k.irani@gmail.com",
-    // userpic: avatarImg1,
-    status: "Active",
-    variant: "success",
-    Department: "IT",
-    Designation: "Senior Developer",
-  },
-  {
-    userId: "2",
-    jobTitleName: "Developer",
-    firstName: "Neil",
-    lastName: "Irani",
-    preferredFullName: "Neil Irani",
-    employeeCode: "E2",
-    phoneNumber: "408-1111111",
-    emailAddress: "neilrirani@gmail.com",
-    // userpic: avatarImg2,
-    status: "Active",
-    variant: "success",
-    Department: "HR",
-    Designation: "HR Director",
-  },
-  {
-    userId: "3",
-    jobTitleName: "Program Directory",
-    firstName: "Tom",
-    lastName: "Hanks",
-    preferredFullName: "Tom Hanks",
-    employeeCode: "E3",
-    phoneNumber: "408-2222222",
-    emailAddress: "tomhanks@gmail.com",
-    // userpic: avatarImg3,
-    status: "Not-Active",
-    variant: "danger",
-    Department: "Accounts",
-    Designation: "Junior Accountant",
-  },
-  {
-    userId: "4",
-    jobTitleName: "Developer",
-    firstName: "Romin",
-    lastName: "Irani",
-    preferredFullName: " Stone Michel ",
-    employeeCode: "E4",
-    phoneNumber: "408-1234567",
-    emailAddress: "romin.k.irani@gmail.com",
-    // userpic: avatarImg4,
-    status: "Active",
-    variant: "success",
-    Department: "IT",
-    Designation: "Junior Developer",
-  },
-  {
-    userId: "5",
-    jobTitleName: "Developer",
-    firstName: "Neil",
-    lastName: "Irani",
-    preferredFullName: "Andreson",
-    employeeCode: "E5",
-    phoneNumber: "408-1111111",
-    emailAddress: "neilrirani@gmail.com",
-    // userpic: avatarImg5,
-    status: "Active",
-    variant: "success",
-    Department: "HR",
-    Designation: "Intern Hr",
-  },
-  {
-    userId: "6",
-    jobTitleName: "Program Directory",
-    firstName: "Tom",
-    lastName: "Hanks",
-    preferredFullName: "Tom Cruise",
-    employeeCode: "E6",
-    phoneNumber: "408-2222222",
-    emailAddress: "tomhanks@gmail.com",
-    // userpic: avatarImg6,
-    status: "Not-Active",
-    variant: "danger",
-    Department: "IT",
-    Designation: "Intern Developer",
-  },
-]
+
+import React from "react"
+
+export const EmployeeData = {
+  columns: [
+    {
+      label: "Name",
+      field: "name",
+      sort: "asc",
+      width: 150,
+    },
+    {
+      label: "Profile",
+      field: "profile",
+      sort: "asc",
+      width: 270,
+    },
+    {
+      label: "Number",
+      field: "number",
+      sort: "asc",
+      width: 200,
+    },
+    {
+      label: "Email",
+      field: "email",
+      sort: "asc",
+      width: 100,
+    },
+    {
+      label: "Department",
+      field: "department",
+      sort: "asc",
+      width: 150,
+    },
+    {
+      label: "Designation",
+      field: "designation",
+      sort: "asc",
+      width: 100,
+    },
+    {
+      label: "Status",
+      field: "status",
+      sort: "asc",
+      width: 100,
+    },
+  ],
+  rows: [
+    {
+      name: "Tiger Nixon",
+      profile: (
+        <img className="rounded-circle header-profile-user " src={avatarImg1} />
+      ),
+      number: "8929356478",
+      email: "Sat@gmail.com",
+      department: "HR",
+      designation: "HR Director",
+      status: "Active",
+    },
+    {
+      name: "Mexi Cab",
+      profile: (
+        <img className="rounded-circle header-profile-user " src={avatarImg2} />
+      ),
+      number: "8929356478",
+      email: "Sat222@gmail.com",
+      department: "HR",
+      designation: "HR Intern",
+      status: "Active",
+    },
+    {
+      name: "Tiger Nixon",
+      profile: (
+        <img className="rounded-circle header-profile-user " src={avatarImg4} />
+      ),
+      number: "8929356478",
+      email: "Sat@gmail.com",
+      department: "HR",
+      designation: "HR Director",
+      status: "Active",
+    },
+    {
+      name: "Marcus Stoinis",
+      profile: (
+        <img className="rounded-circle header-profile-user " src={avatarImg3} />
+      ),
+      number: "8929356478",
+      email: "mark@gmail.com",
+      department: "IT",
+      designation: "Senior Developer",
+      status: "Active",
+    },
+    {
+      name: "Tiger Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg5}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Active'
+    },
+    {
+      name: "Tiger Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg1}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Active'
+    },
+    {
+      name: "Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg6}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Active'
+    },
+    {
+      name: "Tiger Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg1}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Active'
+    },
+    {
+      name: "Tiger Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg1}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Active'
+    }
+    , {
+      name: "Tiger Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg1}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Active'
+    },
+    {
+      name: "Tiger Nixon",
+      profile:<img className="rounded-circle header-profile-user " src={avatarImg1}/>,
+      number:'8929356478',
+      email:'Sat@gmail.com',
+      department:'HR',
+      designation:'HR Director',
+      status:'Not-Active'
+    }
+  ],
+}
