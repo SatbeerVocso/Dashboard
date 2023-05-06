@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap"
 import { motion } from "framer-motion"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import DepartmentCheckboxes from "./DepartmentCheckboxes"
 
 function EmployeeModalForm(props) {
   const [fname, setfname] = useState("")
@@ -216,36 +217,7 @@ function EmployeeModalForm(props) {
               animate={showDepartment ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <Label>
-                  <Input
-                    type="checkbox"
-                    name="IT"
-                    value="IT"
-                    checked={checkboxes.IT}
-                    onChange={handleCheckboxChange}
-                  />
-                  IT
-                </Label>
-                <Label style={{ marginLeft: "1em", marginRight: "1em" }}>
-                  <Input
-                    type="checkbox"
-                    name="HR"
-                    value="HR"
-                    checked={checkboxes.HR}
-                    onChange={handleCheckboxChange}
-                  />
-                  HR
-                </Label>
-                <Label>
-                  <Input
-                    type="checkbox"
-                    name="Accounts"
-                    value="Accounts"
-                    checked={checkboxes.Accounts}
-                    onChange={handleCheckboxChange}
-                  />
-                  Accounts
-                </Label>
+                <DepartmentCheckboxes/>
               </div>
             </motion.div>
           )}
