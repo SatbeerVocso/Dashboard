@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Label, Input } from "reactstrap"
 
-function DepartmentCheckboxes() {
+function DepartmentCheckboxes(props) {
   const [selectedCheckbox, setSelectedCheckbox] = useState("")
 
   function handleCheckboxChange(event) {
@@ -9,13 +9,16 @@ function DepartmentCheckboxes() {
     const checked = event.target.checked
     if (checked) {
       setSelectedCheckbox(checkboxValue)
+      props.checkboxvalue(checkboxValue)
     } else {
       setSelectedCheckbox("")
+      props.checkboxvalue('')
     }
   }
 
   function handleCrossClick() {
     setSelectedCheckbox("")
+    props.checkboxvalue('')
   }
   const labelfontsize = {
     fontSize: "1.1em",

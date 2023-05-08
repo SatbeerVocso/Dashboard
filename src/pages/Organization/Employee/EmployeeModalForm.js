@@ -14,13 +14,20 @@ function EmployeeModalForm(props) {
   const [email, setemail] = useState("")
   const [isEmailValid, setIsEmailValid] = useState(false)
 
-
-
   const [Pnumber, setPnumber] = useState("")
   const [Selecttedfile, setSelecttedfile] = useState(null)
 
   const [showDepartment, setShowDepartment] = useState(false)
   const [showDesignation, setShowDesignation] = useState(false)
+
+  const [checkboxDataDesignation, setCheckboxDataDesignation] = useState("")
+  const checkboxDatafunctionDesignation = (checkboxvaluefromdesignation) => {
+    setCheckboxDataDesignation(checkboxvaluefromdesignation)
+  }
+  const [checkboxDataDepartment,setcheckboxDataDepartment]=useState("")
+  const checkboxDatafunctionDepartment = (checkboxDataDepartment) =>{
+  setcheckboxDataDepartment(checkboxDataDepartment)
+  }
 
   const [isFormValid, setIsFormValid] = useState(false)
   const [buttonStyle, setButtonStyle] = useState({
@@ -34,14 +41,15 @@ function EmployeeModalForm(props) {
     setShowDesignation(!showDesignation)
   }
   useEffect(() => {
-    if ((fname, lname, email, Pnumber)) {
+    if (fname && isEmailValid && lname && Pnumber && Selecttedfile && checkboxDataDepartment&&checkboxDataDesignation) {
       setIsFormValid(true)
-      setButtonStyle({ backgroundColor: "blue", color: "white" })
+      setButtonStyle({ backgroundColor: "#02A499", color: "white" })
     } else {
       setIsFormValid(false)
       setButtonStyle({ backgroundColor: "lightgrey" })
     }
-  })
+  }, [fname, lname, isEmailValid, Pnumber, Selecttedfile,checkboxDataDepartment,checkboxDataDesignation])
+
   const FormSubmithandler = e => {
     e.preventDefault()
     let fullname = fname + " " + lname
@@ -52,6 +60,8 @@ function EmployeeModalForm(props) {
       profile: Selecttedfile,
       number: Pnumber,
       email: email,
+      designation: checkboxDataDesignation,
+      department:checkboxDataDepartment,
       Status: "Active",
     }
     console.log(formdata)
@@ -62,6 +72,8 @@ function EmployeeModalForm(props) {
     setlname("")
     setemail("")
     setPnumber("")
+    setCheckboxDataDesignation("")
+    setcheckboxDataDepartment("")
     setIsFormValid(false) // disable the button after submission
     props.onClose()
   }
@@ -92,7 +104,6 @@ function EmployeeModalForm(props) {
                 value={fname}
                 onChange={e => {
                   setfname(e.target.value)
-                  setShowMessage(false)
                 }}
               />
             </div>
@@ -109,7 +120,6 @@ function EmployeeModalForm(props) {
                 value={lname}
                 onChange={e => {
                   setlname(e.target.value)
-                  setShowMessage(false)
                 }}
               />
             </div>
@@ -125,10 +135,10 @@ function EmployeeModalForm(props) {
               type="text"
               style={{ width: "100%" }}
               value={email}
-              onBlur={(e)=>{
+              onBlur={e => {
                 if (!e.target.value.includes("@")) {
-                  setIsEmailValid(false);
-                  toast.error("Email address should contain '@'");
+                  setIsEmailValid(false)
+                  toast.error("Email address should contain '@'")
                 }
               }}
               onChange={e => {
@@ -136,7 +146,7 @@ function EmployeeModalForm(props) {
                 if (e.target.value.includes("@")) {
                   setIsEmailValid(true)
                 } else {
-                  setIsEmailValid(false);
+                  setIsEmailValid(false)
                 }
               }}
             />
@@ -188,7 +198,7 @@ function EmployeeModalForm(props) {
               animate={showDepartment ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <DepartmentCheckboxes />
+                <DepartmentCheckboxes  checkboxvalue={checkboxDatafunctionDepartment}/>
               </div>
             </motion.div>
           )}
@@ -208,7 +218,7 @@ function EmployeeModalForm(props) {
               animate={showDesignation ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <DesignationCheckboxes />
+                <DesignationCheckboxes checkboxvalue={checkboxDatafunctionDesignation} />
               </div>
             </motion.div>
           )}
