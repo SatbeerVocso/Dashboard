@@ -34,17 +34,17 @@
 
 // export default Employees
 
-import React,{} from "react"
+import React, { useState } from "react"
 import { MDBDataTable } from "mdbreact"
-import { Row, Col, Card, CardBody, CardTitle, CardSubtitle,Button } from "reactstrap"
+import { Row, Col, Card, CardBody } from "reactstrap"
 import { EmployeeData } from "./EmployeeData"
-import { useState } from "react"
- import EmployeeModal from "./EmployeeModal"
- import { ToastContainer, toast } from 'react-toastify';
- import 'react-toastify/dist/ReactToastify.css';
-function Employees() {
-const[empData,setempData]=useState(EmployeeData)
+import EmployeeModal from "./EmployeeModal"
+import { motion } from "framer-motion"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
+function Employees() {
+  const [empData, setempData] = useState(EmployeeData)
 
   return (
     <React.Fragment>
@@ -55,14 +55,19 @@ const[empData,setempData]=useState(EmployeeData)
               <Card>
                 <CardBody>
                   <h2 className="mt-1 mb-1">Employee Data</h2>
-                  <MDBDataTable responsive bordered data={empData} />
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <MDBDataTable responsive bordered data={empData} />
+                  </motion.div>
                 </CardBody>
               </Card>
             </Col>
           </Row>
-             <EmployeeModal />
-             <ToastContainer/>
-             
+          <EmployeeModal />
+          <ToastContainer />
         </div>
       </div>
     </React.Fragment>

@@ -49,11 +49,9 @@ import Processes from "pages/Processes/Processes";
 
 //OrganizationChart
 import Employees from "pages/Organization/Employee/Employees";
-import Designation from "pages/Organization/Designation";
-import OrganizationChart from "pages/Organization/OrganizationChart";
+import Department from "pages/Organization/Department/Department";
+import Designation from "pages/Organization/Designation/Designation";
 
-// import Department from "pages/Organization/Department";
-// Charts
 import ChartApex from "../pages/Charts/Apexcharts";
 import ChartistChart from "../pages/Charts/ChartistChart";
 import ChartjsChart from "../pages/Charts/ChartjsChart";
@@ -125,7 +123,7 @@ import Pages500 from "../pages/Utility/pages-500";
 import PagesGallery from "../pages/Utility/PagesGallery";
 import PagesDirectory from "../pages/Utility/PagesDirectory";
 import PagesProfile from "pages/Utility/pages-profile";
-import Department from "pages/Organization/Department";
+
 
 const userRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
@@ -141,7 +139,6 @@ const userRoutes = [
   {path:"/designation",component:<Designation/>},
   {path:"/department",component:<Department/>},
   {path:"/employees",component:<Employees/>},
-  {path:"/organizationchart",component:<OrganizationChart/>},
 
   // //calendar
   { path: "/calendar", component: <Calendar /> },

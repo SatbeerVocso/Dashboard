@@ -105,6 +105,7 @@ function EmployeeModalForm(props) {
                 onChange={e => {
                   setfname(e.target.value)
                 }}
+                required
               />
             </div>
 
@@ -121,6 +122,7 @@ function EmployeeModalForm(props) {
                 onChange={e => {
                   setlname(e.target.value)
                 }}
+                required
               />
             </div>
           </div>
@@ -159,6 +161,7 @@ function EmployeeModalForm(props) {
               type="tel"
               pattern="[0-9]{10}"
               maxLength={10}
+              required
               value={Pnumber}
               onChange={e => {
                 setPnumber(e.target.value)

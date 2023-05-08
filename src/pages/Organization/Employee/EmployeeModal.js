@@ -13,7 +13,7 @@ function EmployeeModal(props) {
  
   return (
     <div>
-      <Button color="danger" onClick={toggle} style={{position:'fixed',right:'4em',top:'5.4em'}}>
+      <Button color="danger" onClick={toggle} style={{position:'fixed',right:'4em',top:'6em'}}>
         Add Employee
       </Button>
       <Modal isOpen={modal} toggle={toggle} size="lg">
