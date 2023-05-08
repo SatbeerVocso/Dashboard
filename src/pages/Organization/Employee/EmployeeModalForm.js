@@ -13,12 +13,8 @@ function EmployeeModalForm(props) {
 
   const [email, setemail] = useState("")
   const [isEmailValid, setIsEmailValid] = useState(false)
-  const handleEmailBlur = (event) => {
-    if (!event.target.value.includes("@")) {
-      setIsEmailValid(false);
-      toast.error("Email address should contain '@'");
-    }
-  };
+
+
 
   const [Pnumber, setPnumber] = useState("")
   const [Selecttedfile, setSelecttedfile] = useState(null)
@@ -129,7 +125,12 @@ function EmployeeModalForm(props) {
               type="text"
               style={{ width: "100%" }}
               value={email}
-              onBlur={handleEmailBlur}
+              onBlur={(e)=>{
+                if (!e.target.value.includes("@")) {
+                  setIsEmailValid(false);
+                  toast.error("Email address should contain '@'");
+                }
+              }}
               onChange={e => {
                 setemail(e.target.value)
                 if (e.target.value.includes("@")) {
