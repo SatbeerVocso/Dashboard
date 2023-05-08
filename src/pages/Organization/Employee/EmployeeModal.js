@@ -17,7 +17,7 @@ function EmployeeModal(props) {
         Add Employee
       </Button>
       <Modal isOpen={modal} toggle={toggle} size="lg">
-        <ModalHeader toggle={toggle}  className="bg-primary text-white">New Employee Data  </ModalHeader>
+        <ModalHeader toggle={toggle}  className=" text-dark">New Employee Data  </ModalHeader>
         <ModalBody>
           <EmployeeModalForm  onClose={toggle}/>
         </ModalBody>

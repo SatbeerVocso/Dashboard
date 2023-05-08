@@ -1,88 +1,96 @@
-import React,{useState} from 'react';
-import { Label,Input } from 'reactstrap';
+import React, { useState } from "react"
+import { Label, Input } from "reactstrap"
 
 function DepartmentCheckboxes() {
-   const [selectedCheckbox, setSelectedCheckbox] = useState("");
+  const [selectedCheckbox, setSelectedCheckbox] = useState("")
 
   function handleCheckboxChange(event) {
-    const checkboxValue = event.target.value;
-    const checked = event.target.checked;
-
+    const checkboxValue = event.target.value
+    const checked = event.target.checked
     if (checked) {
-      setSelectedCheckbox(checkboxValue);
+      setSelectedCheckbox(checkboxValue)
     } else {
-      setSelectedCheckbox("");
+      setSelectedCheckbox("")
     }
   }
 
   function handleCrossClick() {
-    setSelectedCheckbox("");
+    setSelectedCheckbox("")
   }
-
+  const labelfontsize = {
+    fontSize: "1.1em",
+    paddingLeft: '10px'
+  }
   return (
     <div>
-        {selectedCheckbox && (
-        <p>
-          {selectedCheckbox}{" "}
-          <span style={{ cursor: "pointer" }} onClick={handleCrossClick}>
-            &#10060;
+      <div className="d-flex" >
+        <Label style={{fontSize:'1.1em'}}>
+          <Input
+            type="checkbox"
+            value="IT"
+            checked={selectedCheckbox === "IT"}
+            onChange={handleCheckboxChange}
+          />
+          IT
+        </Label>
+        <br />
+        <Label style={labelfontsize}>
+          <Input
+            type="checkbox"
+            value="HR"
+            checked={selectedCheckbox === "HR"}
+            onChange={handleCheckboxChange}
+          />
+          HR
+        </Label>
+        <br />
+        <Label style={labelfontsize}>
+          <Input
+            type="checkbox"
+            value="Accounts"
+            checked={selectedCheckbox === "Accounts"}
+            onChange={handleCheckboxChange}
+          />
+          Accounts
+        </Label>
+        <br />
+        <Label style={labelfontsize}>
+          <Input
+            type="checkbox"
+            value="Sales"
+            checked={selectedCheckbox === "Sales"}
+            onChange={handleCheckboxChange}
+          />
+          Sales
+        </Label>
+        <br />
+        <Label style={labelfontsize}>
+          <Input
+            type="checkbox"
+            value="Product"
+            checked={selectedCheckbox === "Product"}
+            onChange={handleCheckboxChange}
+          />
+          Product
+        </Label>
+        <br />
+      </div>
+      {selectedCheckbox && (
+        <div className="mb-3 mt-2" >
+          <span
+            className="bg-primary text-white"
+            style={{ padding: "10px", borderRadius: "8px" }}
+          >
+            {selectedCheckbox}
           </span>
-        </p>
+          <span style={{ cursor: "pointer" }} onClick={handleCrossClick}>
+          <i className='ti-close' style={{marginLeft:'4px',fontSize:'1.1em',fontWeight:'bold'}}
+          ></i>
+          </span>
+        </div>
       )}
-      <Label>
-        <Input
-          type="checkbox"
-          value="IT"
-          checked={selectedCheckbox === "IT"}
-          onChange={handleCheckboxChange}
-        />
-      IT
-      </Label>
-      <br />
-      <Label>
-        <Input
-          type="checkbox"
-          value="HR"
-          checked={selectedCheckbox === "HR"}
-          onChange={handleCheckboxChange}
-        />
-       HR
-      </Label>
-      <br />
-      <Label>
-        <Input
-          type="checkbox"
-          value="Accounts"
-          checked={selectedCheckbox === "Accounts"}
-          onChange={handleCheckboxChange}
-        />
-       Accounts
-      </Label>
-      <br />
-      <Label>
-        <Input
-          type="checkbox"
-          value="Sales"
-          checked={selectedCheckbox === "Sales"}
-          onChange={handleCheckboxChange}
-        />
-        Sales
-      </Label>
-      <br />
-      <Label>
-        <Input
-          type="checkbox"
-          value="Product"
-          checked={selectedCheckbox === "Product"}
-          onChange={handleCheckboxChange}
-        />
-        Product
-      </Label>
-      <br />
-      
     </div>
   )
-  
 }
 
 export default DepartmentCheckboxes

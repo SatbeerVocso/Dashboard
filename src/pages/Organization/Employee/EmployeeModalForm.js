@@ -1,88 +1,64 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useState } from "react"
 import { Form, FormGroup, Label, Input, Button } from "reactstrap"
 import { motion } from "framer-motion"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import DepartmentCheckboxes from "./DepartmentCheckboxes"
+import DesignationCheckboxes from "./DesignationCheckboxes"
 
 function EmployeeModalForm(props) {
   const [fname, setfname] = useState("")
   const [lname, setlname] = useState("")
+
   const [email, setemail] = useState("")
+  const [isEmailValid, setIsEmailValid] = useState(false)
+  const handleEmailBlur = (event) => {
+    if (!event.target.value.includes("@")) {
+      setIsEmailValid(false);
+      toast.error("Email address should contain '@'");
+    }
+  };
+
   const [Pnumber, setPnumber] = useState("")
   const [Selecttedfile, setSelecttedfile] = useState(null)
 
   const [showDepartment, setShowDepartment] = useState(false)
   const [showDesignation, setShowDesignation] = useState(false)
 
-  const [selectedCheckbox, setSelectedCheckbox] = useState("")
-  const [checkboxes, setCheckboxes] = useState({
-    IT: false,
-    HR: false,
-    Accounts: false,
+  const [isFormValid, setIsFormValid] = useState(false)
+  const [buttonStyle, setButtonStyle] = useState({
+    backgroundColor: "lightgrey",
   })
 
-  const handleCheckboxChange = event => {
-    const { name, value, checked } = event.target
-    setCheckboxes(prevCheckboxes => ({
-      ...Object.keys(prevCheckboxes).reduce((acc, key) => {
-        acc[key] = key === name ? checked : false
-        return acc
-      }, {}),
-    }))
-    if (checked) {
-      setSelectedCheckbox(value)
-    } else {
-      setSelectedCheckbox("")
-    }
-  }
-
-  const [selectedDesignationcheckboxes, setselectedDesignationcheckboxes] =
-    useState("")
-  const [DesignationCheckboxes, setDesignationCheckboxes] = useState({
-    Seniordeveloper: false,
-    Juniordeveloper: false,
-    Intern: false,
-  })
-
-  const handleDesignationCheckboxChange = event => {
-    const { name, value, checked } = event.target
-    setDesignationCheckboxes(prevCheckboxes => ({
-      ...Object.keys(prevCheckboxes).reduce((acc, key) => {
-        acc[key] = key === name ? checked : false
-        return acc
-      }, {}),
-    }))
-    if (checked) {
-      setselectedDesignationcheckboxes(value)
-    } else {
-      setselectedDesignationcheckboxes("")
-    }
-  }
-
-  const togglehandler = () => {
+  const togglehandlerDepartment = () => {
     setShowDepartment(!showDepartment)
   }
   const togglehandlerDesignation = () => {
     setShowDesignation(!showDesignation)
   }
-
+  useEffect(() => {
+    if ((fname, lname, email, Pnumber)) {
+      setIsFormValid(true)
+      setButtonStyle({ backgroundColor: "blue", color: "white" })
+    } else {
+      setIsFormValid(false)
+      setButtonStyle({ backgroundColor: "lightgrey" })
+    }
+  })
   const FormSubmithandler = e => {
     e.preventDefault()
     let fullname = fname + " " + lname
+
     const formdata = {
       // userId: Math.floor(Math.random() * 100 + 10),
       name: fullname,
       profile: Selecttedfile,
       number: Pnumber,
       email: email,
-      department: selectedCheckbox,
-      designation: selectedDesignationcheckboxes,
       Status: "Active",
     }
     console.log(formdata)
-
     toast.success("Data Submitted Successfuly ", {
       position: toast.POSITION.TOP_RIGHT,
     })
@@ -90,21 +66,10 @@ function EmployeeModalForm(props) {
     setlname("")
     setemail("")
     setPnumber("")
-    setSelecttedfile("")
-    setCheckboxes({
-      IT: false,
-      HR: false,
-      Accounts: false,
-    })
-    setDesignationCheckboxes({
-      Seniordeveloper: false,
-      Juniordeveloper: false,
-      Intern: false,
-    })
-    setselectedDesignationcheckboxes("")
-    setSelectedCheckbox("")
+    setIsFormValid(false) // disable the button after submission
     props.onClose()
   }
+
   const iconstyle = {
     cursor: "pointer",
     marginRight: "0.2rem",
@@ -131,10 +96,11 @@ function EmployeeModalForm(props) {
                 value={fname}
                 onChange={e => {
                   setfname(e.target.value)
+                  setShowMessage(false)
                 }}
-                required
               />
             </div>
+
             <div style={{ flexBasis: "50%" }}>
               <Label for="lastname" className="mb-0">
                 LastName
@@ -147,8 +113,8 @@ function EmployeeModalForm(props) {
                 value={lname}
                 onChange={e => {
                   setlname(e.target.value)
+                  setShowMessage(false)
                 }}
-                required
               />
             </div>
           </div>
@@ -160,13 +126,18 @@ function EmployeeModalForm(props) {
               id="exampleEmail"
               name="email"
               placeholder="Enter a Email"
-              type="email"
+              type="text"
               style={{ width: "100%" }}
               value={email}
+              onBlur={handleEmailBlur}
               onChange={e => {
                 setemail(e.target.value)
+                if (e.target.value.includes("@")) {
+                  setIsEmailValid(true)
+                } else {
+                  setIsEmailValid(false);
+                }
               }}
-              required
             />
           </div>
           <div style={{ width: "50%" }}>
@@ -176,8 +147,7 @@ function EmployeeModalForm(props) {
             <Input
               type="tel"
               pattern="[0-9]{10}"
-              maxlength="10"
-              required
+              maxLength={10}
               value={Pnumber}
               onChange={e => {
                 setPnumber(e.target.value)
@@ -206,7 +176,7 @@ function EmployeeModalForm(props) {
             <i
               className={`ti-angle-${showDepartment ? "up" : "right"}`}
               style={iconstyle}
-              onClick={togglehandler}
+              onClick={togglehandlerDepartment}
             ></i>
             <h5 className="mt-2 ">Select Departments</h5>
           </div>
@@ -217,7 +187,7 @@ function EmployeeModalForm(props) {
               animate={showDepartment ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <DepartmentCheckboxes/>
+                <DepartmentCheckboxes />
               </div>
             </motion.div>
           )}
@@ -237,42 +207,18 @@ function EmployeeModalForm(props) {
               animate={showDesignation ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <Label>
-                  <Input
-                    type="checkbox"
-                    name="Seniordeveloper"
-                    value="Senior Developer"
-                    checked={DesignationCheckboxes.Seniordeveloper}
-                    onChange={handleDesignationCheckboxChange}
-                  />
-                  Senior Developer
-                </Label>
-                <Label style={{ marginLeft: "1em", marginRight: "1em" }}>
-                  <Input
-                    type="checkbox"
-                    name="Juniordeveloper"
-                    value="Junior Developer"
-                    checked={DesignationCheckboxes.Juniordeveloper}
-                    onChange={handleDesignationCheckboxChange}
-                  />
-                  Junior Developer
-                </Label>
-                <Label>
-                  <Input
-                    type="checkbox"
-                    name="Intern"
-                    value="Intern Frontend-D"
-                    checked={DesignationCheckboxes.Intern}
-                    onChange={handleDesignationCheckboxChange}
-                  />
-                  Intern Frontend-D
-                </Label>
+                <DesignationCheckboxes />
               </div>
             </motion.div>
           )}
 
-          <Button color="primary" className="mt-3">
-            Add Data
+          <Button
+            style={buttonStyle}
+            className="mt-4"
+            type="submit"
+            disabled={!isFormValid}
+          >
+            Save
           </Button>
         </FormGroup>
       </Form>
