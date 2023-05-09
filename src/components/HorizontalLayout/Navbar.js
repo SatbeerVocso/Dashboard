@@ -14,6 +14,7 @@ const Navbar = props => {
   const [ui, setui] = useState(false)
 
   const [organization, setorganization] = useState(false)
+  const [Settings, setSettings] = useState(false)
 
   const [component, setcomponent] = useState(false)
   const [form, setform] = useState(false)
@@ -145,6 +146,33 @@ const Navbar = props => {
                       </Link>
                       <Link to="/organizationchart" className="dropdown-item">
                         {props.t("Organization-Chart")}
+                      </Link>
+                    </div>
+                  )}
+                </li>
+
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle arrow-none"
+                    to="/#"
+                    onClick={e => {
+                      e.preventDefault()
+                      setSettings(!Settings)
+                    }}
+                  >
+                    <i className="ti-settings me-2"></i>
+                    {props.t("Settings")}
+                  </Link>
+                  {Settings && (
+                    <div
+                      className={classname("dropdown-menu")}
+                      aria-labelledby="topnav-emailtemplates"
+                    >
+                      <Link to="/email_settings" className="dropdown-item">
+                        {props.t("Email Settings")}
+                      </Link>
+                      <Link to="/organization_settings" className="dropdown-item">
+                        {props.t("Organization")}
                       </Link>
                     </div>
                   )}
