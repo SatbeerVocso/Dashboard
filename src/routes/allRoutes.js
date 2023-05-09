@@ -51,6 +51,7 @@ import Processes from "pages/Processes/Processes";
 import Employees from "pages/Organization/Employee/Employees";
 import Department from "pages/Organization/Department/Department";
 import Designation from "pages/Organization/Designation/Designation";
+import OrganizationChart from "pages/Organization/OrganizationChart";
 
 import ChartApex from "../pages/Charts/Apexcharts";
 import ChartistChart from "../pages/Charts/ChartistChart";
@@ -139,6 +140,7 @@ const userRoutes = [
   {path:"/designation",component:<Designation/>},
   {path:"/department",component:<Department/>},
   {path:"/employees",component:<Employees/>},
+  {path:"/organizationchart",component:<OrganizationChart/>},
 
   // //calendar
   { path: "/calendar", component: <Calendar /> },
