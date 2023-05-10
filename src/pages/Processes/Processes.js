@@ -14,7 +14,7 @@ function Processes() {
   function handleBlur() {
     setIsClicked(false)
   }
-  const submithandler = e => {
+  const submithandler = (e) => {
     e.preventDefault()
     setsubmit(true)
   }
