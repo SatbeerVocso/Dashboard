@@ -51,6 +51,7 @@ export const EmployeeData = {
       field: "status",
       sort: "asc",
       width: 100,
+      
     },
   ],
   rows: [
