@@ -2,29 +2,18 @@ import React, { useState } from "react"
 import { Card, CardBody, input, Button, Input, Label, Form } from "reactstrap"
 import ProcessesForm from "./ProcessesForm"
 import { motion } from "framer-motion"
+import TextInput from "common/TextInput"
 
 function Processes() {
   const [request, setrequest] = useState("")
 
   const [submit, setsubmit] = useState(false)
-  const [isClicked, setIsClicked] = useState(false)
-  function handleClick() {
-    setIsClicked(true)
-  }
-  function handleBlur() {
-    setIsClicked(false)
-  }
+
   const submithandler = (e) => {
     e.preventDefault()
     setsubmit(true)
   }
-
-  const inputStyle = {
-    border: "none",
-    borderBottom: "2px solid",
-    transition: "border-bottom-color 0.1s ease",
-    borderBottomColor: isClicked ? "#02a499" : "",
-  }
+  
 
   return (
     <div className="page-content">
@@ -42,18 +31,12 @@ function Processes() {
           <CardBody>
             <Form onSubmit={submithandler}>
               <div>
-                <Label>Enter the Request Name:</Label>
-                <Input
-                  type="text"
-                  onClick={handleClick}
-                  style={inputStyle}
-                  onBlur={handleBlur}
-                  value={request}
-                  onChange={e => {
-                    setrequest(e.target.value)
-                  }}
-                  required
-                ></Input>
+                <TextInput 
+                label='Enter the Request Name'
+                type='text' 
+                value={request}
+                onChange={(e)=>{setrequest(e.target.value)}}
+                />
               </div>
               <Button color="success" className="mt-4" type="submit">
                 Next
