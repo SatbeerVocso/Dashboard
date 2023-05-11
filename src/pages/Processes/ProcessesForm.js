@@ -11,7 +11,7 @@ function ProcessesForm({ requestname }) {
 
   return (
     <div>
-      <h5>Request Name: {requestname}</h5>
+      <h5 className="mb-3">Request Name: {requestname}</h5>
       <Card style={{ width: "90%", margin: "auto" }}>
         <CardBody>
           <div>
@@ -27,6 +27,7 @@ function ProcessesForm({ requestname }) {
             </Button>
             <Button className="bg-primary text-white">Add Table</Button>
           </div>
+          <hr/>
         </CardBody>
       </Card>
     </div>
