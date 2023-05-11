@@ -9,6 +9,17 @@ function Processes() {
   const [showAlert, setShowAlert] = useState(false)
   const [submit, setsubmit] = useState(false)
 
+  
+  const [isVisible, setisVisible] = useState(true)
+  const deletecomponet = () => {
+    setisVisible(false)
+    //initially component is visible but when trash icon is clicked we hide the component
+  }
+  const [sections, setSections] = useState([{}])
+  const handleAddSection = () => {
+    setSections([...sections, {}])
+  }
+
   const submithandler = e => {
     e.preventDefault()
     if (request === "") {
@@ -27,16 +38,42 @@ function Processes() {
     }
   }, [showAlert])
 
+  const iconstyle = {
+    fontSize: "1.5em",
+    cursor: "pointer",
+    marginLeft:"1.5em"
+  }
   return (
+    
     <div className="page-content">
       <h1>Processes Component</h1>
-      {submit ? (
+      { submit ? (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <ProcessesForm requestname={request} />
+          {sections.map((section, index) => (
+            <ProcessesForm
+              key={index}
+              sectionIndex={index}
+              requestname={request}
+            />
+          ))}
+          <div className="d-flex align-items-center">
+          <Button
+            className="bg-primary text-white mt-4"
+            onClick={handleAddSection}
+          >
+            Add Section
+          </Button>
+          <i
+            className="ti-trash mt-4"
+            style={iconstyle}
+            onClick={deletecomponet}
+          ></i>
+          </div>
+       
         </motion.div>
       ) : (
         <Card style={{ width: "50%", margin: "auto" }} className="mt-4">

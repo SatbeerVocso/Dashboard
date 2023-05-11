@@ -40,6 +40,7 @@ function ProcessesField(props) {
       clearTimeout(timeoutId)
     }
   }, [showAlert])
+
   const containerStyle = {
     display: "flex",
     width: "100%",
@@ -58,86 +59,95 @@ function ProcessesField(props) {
   }
   return (
     <div>
-      {isVisible && (
-        <div>
-          {FieldSubmit ? (
-            <div>
-              <Processfieldata fieldname={FieldName} fieldtype={FieldType} />
-            </div>
-          ) : (
-            <div style={containerStyle}>
-              <div style={halfWidthStyle} className="mt-2 ">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {isVisible && (
+          <div>
+            {FieldSubmit ? (
+              <div>
+                <Processfieldata fieldname={FieldName} fieldtype={FieldType} />
+              </div>
+            ) : (
+              <div>
                 {showAlert && (
                   <UncontrolledAlert
                     color="danger"
-                    className="mb-3"
+                    className="mb-2 mt-2"
                     role="alert"
                   >
-                    Please enter the field name & field type !
+                    Please enter the field name & field type!
                   </UncontrolledAlert>
                 )}
-
-                <TextInput
-                  label="Enter the Field Name"
-                  type="text"
-                  value={FieldName}
-                  onChange={e => {
-                    setFieldName(e.target.value)
-                  }}
-                />
-              </div>
-              <div style={halfWidthStyle} className="mt-2">
-                <Label className="mb-0">Enter the Field Type</Label>
-                <Input
-                  type="text"
-                  style={{
-                    border: "none",
-                    borderBottom: "2px solid",
-                    transition: "border-bottom-color 0.1s ease",
-                    borderBottomColor: isInput2Clicked ? "#02a499" : "",
-                  }}
-                  value={FieldType}
-                  onClick={() => {
-                    setisInput2Clicked(!isInput2Clicked)
-                  }}
-                  // onBlur={()=>{setisInput2Clicked(false)}}
-                  onChange={e => {
-                    setFieldType(e.target.value)
-                  }}
-                ></Input>
-              </div>
-              <i
-                className="ti-save pointer-cursor mt-4 me-2"
-                style={iconstyle}
-                onClick={fieldSubmithandler}
-              ></i>
-              <i
-                className="ti-trash mt-4"
-                style={iconstyle}
-                onClick={deletecomponet}
-              ></i>
-              {isInput2Clicked && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "105%", // position below input
-                      right: "16%",
-                      width: "30%",
-                    }}
-                  >
-                    <AllFieldType data={handleFieldTypeSelected} />
+                <div style={containerStyle}>
+                  <div style={halfWidthStyle} className="mt-2 ">
+                    <TextInput
+                      label="Enter the Field Name"
+                      type="text"
+                      value={FieldName}
+                      onChange={e => {
+                        setFieldName(e.target.value)
+                      }}
+                    />
                   </div>
-                </motion.div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+                  <div style={halfWidthStyle} className="mt-2">
+                    <Label className="mb-0">Enter the Field Type</Label>
+                    <Input
+                      type="text"
+                      style={{
+                        border: "none",
+                        borderBottom: "2px solid",
+                        transition: "border-bottom-color 0.1s ease",
+                        borderBottomColor: isInput2Clicked ? "#02a499" : "",
+                      }}
+                      value={FieldType}
+                      onClick={() => {
+                        setisInput2Clicked(!isInput2Clicked)
+                      }}
+                      // onBlur={()=>{setisInput2Clicked(false)}}
+                      onChange={e => {
+                        setFieldType(e.target.value)
+                      }}
+                    ></Input>
+                  </div>
+
+                  <i
+                    className="ti-save pointer-cursor mt-4 me-2"
+                    style={iconstyle}
+                    onClick={fieldSubmithandler}
+                  ></i>
+                  <i
+                    className="ti-trash mt-4"
+                    style={iconstyle}
+                    onClick={deletecomponet}
+                  ></i>
+
+                  {isInput2Clicked && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "105%", // position below input
+                          right: "16%",
+                          width: "30%",
+                        }}
+                      >
+                        <AllFieldType data={handleFieldTypeSelected} />
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </motion.div>
     </div>
   )
 }
