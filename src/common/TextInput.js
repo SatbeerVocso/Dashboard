@@ -6,7 +6,7 @@ const TextInput = ({ label, type, value, onChange, placeholder }) => {
 
   const inputStyle = {
     border: "none",
-    borderBottom: "2px solid",
+    borderBottom: "2px solid black",
     transition: "border-bottom-color 0.1s ease",
     borderBottomColor: isClicked ? "#02a499" : "",
   };

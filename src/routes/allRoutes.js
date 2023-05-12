@@ -45,7 +45,7 @@ import Dashboard from "../pages/Dashboard/index"
 import Request from "pages/Request/Request"
 
 // Processes Component
-import Processes from "pages/Processes/Processes"
+ import MainProcesses from "pages/Processes/MainProcess"
 
 //OrganizationChart
 import Employees from "pages/Organization/Employee/Employees"
@@ -137,7 +137,7 @@ const userRoutes = [
   { path: "/request", component: <Request /> },
 
   // Processes
-  { path: "/processes", component: <Processes /> },
+  { path: "/processes", component: <MainProcesses /> },
 
   //Organization
   { path: "/designation", component: <Designation /> },

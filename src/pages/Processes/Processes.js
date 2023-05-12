@@ -6,18 +6,16 @@ import TextInput from "common/TextInput"
 
 function Processes() {
   const [request, setrequest] = useState("")
+  const [description, setdescription] = useState("")
   const [showAlert, setShowAlert] = useState(false)
   const [submit, setsubmit] = useState(false)
 
-  
-  const [isVisible, setisVisible] = useState(true)
-  const deletecomponet = () => {
-    setisVisible(false)
-    //initially component is visible but when trash icon is clicked we hide the component
-  }
   const [sections, setSections] = useState([{}])
+  const [numSections, setNumSections] = useState(1)
+
   const handleAddSection = () => {
     setSections([...sections, {}])
+    setNumSections(numSections + 1)
   }
 
   const submithandler = e => {
@@ -41,42 +39,45 @@ function Processes() {
   const iconstyle = {
     fontSize: "1.5em",
     cursor: "pointer",
-    marginLeft:"1.5em"
+    marginLeft: "1.5em",
   }
   return (
-    
-    <div className="page-content">
-      <h1>Processes Component</h1>
-      { submit ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {sections.map((section, index) => (
-            <ProcessesForm
-              key={index}
-              sectionIndex={index}
-              requestname={request}
-            />
-          ))}
-          <div className="d-flex align-items-center">
-          <Button
-            className="bg-primary text-white mt-4"
-            onClick={handleAddSection}
+    <div className="mt-4">
+      {submit ? (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            Add Section
-          </Button>
-          <i
-            className="ti-trash mt-4"
-            style={iconstyle}
-            onClick={deletecomponet}
-          ></i>
-          </div>
-       
-        </motion.div>
+            {sections.map((section, index) => (
+              <ProcessesForm
+                key={index}
+                sectionIndex={index}
+                requestname={request}
+              />
+            ))}
+
+            <div className="d-flex align-items-center">
+              <Button className="mt-4" onClick={handleAddSection} color="dark">
+                Add Section
+              </Button>
+
+              <i
+                className="ti-trash mt-4"
+                style={iconstyle}
+                onClick={() => {
+                  if (numSections > 1) {
+                    setSections(sections.slice(0, -1))
+                    setNumSections(numSections - 1)
+                  }
+                }}
+              ></i>
+            </div>
+          </motion.div>
+        </>
       ) : (
-        <Card style={{ width: "50%", margin: "auto" }} className="mt-4">
+        <Card style={{ width: "50%", margin: "auto" }}>
           <CardBody>
             {showAlert && (
               <UncontrolledAlert color="danger" className="mb-3" role="alert">
@@ -84,7 +85,7 @@ function Processes() {
               </UncontrolledAlert>
             )}
             <Form onSubmit={submithandler}>
-              <div>
+              <div className="mb-4">
                 <TextInput
                   label="Enter the Request Name"
                   type="text"
@@ -94,6 +95,17 @@ function Processes() {
                   }}
                 />
               </div>
+              <div>
+                <TextInput
+                  label="Short Description for Users"
+                  type="text"
+                  value={description}
+                  onChange={e => {
+                    setdescription(e.target.value)
+                  }}
+                />
+              </div>
+
               <Button color="success" className="mt-4" type="submit">
                 Next
               </Button>
