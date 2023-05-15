@@ -26,11 +26,13 @@ function ProcessesField(props) {
   const [drp_success1, setDrp_success1] = useState(false)
   const [checked1, setChecked1] = useState(false)
   const handleChange1 = nextChecked1 => {
+    console.log(nextChecked1)
     setChecked1(nextChecked1)
   }
-  const[checked2,setchecked2]=useState(false)
-  const handleChange2 = nextChecked2 =>{
+  const [checked2, setchecked2] = useState(false)
+  const handleChange2 = nextChecked2 => {
     setchecked2(nextChecked2)
+    console.log(nextChecked2)
   }
 
   const handleFieldTypeClick = type => {
@@ -51,7 +53,7 @@ function ProcessesField(props) {
     setisVisible(false)
     //initially component is visible but when trash icon is clicked we hide the component
   }
-
+ 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowAlert(false)
@@ -77,7 +79,11 @@ function ProcessesField(props) {
           <div>
             {FieldSubmit ? (
               <div>
-                <Processfieldata fieldname={FieldName} fieldtype={FieldType} />
+                <Processfieldata
+                  fieldname={FieldName}
+                  fieldtype={FieldType}
+                  onchecked={checked2}
+                />
               </div>
             ) : (
               <div>

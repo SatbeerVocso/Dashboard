@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 
 import {
   Card,
@@ -14,10 +14,11 @@ import {
 
 import classnames from "classnames"
 import { Link } from "react-router-dom"
-import Processes from "./Processes"
+import Processes from "./Processes/Processes"
+import ProcessFlow from "./ProcessFlow/ProcessFlow"
 
-const MainProcesses = () => { 
-    const [activeTab, setactiveTab] = useState(1);
+const MainProcesses = () => {
+  const [activeTab, setactiveTab] = useState(1)
 
   function toggleTab(tab) {
     if (activeTab !== tab) {
@@ -32,7 +33,7 @@ const MainProcesses = () => {
       <div className="page-content">
         <Container fluid={true}>
           <div className="form-horizontal form-wizard-wrapper wizard clearfix mt-4" >
-            <div className="steps clearfix">
+            <div className="steps clearfix" style={{marginLeft:'16.5em',marginBottom:'3em'}}>
               <ul>
                 <NavItem className={classnames({ current: activeTab === 1 })}>
                   <NavLink
@@ -68,22 +69,21 @@ const MainProcesses = () => {
               </ul>
             </div>
 
-           <div className="mt-2">
-           <TabContent activeTab={activeTab} className="body">
+            <div className="mt-2">
+              <TabContent activeTab={activeTab} className="body">
                 <TabPane tabId={1}>
-                <Processes/>
+                  <Processes />
                 </TabPane>
                 <TabPane tabId={2}>
-                  <h1>Current Node</h1>
+                  <ProcessFlow />
                 </TabPane>
 
                 <TabPane tabId={3}>
                   <h1>Publish</h1>
                 </TabPane>
               </TabContent>
-           </div>
-          
-         
+            </div>
+
             <div className="actions clearfix">
               <ul>
                 <li
@@ -110,7 +110,6 @@ const MainProcesses = () => {
                 </li>
               </ul>
             </div>
-
           </div>
         </Container>
       </div>

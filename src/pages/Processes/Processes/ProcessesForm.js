@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Card, CardBody, Button, Input, Label } from "reactstrap"
 import ProcessesField from "./ProcessesField"
 
-function ProcessesForm({ requestname }) {
+function ProcessesForm(props) {
   const [text, settext] = useState("")
   const [isInputClicked, setisInputClicked] = useState(false)
 
@@ -20,7 +20,7 @@ function ProcessesForm({ requestname }) {
 
   return (
     <div>
-      <h5 className="mb-3">Request Name: {requestname}</h5>
+      {/* <h5 className="mb-3">Request Name: {props.requestname}</h5> */}
       <Card style={{ width: "100%", margin: "auto" }}>
         <CardBody>
           <Input

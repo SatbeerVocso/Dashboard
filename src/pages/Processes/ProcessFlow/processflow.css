@@ -1,0 +1,25 @@
+.custom-node {
+  cursor: pointer;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 32px;
+  background-color: rgb(238, 238, 238);
+}
+
+.box {
+  width: 18em;
+  background-color: blue;
+  color: whitesmoke;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+.box div {
+  padding-left: 1em;
+}
+.box div:hover {
+  color: lightblue;
+  animation: all 0.4s;
+}

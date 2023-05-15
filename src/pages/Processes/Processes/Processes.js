@@ -5,27 +5,60 @@ import { motion } from "framer-motion"
 import TextInput from "common/TextInput"
 
 function Processes() {
-  const [request, setrequest] = useState("")
-  const [description, setdescription] = useState("")
-  const [showAlert, setShowAlert] = useState(false)
-  const [submit, setsubmit] = useState(false)
+  
+  const [request, setRequest] = useState("");
+  const [description, setDescription] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
-  const [sections, setSections] = useState([{}])
-  const [numSections, setNumSections] = useState(1)
+  const [sections, setSections] = useState([{}]);
+  const [numSections, setNumSections] = useState(1);
 
   const handleAddSection = () => {
-    setSections([...sections, {}])
-    setNumSections(numSections + 1)
-  }
+    setSections([...sections, {}]);
+    setNumSections(numSections + 1);
+  };
 
-  const submithandler = e => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (request === "") {
-      setShowAlert(true)
-      return
+      setShowAlert(true);
+      return;
     }
-    setsubmit(true)
-  }
+    const formData = {
+      request,
+      description,
+    };
+
+    const formId = Date.now().toString(); // Generate a unique ID for the form submission
+
+    // Save the form data to local storage
+    localStorage.setItem(formId, JSON.stringify(formData));
+
+    setSubmit(true);
+    setRequest("");
+    setDescription("");
+  };
+
+  useEffect(() => {
+    // Retrieve the form data from local storage upon component mount
+    const storedFormData = JSON.parse(localStorage.getItem("formdata"));
+    if (storedFormData) {
+      setRequest(storedFormData.request);
+      setDescription(storedFormData.description);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Update the local storage whenever the form data changes
+    const formData = {
+      request,
+      description,
+    };
+    localStorage.setItem("formdata", JSON.stringify(formData));
+  }, [request, description]);
+  
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowAlert(false)
@@ -41,6 +74,11 @@ function Processes() {
     cursor: "pointer",
     marginLeft: "1.5em",
   }
+  const trashiconstyle = {
+    fontSize: "1.5em",
+    cursor: numSections === 1 ? "default" : "pointer",
+    marginLeft: "1.5em",
+  }
   return (
     <div className="mt-4">
       {submit ? (
@@ -54,7 +92,7 @@ function Processes() {
               <ProcessesForm
                 key={index}
                 sectionIndex={index}
-                requestname={request}
+                // requestname={request}
               />
             ))}
 
@@ -65,7 +103,7 @@ function Processes() {
 
               <i
                 className="ti-trash mt-4"
-                style={iconstyle}
+                style={trashiconstyle}
                 onClick={() => {
                   if (numSections > 1) {
                     setSections(sections.slice(0, -1))
@@ -84,14 +122,14 @@ function Processes() {
                 Please enter the request name
               </UncontrolledAlert>
             )}
-            <Form onSubmit={submithandler}>
+            <Form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <TextInput
                   label="Enter the Request Name"
                   type="text"
                   value={request}
                   onChange={e => {
-                    setrequest(e.target.value)
+                    setRequest(e.target.value)
                   }}
                 />
               </div>
@@ -101,7 +139,7 @@ function Processes() {
                   type="text"
                   value={description}
                   onChange={e => {
-                    setdescription(e.target.value)
+                    setDescription(e.target.value)
                   }}
                 />
               </div>
