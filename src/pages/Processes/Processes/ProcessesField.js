@@ -7,6 +7,7 @@ import {
   Card,
   CardBody,
   Dropdown,
+  UncontrolledTooltip,
 } from "reactstrap"
 import Processfieldata from "./Processfieldata"
 import { motion } from "framer-motion"
@@ -217,8 +218,15 @@ function ProcessesField(props) {
                         <i
                           className="ti-save me-4"
                           style={iconstyle}
+                          id="tooltipExample"
                           onClick={fieldSubmithandler}
                         ></i>
+                        <UncontrolledTooltip
+                          placement="top"
+                          target="tooltipExample"
+                        >
+                          Save
+                        </UncontrolledTooltip>
                       </div>
 
                       <div>
@@ -226,7 +234,14 @@ function ProcessesField(props) {
                           className="ti-trash "
                           style={iconstyle}
                           onClick={deleteComponent}
+                          id="tooltipDelete"
                         ></i>
+                        <UncontrolledTooltip
+                          placement="top"
+                          target="tooltipDelete"
+                        >
+                          Delete
+                        </UncontrolledTooltip>
                       </div>
                     </div>
                   </CardBody>

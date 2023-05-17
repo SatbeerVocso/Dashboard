@@ -46,9 +46,8 @@ function DesignationCheckboxes(props) {
   ) {
     setSelectedCheckboxes([]); // Deselect all checkboxes
   } else {
-    setSelectedCheckboxes(allCheckboxValues)
-    console.log(allCheckboxValues.length)
-    ; // Select all checkboxes
+    setSelectedCheckboxes(allCheckboxValues);
+     // Select all checkboxes
   }
 }
 

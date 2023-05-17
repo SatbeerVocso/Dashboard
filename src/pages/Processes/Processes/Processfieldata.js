@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { CardBody, Card, Input } from "reactstrap"
+import { CardBody, Card,UncontrolledTooltip } from "reactstrap"
 import TextInput from "common/TextInput"
 import { motion } from "framer-motion"
 
@@ -51,7 +51,14 @@ function Processfieldata(props) {
                         className="ti-pencil me-3"
                         style={{ cursor: "pointer" }}
                         onClick={goBack}
+                        id="tooltipedit"
                       ></i>
+                       <UncontrolledTooltip
+                          placement="top"
+                          target="tooltipedit"
+                        >
+                         Edit
+                        </UncontrolledTooltip>
                     </div>
                   </div>
                 )}

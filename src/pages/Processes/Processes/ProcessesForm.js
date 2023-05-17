@@ -14,7 +14,6 @@ function ProcessesForm(props) {
       id: fieldCount + 1, // Increment fieldCount for unique ID
       type: "processfield",
     }
-
     setFields(prevFields => {
       const updatedfield = [...prevFields, newField]
       console.log(newField.id , updatedfield)
@@ -35,7 +34,7 @@ function ProcessesForm(props) {
   }
 
   return (
-    <div>
+    <div style={{marginTop:'2em'}}>
       <Card style={{ width: "100%", margin: "auto" }}>
         <CardBody>
           <Input
