@@ -22,6 +22,7 @@ function ProcessesField(props) {
   const [showAlert, setShowAlert] = useState(false)
 
   const [drp_success1, setDrp_success1] = useState(false)
+
   const [checked1, setChecked1] = useState(false)
   const handleChange1 = nextChecked1 => {
     setChecked1(nextChecked1)
@@ -78,6 +79,8 @@ function ProcessesField(props) {
                 fieldname={FieldName}
                 fieldtype={FieldType}
                 onchecked={checked2}
+                id={props.id}
+                setFieldSubmit={setFieldSubmit}
               />
             </div>
           ) : (

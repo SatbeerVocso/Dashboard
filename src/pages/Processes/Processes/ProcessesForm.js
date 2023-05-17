@@ -22,6 +22,7 @@ function ProcessesForm(props) {
   }
   const handleDeleteField = id => {
     setFields(prevFields => prevFields.filter(field => field.id !== id))
+    setFieldCount(prevCount => prevCount - 1);
   }
 
   const [hasSeparator, setHasSeparator] = useState(false)

@@ -63,11 +63,11 @@ function DesignationCheckboxes(props) {
         <br />
       </div>
       {selectedCheckboxes.length > 0 && (
-        <div className="mb-3 mt-2">
+        <div className="mb-4 mt-3">
           {selectedCheckboxes.map(value => (
             <span
               key={value}
-              className="bg-primary text-white"
+              className="bg-primary text-white me-2"
               style={{ padding: '10px', borderRadius: '8px', marginRight: '4px' }}
             >
               {value}
@@ -75,7 +75,7 @@ function DesignationCheckboxes(props) {
                 style={{ cursor: 'pointer', marginLeft: '4px' }}
                 onClick={() => handleCrossClick(value)}
               >
-                <i className="ti-close" style={{ fontSize: '1.1em', fontWeight: 'bold' }}></i>
+                <i className="ti-close" style={{ fontSize: '0.8em', fontWeight: 'bold' }}></i>
               </span>
             </span>
           ))}
