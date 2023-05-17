@@ -30,66 +30,77 @@ function DepartmentCheckboxes(props) {
 
   function handleSelectAllClick() {
     const allCheckboxValues = ["IT", "HR", "Accounts", "Sales", "Product"]
-    setSelectedCheckboxes(allCheckboxValues)
+    if (
+      selectedCheckboxes.length === allCheckboxValues.length &&
+      allCheckboxValues.every((value) => selectedCheckboxes.includes(value))
+    ) {
+      setSelectedCheckboxes([]); // Deselect all checkboxes
+    } else {
+      setSelectedCheckboxes(allCheckboxValues); // Select all checkboxes
+    }
   }
 
   return (
     <div>
-      <div className="d-flex">
-        <Label style={{ fontSize: "1.1em" }}>
-          <Input
-            type="checkbox"
-            value="IT"
-            checked={selectedCheckboxes.includes("IT")}
-            onChange={handleCheckboxChange}
-          />
-          IT
-        </Label>
-        <br />
-        <Label style={labelfontsize}>
-          <Input
-            type="checkbox"
-            value="HR"
-            checked={selectedCheckboxes.includes("HR")}
-            onChange={handleCheckboxChange}
-          />
-          HR
-        </Label>
-        <br />
-        <Label style={labelfontsize}>
-          <Input
-            type="checkbox"
-            value="Accounts"
-            checked={selectedCheckboxes.includes("Accounts")}
-            onChange={handleCheckboxChange}
-          />
-          Accounts
-        </Label>
-        <br />
-        <Label style={labelfontsize}>
-          <Input
-            type="checkbox"
-            value="Sales"
-            checked={selectedCheckboxes.includes("Sales")}
-            onChange={handleCheckboxChange}
-          />
-          Sales
-        </Label>
-        <br />
-        <Label style={labelfontsize}>
-          <Input
-            type="checkbox"
-            value="Product"
-            checked={selectedCheckboxes.includes("Product")}
-            onChange={handleCheckboxChange}
-          />
-          Product
-        </Label>
-        <br />
+      <div>
+        <div>
+          <Button onClick={handleSelectAllClick}>Select All</Button>
+        </div>
+        <div className="d-flex mt-2">
+          <Label style={{ fontSize: "1.1em" }}>
+            <Input
+              type="checkbox"
+              value="IT"
+              checked={selectedCheckboxes.includes("IT")}
+              onChange={handleCheckboxChange}
+            />
+            IT
+          </Label>
+          <br />
+          <Label style={labelfontsize}>
+            <Input
+              type="checkbox"
+              value="HR"
+              checked={selectedCheckboxes.includes("HR")}
+              onChange={handleCheckboxChange}
+            />
+            HR
+          </Label>
+          <br />
+          <Label style={labelfontsize}>
+            <Input
+              type="checkbox"
+              value="Accounts"
+              checked={selectedCheckboxes.includes("Accounts")}
+              onChange={handleCheckboxChange}
+            />
+            Accounts
+          </Label>
+          <br />
+          <Label style={labelfontsize}>
+            <Input
+              type="checkbox"
+              value="Sales"
+              checked={selectedCheckboxes.includes("Sales")}
+              onChange={handleCheckboxChange}
+            />
+            Sales
+          </Label>
+          <br />
+          <Label style={labelfontsize}>
+            <Input
+              type="checkbox"
+              value="Product"
+              checked={selectedCheckboxes.includes("Product")}
+              onChange={handleCheckboxChange}
+            />
+            Product
+          </Label>
+          <br />
+        </div>
       </div>
-      <Button onClick={handleSelectAllClick}>Select All</Button>
       {selectedCheckboxes.length > 0 && (
-        <div className="mb-4 mt-3">
+        <div  className="mb-4 mt-3">
           {selectedCheckboxes.map(value => (
             <span
               key={value}
