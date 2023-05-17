@@ -7,8 +7,21 @@ function ProcessesForm(props) {
   const [isInputClicked, setisInputClicked] = useState(false)
 
   const [fields, setFields] = useState([])
+  const [fieldCount, setFieldCount] = useState(0) // New state variable for field count
+
   const handleAddField = () => {
-    setFields([...fields, { type: "processfield" }])
+    const newField = {
+      id: fieldCount + 1, // Increment fieldCount for unique ID
+      type: "processfield",
+    }
+
+    setFields(prevFields => [...prevFields, newField])
+    setFieldCount(prevCount => prevCount + 1) // Increment fieldCount
+    console.log('id-', newField.id,'arr-', fields )
+    
+  }
+  const handleDeleteField = id => {
+    setFields(prevFields => prevFields.filter(field => field.id !== id))
   }
 
   const [hasSeparator, setHasSeparator] = useState(false)
@@ -20,7 +33,6 @@ function ProcessesForm(props) {
 
   return (
     <div>
-      {/* <h5 className="mb-3">Request Name: {props.requestname}</h5> */}
       <Card style={{ width: "100%", margin: "auto" }}>
         <CardBody>
           <Input
@@ -47,9 +59,17 @@ function ProcessesForm(props) {
             {fields.map((field, index) => (
               <div key={index}>
                 {/* Conditionally render the horizontal line if hasSeparator is true */}
-                {field.type === "processfield" && <ProcessesField />}
+                {field.type === "processfield" && (
+                  <ProcessesField id={field.id} onDelete={handleDeleteField}/>
+                )}
                 {field.type === "separator" && hasSeparator && (
-                  <hr style={{ marginTop: "10px", marginBottom: "10px",width:'100%'}} />
+                  <hr
+                    style={{
+                      marginTop: "10px",
+                      marginBottom: "10px",
+                      width: "100%",
+                    }}
+                  />
                 )}
               </div>
             ))}
@@ -65,7 +85,6 @@ function ProcessesForm(props) {
               <i></i> Add Seprator
             </Button>
           </div>
-          <div></div>
         </CardBody>
       </Card>
     </div>

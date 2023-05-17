@@ -16,6 +16,7 @@ import classnames from "classnames"
 import { Link } from "react-router-dom"
 import Processes from "./Processes/Processes"
 import ProcessFlow from "./ProcessFlow/ProcessFlow"
+import Publish from "./Publish/Publish"
 
 const MainProcesses = () => {
   const [activeTab, setactiveTab] = useState(1)
@@ -32,8 +33,11 @@ const MainProcesses = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid={true}>
-          <div className="form-horizontal form-wizard-wrapper wizard clearfix mt-4" >
-            <div className="steps clearfix" style={{marginLeft:'16.5em',marginBottom:'3em'}}>
+          <div className="form-horizontal form-wizard-wrapper wizard clearfix mt-4">
+            <div
+              className="steps clearfix"
+              style={{ marginLeft: "16.5em", marginBottom: "3em" }}
+            >
               <ul>
                 <NavItem className={classnames({ current: activeTab === 1 })}>
                   <NavLink
@@ -79,7 +83,7 @@ const MainProcesses = () => {
                 </TabPane>
 
                 <TabPane tabId={3}>
-                  <h1>Publish</h1>
+                  <Publish />
                 </TabPane>
               </TabContent>
             </div>
