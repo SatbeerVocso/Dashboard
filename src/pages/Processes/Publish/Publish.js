@@ -13,7 +13,6 @@ import {
 import { motion } from "framer-motion"
 import DesignationCheckboxes from "./DesignationCheckboxes"
 import DepartmentCheckboxes from "./DepartmentCheckboxes"
-import Switch from "react-switch"
 
 function Publish() {
   const [showDepartment, setShowDepartment] = useState(false)
@@ -26,11 +25,7 @@ function Publish() {
   const togglehandlerDesignation = () => {
     setShowDesignation(!showDesignation)
   }
-  const [checked1, setChecked1] = useState(false)
-  const handleChange1 = nextChecked1 => {
-    console.log(nextChecked1)
-    setChecked1(nextChecked1)
-  }
+ 
   const iconstyle = {
     cursor: "pointer",
     marginRight: "0.2rem",
@@ -47,17 +42,6 @@ function Publish() {
         <Card style={{ width: "50%", margin: "auto" }}>
           <CardBody>
             <Form>
-              <div className="d-flex">
-                <p className="me-5">Host this Form on Web ?</p>
-                <Switch
-                  onChange={handleChange1}
-                  checked={checked1}
-                  className="react-switch mt-1"
-                  height={15}
-                  width={40}
-                />
-              </div>
-
               <div className="d-flex justify-content-start align-items-center mt-2">
                 <i
                   className={`ti-angle-${showDepartment ? "up" : "right"}`}

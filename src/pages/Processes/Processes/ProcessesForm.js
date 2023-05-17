@@ -15,14 +15,16 @@ function ProcessesForm(props) {
       type: "processfield",
     }
 
-    setFields(prevFields => [...prevFields, newField])
+    setFields(prevFields => {
+      const updatedfield = [...prevFields, newField]
+      console.log(newField.id , updatedfield)
+      return updatedfield
+    })
     setFieldCount(prevCount => prevCount + 1) // Increment fieldCount
-    console.log('id-', newField.id,'arr-', fields )
-    
   }
   const handleDeleteField = id => {
     setFields(prevFields => prevFields.filter(field => field.id !== id))
-    setFieldCount(prevCount => prevCount - 1);
+    setFieldCount(prevCount => prevCount - 1)
   }
 
   const [hasSeparator, setHasSeparator] = useState(false)
@@ -61,7 +63,7 @@ function ProcessesForm(props) {
               <div key={index}>
                 {/* Conditionally render the horizontal line if hasSeparator is true */}
                 {field.type === "processfield" && (
-                  <ProcessesField id={field.id} onDelete={handleDeleteField}/>
+                  <ProcessesField id={field.id} onDelete={handleDeleteField} />
                 )}
                 {field.type === "separator" && hasSeparator && (
                   <hr
