@@ -48,8 +48,8 @@ function Processfieldata(props) {
 
                     <div>
                       <i
-                        className="ti-pencil me-3"
-                        style={{ cursor: "pointer" }}
+                        className="ti-pencil"
+                        style={{ cursor: "pointer",fontSize:'1.2em' }}
                         onClick={goBack}
                         id="tooltipedit"
                       ></i>

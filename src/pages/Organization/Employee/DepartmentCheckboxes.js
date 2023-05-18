@@ -82,7 +82,7 @@ function DepartmentCheckboxes(props) {
         <div className="mb-3 mt-2" >
           <span
             className="bg-primary text-white"
-            style={{ padding: "10px", borderRadius: "8px" }}
+            style={{ padding: "5px", borderRadius: "8px" }}
           >
             {selectedCheckbox}
           </span>

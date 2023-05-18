@@ -100,13 +100,13 @@ function DepartmentCheckboxes(props) {
         </div>
       </div>
       {selectedCheckboxes.length > 0 && (
-        <div  className="mb-4 mt-3">
+        <div  className="mb-4 mt-2">
           {selectedCheckboxes.map(value => (
             <span
               key={value}
               className="bg-primary text-white me-2"
               style={{
-                padding: "10px",
+                padding: "5px",
                 borderRadius: "8px",
                 marginRight: "4px",
               }}

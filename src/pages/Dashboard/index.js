@@ -32,7 +32,6 @@ const Dashboard = props => {
   const toggle = () => {
     setMenu(!menu)
   }
-  document.title = "Dashboard | Veltrix - React Admin & Dashboard Template"
 
   return (
     <React.Fragment>

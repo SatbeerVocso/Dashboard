@@ -24,7 +24,9 @@ function Publish() {
   const togglehandlerDesignation = () => {
     setShowDesignation(!showDesignation)
   }
- 
+ const Submithandler =(e)=>{
+  e.preventDefault()
+ }
   const iconstyle = {
     cursor: "pointer",
     marginRight: "0.2rem",
@@ -40,7 +42,7 @@ function Publish() {
       >
         <Card style={{ width: "50%", margin: "auto" }}>
           <CardBody>
-            <Form>
+            <Form onSubmit={Submithandler}>
               <div className="d-flex justify-content-start align-items-center mt-2">
                 <i
                   className={`ti-angle-${showDepartment ? "up" : "right"}`}

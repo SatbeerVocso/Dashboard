@@ -29,9 +29,14 @@ function ProcessesForm(props) {
   const [hasSeparator, setHasSeparator] = useState(false)
   // Update addSeparator function to set hasSeparator state to true
   const addSeparator = () => {
-    setFields([...fields, { type: "separator" }])
-    setHasSeparator(true)
-  }
+    const lastField = fields[fields.length - 1];
+    console.log(lastField)
+    if (lastField && lastField.type === "processfield") {
+      // setFields(prevFields => [...prevFields, { type: "separator" }]);
+      setHasSeparator(true);
+    }
+  };
+  
 
   return (
     <div style={{marginTop:'2em'}}>
