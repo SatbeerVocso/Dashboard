@@ -32,7 +32,7 @@ function ProcessesForm(props) {
     const lastField = fields[fields.length - 1];
     console.log(lastField)
     if (lastField && lastField.type === "processfield") {
-      // setFields(prevFields => [...prevFields, { type: "separator" }]);
+      setFields(prevFields => [...prevFields, { type: "separator" }]);
       setHasSeparator(true);
     }
   };

@@ -230,18 +230,13 @@ function ProcessesField(props) {
                       </div>
 
                       <div>
-                        <i
-                          className="ti-trash "
-                          style={iconstyle}
-                          onClick={deleteComponent}
-                          id="tooltipDelete"
-                        ></i>
-                        <UncontrolledTooltip
-                          placement="top"
-                          target="tooltipDelete"
-                        >
-                          Delete
-                        </UncontrolledTooltip>
+                        <span  className="text-danger">
+                          <i
+                            className="ti-trash "
+                            style={iconstyle}
+                            onClick={deleteComponent}
+                          ></i>
+                        </span>
                       </div>
                     </div>
                   </CardBody>

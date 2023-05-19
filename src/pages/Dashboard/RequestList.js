@@ -1,4 +1,4 @@
-import React, { useState,useRef,useEffect } from "react"
+import React, { useState  } from "react"
 import { Card, CardBody } from "reactstrap"
 import {
   TodayRequestListData,
@@ -8,9 +8,8 @@ import {
 import { motion } from "framer-motion"
 function RequestList() {
   const [showData, setShowData] = useState(true)
-  const [showDataUpcoming, setShowDataUpcoming] = useState(false)
+  const [showDataUpcoming, setShowDataUpcoming] = useState(true)
   const [showDataOthers, setshowDataOthers] = useState(false)
-  const [cardHeight, setCardHeight] = useState(0)
 
   const toggleShowData = () => {
     setShowData(!showData)
@@ -19,25 +18,16 @@ function RequestList() {
   const toggleShowDataOthers = () => {
     setshowDataOthers(!showDataOthers)
   }
+
   const iconstyle = {
     cursor: "pointer",
     marginRight: "0.2rem",
-    fontSize:'1.3em'
+    fontSize: "1.3em",
   }
-  const cardBodyRef = useRef(null)
-  useEffect(() => {
-    // Calculate the height of the CardBody element and set the Card height accordingly
-    if (cardBodyRef.current) {
-      setCardHeight(cardBodyRef.current.scrollHeight)
-    }
-  }, [showData, showDataUpcoming, showDataOthers])
 
   return (
     <div>
-      <Card
-        className="mini-stat bg-white text-dark"
-        style={{ height: cardHeight }}
-      >
+      <Card className="mini-stat bg-white text-dark">
         <CardBody>
           <h4 className="mb-4">REQUEST LIST</h4>
           <div className="d-flex justify-content-start align-items-center mb-3">
@@ -52,55 +42,62 @@ function RequestList() {
           {showData &&
             TodayRequestListData.map((item, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  onClick={() => {
+                    console.log(item.id)
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
                   <motion.div
                     className="data-container"
                     initial={{ opacity: 0, y: 20 }}
                     animate={showData ? { opacity: 1, y: 0 } : {}}
                   >
-                    <div className="d-flex justify-content-between ">
-                      <div style={{ width: "45%" }}>
-                        <span>{item.title}</span>
+                      <div className="d-flex justify-content-between ">
+                        <div style={{ width: "45%" }}>
+                          <span>{item.title}</span>
+                        </div>
+
+                        <div style={{ width: "20%" }}>
+                          <img
+                            className="rounded-circle header-profile-user "
+                            src={item.assignee_avatar}
+                            alt="Header Avatar"
+                          />
+                          <span style={{ paddingLeft: "8px" }}>
+                            {item.assigned_to}
+                          </span>
+                        </div>
+
+                        <div style={{ width: "20%" }}>
+                          <i className="ti-calendar"></i>
+                          <span style={{ paddingLeft: "5px" }}>
+                            {item.due_date}
+                          </span>
+                        </div>
+
+                        <div style={{ width: "15%", marginLeft: "20px" }}>
+                          <span
+                            className={`text-${item.variant} `}
+                            style={{
+                              backgroundColor:
+                                item.variant === "success"
+                                  ? "#D1FAE5"
+                                  : item.variant === "danger"
+                                  ? "#FECACA"
+                                  : item.variant === "info"
+                                  ? "#D1E5F0"
+                                  : "#E0E7FF",
+                              padding: "5px",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            {item.priority}
+                          </span>
+                        </div>
                       </div>
 
-                      <div style={{ width: "20%" }}>
-                        <img
-                          className="rounded-circle header-profile-user "
-                          src={item.assignee_avatar}
-                          alt="Header Avatar"
-                        />
-                        <span style={{ paddingLeft: "8px" }}>
-                          {item.assigned_to}
-                        </span>
-                      </div>
-
-                      <div style={{ width: "20%" }}>
-                        <i className="ti-calendar"></i>
-                        <span style={{ paddingLeft: "5px" }}>
-                          {item.due_date}
-                        </span>
-                      </div>
-
-                      <div style={{ width: "15%", marginLeft: "20px" }}>
-                        <span
-                          className={`text-${item.variant} `}
-                          style={{
-                            backgroundColor:
-                              item.variant === "success"
-                                ? "#D1FAE5"
-                                : item.variant === "danger"
-                                ? "#FECACA"
-                                : item.variant === "info"
-                                ? "#D1E5F0"
-                                : "#E0E7FF",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          {item.priority}
-                        </span>
-                      </div>
-                    </div>
                     <hr />
                   </motion.div>
                 </div>

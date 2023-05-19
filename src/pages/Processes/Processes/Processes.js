@@ -5,60 +5,59 @@ import { motion } from "framer-motion"
 import TextInput from "common/TextInput"
 
 function Processes() {
-  
-  const [request, setRequest] = useState("");
-  const [description, setDescription] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const [submit, setSubmit] = useState(false);
+  const [request, setRequest] = useState("")
+  const [description, setDescription] = useState("")
+  const [showAlert, setShowAlert] = useState(false)
+  const [submit, setSubmit] = useState(false)
 
-  const [sections, setSections] = useState([{}]);
-  const [numSections, setNumSections] = useState(1);
+  const [sections, setSections] = useState([{}])
+  const [numSections, setNumSections] = useState(1)
 
   const handleAddSection = () => {
-    setSections([...sections, {}]);
-    setNumSections(numSections + 1);
-  };
+    setSections([...sections, {}])
+    setNumSections(numSections + 1)
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault()
 
     if (request === "") {
-      setShowAlert(true);
-      return;
+      setShowAlert(true)
+      return
     }
     const formData = {
       request,
       description,
-    };
+    }
 
-    const formId = Date.now().toString(); // Generate a unique ID for the form submission
+    const formId = Date.now().toString() // Generate a unique ID for the form submission
 
     // Save the form data to local storage
-    localStorage.setItem(formId, JSON.stringify(formData));
+    localStorage.setItem(formId, JSON.stringify(formData))
 
-    setSubmit(true);
-    setRequest("");
-    setDescription("");
-  };
+    setSubmit(true)
+    setRequest("")
+    setDescription("")
+  }
 
   useEffect(() => {
     // Retrieve the form data from local storage upon component mount
-    const storedFormData = JSON.parse(localStorage.getItem("formdata"));
+    const storedFormData = JSON.parse(localStorage.getItem("formdata"))
     if (storedFormData) {
-      setRequest(storedFormData.request);
-      setDescription(storedFormData.description);
+      setRequest(storedFormData.request)
+      setDescription(storedFormData.description)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     // Update the local storage whenever the form data changes
     const formData = {
       request,
       description,
-    };
-    localStorage.setItem("formdata", JSON.stringify(formData));
-  }, [request, description]);
-  
+    }
+    localStorage.setItem("formdata", JSON.stringify(formData))
+  }, [request, description])
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowAlert(false)
@@ -101,16 +100,18 @@ function Processes() {
                 Add Section
               </Button>
 
-              <i
-                className="ti-trash mt-4"
-                style={trashiconstyle}
-                onClick={() => {
-                  if (numSections > 1) {
-                    setSections(sections.slice(0, -1))
-                    setNumSections(numSections - 1)
-                  }
-                }}
-              ></i>
+              <span className="text-danger mt-4">
+                <i
+                  className="ti-trash "
+                  style={trashiconstyle}
+                  onClick={() => {
+                    if (numSections > 1) {
+                      setSections(sections.slice(0, -1))
+                      setNumSections(numSections - 1)
+                    }
+                  }}
+                ></i>
+              </span>
             </div>
           </motion.div>
         </>

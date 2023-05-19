@@ -208,15 +208,13 @@ const Dashboard = props => {
 
           <Button
             color="success"
-            className="rounded-circle px-3 py-2"
             style={{
               position: "fixed",
               bottom: "10px",
               right: "20px",
-              fontSize: "2.5em",
             }}
           >
-            +
+          <i className="ti-plus"></i>
           </Button>
         </Container>
       </div>

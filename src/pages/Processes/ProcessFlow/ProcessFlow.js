@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import ReactFlow, {
-  Background,
   useNodesState,
   useEdgesState,
   addEdge,
@@ -98,7 +97,6 @@ const ProcessFlow = () => {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
         >  {showComponent && <Option onAddNode={addNode} />} 
-        <Background/>
         </ReactFlow>
       </div>
     </div>
