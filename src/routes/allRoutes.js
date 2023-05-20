@@ -134,7 +134,7 @@ const userRoutes = [
 
   // Request Component
 
-  { path: "/requestdetail", component: <RequestDetail/> },
+  { path: "/dashboard/:id", component: <RequestDetail/> },
 
   // Processes
   { path: "/processes", component: <MainProcesses /> },

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react"
 import { Button, Card, CardBody, Form, Input } from "reactstrap"
 
-function Comments() {
+function Comments(props) {
   const currentTime = new Date()
   const [comment, setComment] = useState("")
   const fileInputRef = useRef(null)
@@ -61,7 +61,7 @@ function Comments() {
             return (
               <div key={i} className="mb-4">
                 <div className="d-flex justify-content-between">
-                  <h6>{item.name}</h6>
+                  <h6>{props.username.assigned_to}</h6>
                   <span>{item.time}</span>
                 </div>
                 <div className="d-flex  justify-content-between">

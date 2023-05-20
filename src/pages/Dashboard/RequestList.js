@@ -1,4 +1,4 @@
-import React, { useState  } from "react"
+import React, { useState } from "react"
 import { Card, CardBody } from "reactstrap"
 import {
   TodayRequestListData,
@@ -6,6 +6,8 @@ import {
   OtherRequestListData,
 } from "./RequestListData"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
+
 function RequestList() {
   const [showData, setShowData] = useState(true)
   const [showDataUpcoming, setShowDataUpcoming] = useState(true)
@@ -42,18 +44,13 @@ function RequestList() {
           {showData &&
             TodayRequestListData.map((item, index) => {
               return (
-                <div
-                  key={index}
-                  onClick={() => {
-                    console.log(item.id)
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
-                  <motion.div
-                    className="data-container"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={showData ? { opacity: 1, y: 0 } : {}}
-                  >
+                <div key={index}>
+                  <Link to={`/dashboard/${item.id}`}>
+                    <motion.div
+                      className="data-container"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={showData ? { opacity: 1, y: 0 } : {}}
+                    >
                       <div className="d-flex justify-content-between ">
                         <div style={{ width: "45%" }}>
                           <span>{item.title}</span>
@@ -98,8 +95,9 @@ function RequestList() {
                         </div>
                       </div>
 
-                    <hr />
-                  </motion.div>
+                      <hr />
+                    </motion.div>
+                  </Link>
                 </div>
               )
             })}

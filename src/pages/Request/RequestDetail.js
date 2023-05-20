@@ -8,10 +8,19 @@ import avatarImg5 from "../../assets/images/users/avatar-5.jpg"
 import ActivityList from "./ActivityList"
 import Comments from "./Comments"
 import { GrStatusUnknown } from "react-icons/gr"
-import { AiOutlineUser,AiOutlinePullRequest } from "react-icons/ai"
+import { AiOutlineUser, AiOutlinePullRequest } from "react-icons/ai"
 import { MdOutlineDetails } from "react-icons/md"
-
+import { useParams } from "react-router-dom"
+import { TodayRequestListData } from "pages/Dashboard/RequestListData"
 function RequestDetail() {
+  const { id } = useParams();
+  const requestId = parseInt(id);
+  const item = TodayRequestListData.find((r) => r.id === requestId);
+
+  if (!item ){
+    return <div>Request not found</div>;
+  }
+
   const picstyle = {
     display: "flex",
     alignItems: "center",
@@ -22,8 +31,8 @@ function RequestDetail() {
     flexDirection: "column",
     alignItems: "center",
   }
-  const iconst ={
-    fontSize:"1.4em"
+  const iconst = {
+    fontSize: "1.4em",
   }
   return (
     <div className="page-content">
@@ -33,22 +42,21 @@ function RequestDetail() {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ width: "63%"}}>
+        <div style={{ width: "63%" }}>
           <Card className="mt-4">
             <CardBody>
               <div className="d-flex justify-content-between ">
-                <div
-                  style={{width: "45%",...iconstyle}}
-                >
+                <div style={{ width: "45%", ...iconstyle }}>
                   <i style={iconst} className="mb-2">
                     <MdOutlineDetails />
                   </i>
-                  <span>Draft the new contract document for sales team</span>
+                  <span>{item.title}</span>
                 </div>
 
                 <div
                   style={{
-                    width: "20%",...iconstyle
+                    width: "20%",
+                    ...iconstyle,
                   }}
                 >
                   <i style={iconst} className="mb-2">
@@ -60,23 +68,23 @@ function RequestDetail() {
                 <div
                   style={{
                     width: "20%",
-                   ...iconstyle
+                    ...iconstyle,
                   }}
                 >
                   <i style={iconst} className="mb-2">
                     <AiOutlineUser />
                   </i>
-                  <span style={{ paddingLeft: "5px" }}>Arya Stark</span>
+                  <span style={{ paddingLeft: "5px" }}>{item.assigned_to}</span>
                 </div>
 
                 <div
                   style={{
                     width: "15%",
                     marginLeft: "20px",
-                    ...iconstyle
+                    ...iconstyle,
                   }}
                 >
-                  <i style={iconst} className="mb-2"> 
+                  <i style={iconst} className="mb-2">
                     <GrStatusUnknown />
                   </i>
                   <span className="text-danger">High</span>
@@ -91,11 +99,11 @@ function RequestDetail() {
             <CardBody>
               <div className="d-flex justify-content-between">
                 <div style={picstyle}>
-                  <h6>Initiated By: Arya Stark</h6>
+                  <h6>Initiated By: {item.assigned_to}</h6>
                   <div>
                     <img
                       className="avatar-sm rounded-circle mb-2"
-                      src={avatarImg2}
+                      src={item.assignee_avatar}
                     />
                   </div>
 
@@ -136,7 +144,7 @@ function RequestDetail() {
           <Card className="mt-4">
             <CardBody>
               <ActivityList />
-              <Comments />
+              <Comments username={item}/>
             </CardBody>
           </Card>
         </div>
