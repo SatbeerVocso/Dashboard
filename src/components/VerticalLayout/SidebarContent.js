@@ -155,7 +155,7 @@ const SidebarContent = props => {
             </li>
 
             <li>
-              <Link to="/request" className=" waves-effect">
+              <Link to="/requestdetail" className=" waves-effect">
                 <i className="ti-new-window"></i>
                 <span>{props.t("Request")}</span>
               </Link>

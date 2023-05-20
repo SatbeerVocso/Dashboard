@@ -42,7 +42,7 @@ import TwostepVerification2 from "../pages/AuthenticationInner/auth-two-step-ver
 import Dashboard from "../pages/Dashboard/index"
 
 // Request Component
-import Request from "pages/Request/Request"
+import RequestDetail from "pages/Request/RequestDetail"
 
 // Processes Component
  import MainProcesses from "pages/Processes/MainProcess"
@@ -134,7 +134,7 @@ const userRoutes = [
 
   // Request Component
 
-  { path: "/request", component: <Request /> },
+  { path: "/requestdetail", component: <RequestDetail/> },
 
   // Processes
   { path: "/processes", component: <MainProcesses /> },

@@ -5,11 +5,15 @@ import avatarImg2 from "../../assets/images/users/avatar-2.jpg"
 import avatarImg3 from "../../assets/images/users/avatar-3.jpg"
 import avatarImg4 from "../../assets/images/users/avatar-4.jpg"
 import avatarImg5 from "../../assets/images/users/avatar-5.jpg"
-import avatarImg6 from "../../assets/images/users/avatar-6.jpg"
 import ActivityList from "./ActivityList"
 import Comments from "./Comments"
 
-function Request() {
+function RequestDetail() {
+  const picstyle = {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  }
   return (
     <div className="page-content">
       <div
@@ -35,42 +39,50 @@ function Request() {
                 </div>
 
                 <div style={{ width: "15%", marginLeft: "20px" }}>
-                  <span>High</span>
+                  <span className="text-danger">High</span>
                 </div>
               </div>
             </CardBody>
           </Card>
           <Card className="mt-">
-            <CardBody className="d-flex justify-content-around">
-              <div>
-                <div>
-                  <img
-                    className="avatar-sm rounded-circle mb-2"
-                    src={avatarImg2}
-                  />
-                </div>
-                <div>
+            <h4 className="mt-2" style={{marginLeft:'1em'}}>RequestList ProgressBar</h4>
+            <CardBody>
+              <div className="d-flex justify-content-between">
+                <div style={picstyle}>
+                  <h6>Initiated By: Arya Stark</h6>
+                  <div>
+                    <img
+                      className="avatar-sm rounded-circle mb-2"
+                      src={avatarImg2}
+                    />
+                  </div>
+
                   <Checkmark size="medium" />
                 </div>
-              </div>
-              <div>
-                <img
-                  className="avatar-sm rounded-circle mb-2"
-                  src={avatarImg3}
-                />
-                <Checkmark size="medium" />
-              </div>
-              <div>
-                <img
-                  className="avatar-sm rounded-circle mb-2"
-                  src={avatarImg4}
-                />
-              </div>
-              <div>
-                <img
-                  className="avatar-sm rounded-circle mb-2"
-                  src={avatarImg5}
-                />
+
+                <div style={picstyle}>
+                  <h6>Approval by: James A</h6>
+                  <img
+                    className="avatar-sm rounded-circle mb-2"
+                    src={avatarImg3}
+                  />
+
+                  <Checkmark size="medium" />
+                </div>
+                <div style={picstyle}>
+                  <h6>Approval by: James B</h6>
+                  <img
+                    className="avatar-sm rounded-circle mb-2"
+                    src={avatarImg4}
+                  />
+                </div>
+                <div style={picstyle}>
+                  <h6>Approval by: James C</h6>
+                  <img
+                    className="avatar-sm rounded-circle mb-2"
+                    src={avatarImg5}
+                  />
+                </div>
               </div>
             </CardBody>
           </Card>
@@ -91,4 +103,4 @@ function Request() {
   )
 }
 
-export default Request
+export default RequestDetail

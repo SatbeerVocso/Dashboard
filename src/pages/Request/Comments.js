@@ -35,7 +35,7 @@ function Comments() {
     setCommentData([...commentData, commentBoxData])
     setComment("")
   }
-  
+
   const deleteHandler = index => {
     const newCommentData = [...commentData]
     newCommentData.splice(index, 1)
@@ -54,14 +54,14 @@ function Comments() {
 
   return (
     <div>
-      <h5>Comments</h5>
+      <h5>Comments {commentData.length}</h5>
       <Card>
         <CardBody>
           {commentData.map((item, i) => {
             return (
               <div key={i} className="mb-4">
                 <div className="d-flex justify-content-between">
-                  <h6 >{item.name}</h6>
+                  <h6>{item.name}</h6>
                   <span>{item.time}</span>
                 </div>
                 <div className="d-flex  justify-content-between">
