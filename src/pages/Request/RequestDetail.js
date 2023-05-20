@@ -7,12 +7,23 @@ import avatarImg4 from "../../assets/images/users/avatar-4.jpg"
 import avatarImg5 from "../../assets/images/users/avatar-5.jpg"
 import ActivityList from "./ActivityList"
 import Comments from "./Comments"
+import { GrStatusUnknown } from "react-icons/gr"
+import { AiOutlineUser,AiOutlinePullRequest } from "react-icons/ai"
+import { MdOutlineDetails } from "react-icons/md"
 
 function RequestDetail() {
   const picstyle = {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
+  }
+  const iconstyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  }
+  const iconst ={
+    fontSize:"1.4em"
   }
   return (
     <div className="page-content">
@@ -22,30 +33,61 @@ function RequestDetail() {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ width: "63%" }}>
+        <div style={{ width: "63%"}}>
           <Card className="mt-4">
             <CardBody>
               <div className="d-flex justify-content-between ">
-                <div style={{ width: "45%" }}>
+                <div
+                  style={{width: "45%",...iconstyle}}
+                >
+                  <i style={iconst} className="mb-2">
+                    <MdOutlineDetails />
+                  </i>
                   <span>Draft the new contract document for sales team</span>
                 </div>
 
-                <div style={{ width: "20%" }}>
+                <div
+                  style={{
+                    width: "20%",...iconstyle
+                  }}
+                >
+                  <i style={iconst} className="mb-2">
+                    <AiOutlinePullRequest />
+                  </i>
                   <span style={{ paddingLeft: "8px" }}>Finance Request</span>
                 </div>
 
-                <div style={{ width: "20%" }}>
+                <div
+                  style={{
+                    width: "20%",
+                   ...iconstyle
+                  }}
+                >
+                  <i style={iconst} className="mb-2">
+                    <AiOutlineUser />
+                  </i>
                   <span style={{ paddingLeft: "5px" }}>Arya Stark</span>
                 </div>
 
-                <div style={{ width: "15%", marginLeft: "20px" }}>
+                <div
+                  style={{
+                    width: "15%",
+                    marginLeft: "20px",
+                    ...iconstyle
+                  }}
+                >
+                  <i style={iconst} className="mb-2"> 
+                    <GrStatusUnknown />
+                  </i>
                   <span className="text-danger">High</span>
                 </div>
               </div>
             </CardBody>
           </Card>
           <Card className="mt-">
-            <h4 className="mt-2" style={{marginLeft:'1em'}}>RequestList ProgressBar</h4>
+            <h4 className="mt-2" style={{ marginLeft: "1em" }}>
+              RequestList ProgressBar
+            </h4>
             <CardBody>
               <div className="d-flex justify-content-between">
                 <div style={picstyle}>
