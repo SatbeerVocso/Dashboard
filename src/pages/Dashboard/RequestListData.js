@@ -3,6 +3,8 @@ import avatarImg3 from '../../assets/images/users/avatar-3.jpg'
 import avatarImg4 from '../../assets/images/users/avatar-4.jpg'
 import avatarImg5 from '../../assets/images/users/avatar-5.jpg'
 import avatarImg6 from '../../assets/images/users/avatar-6.jpg'
+import avatarImg7 from '../../assets/images/users/avatar-7.jpg'
+import avatarImg8 from '../../assets/images/users/avatar-8.jpg'
 
 export const RequestListData = {
   TodayRequestListData:[
@@ -55,7 +57,7 @@ export const RequestListData = {
       id: 5,
       title: "Enable analytics tracking",
       assigned_to: "James stark",
-      assignee_avatar: avatarImg5,
+      assignee_avatar: avatarImg4,
       due_date: "27 Aug 10am",
       completed: false,
       stage: "Review",
@@ -65,8 +67,8 @@ export const RequestListData = {
     {
       id: 6,
       title: "Code HTML email template",
-      assigned_to: "Kevin C",
-      assignee_avatar: avatarImg6,
+      assigned_to: "Jimmy c",
+      assignee_avatar: avatarImg8,
       due_date: "No Due Date",
       completed: false,
       stage: "Review",
@@ -111,8 +113,8 @@ export const RequestListData = {
     {
       id: 10,
       title: "Draft the new contract document for vendor Abc",
-      assigned_to: "Maria D",
-      assignee_avatar: avatarImg4,
+      assigned_to: "Paul D",
+      assignee_avatar: avatarImg7,
       due_date: "2 Sep 10am",
       completed: false,
       stage: "Done",

@@ -12,6 +12,7 @@ import { AiOutlineUser, AiOutlinePullRequest } from "react-icons/ai"
 import { MdOutlineDetails } from "react-icons/md"
 import { useParams } from "react-router-dom"
 import { RequestListData } from "pages/Dashboard/RequestListData"
+
 function RequestDetail() {
   const { id, listType } = useParams()
   const requestId = parseInt(id)
@@ -25,6 +26,7 @@ function RequestDetail() {
   } 
 
   const item = selectedList.find(r => r.id === requestId)
+  
   const picstyle = {
     display: "flex",
     alignItems: "center",

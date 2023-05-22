@@ -153,14 +153,7 @@ const SidebarContent = props => {
                 <span>{props.t("Dashboard")}</span>
               </Link>
             </li>
-
-            <li>
-              <Link to="/requestdetail" className=" waves-effect">
-                <i className="ti-new-window"></i>
-                <span>{props.t("Request")}</span>
-              </Link>
-            </li>
-
+            
             <li>
               <Link to="/processes" className=" waves-effect">
                 <i className="ti-arrow-right"></i>
