@@ -133,8 +133,7 @@ const userRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
 
   // Request Component
-
-  { path: "/dashboard/:id", component: <RequestDetail/> },
+  { path: "/dashboard/:listType/:id", component: <RequestDetail/> },
 
   // Processes
   { path: "/processes", component: <MainProcesses /> },

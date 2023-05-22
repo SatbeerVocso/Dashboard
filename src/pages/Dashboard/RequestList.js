@@ -1,10 +1,6 @@
 import React, { useState } from "react"
 import { Card, CardBody } from "reactstrap"
-import {
-  TodayRequestListData,
-  UpcomingRequestListData,
-  OtherRequestListData,
-} from "./RequestListData"
+import { RequestListData } from "./RequestListData"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 
@@ -29,23 +25,27 @@ function RequestList() {
 
   return (
     <div>
-      <Card className="mini-stat bg-white text-dark">
+      <Card className=" bg-white text-dark">
         <CardBody>
-          <h4 className="mb-4">REQUEST LIST</h4>
+          <h4 className="mb-4" style={{textAlign:'center'}}>REQUEST LIST</h4>
+
           <div className="d-flex justify-content-start align-items-center mb-3">
             <i
               className={`ti-angle-${showData ? "up" : "right"}`}
               style={iconstyle}
               onClick={toggleShowData}
             ></i>
-            <h5>Today({TodayRequestListData.length})</h5>
+            <h5>Today({RequestListData.TodayRequestListData.length})</h5>
           </div>
 
           {showData &&
-            TodayRequestListData.map((item, index) => {
+            RequestListData.TodayRequestListData.map((item, index) => {
               return (
                 <div key={index}>
-                  <Link to={`/dashboard/${item.id}`}>
+                  <Link
+                    to={`/dashboard/todaylist/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
                     <motion.div
                       className="data-container"
                       initial={{ opacity: 0, y: 20 }}
@@ -110,63 +110,68 @@ function RequestList() {
               style={iconstyle}
               onClick={toggleShowDataUpcoming}
             ></i>
-            <h5>Upcoming({UpcomingRequestListData.length})</h5>
+            <h5>Upcoming({RequestListData.UpcomingRequestListData.length})</h5>
           </div>
 
           {showDataUpcoming &&
-            UpcomingRequestListData.map((item, index) => {
+            RequestListData.UpcomingRequestListData.map((item, index) => {
               return (
                 <div key={index}>
-                  <motion.div
-                    className="data-container"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={showDataUpcoming ? { opacity: 1, y: 0 } : {}}
+                  <Link
+                    to={`/dashboard/upcominglist/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <div className="d-flex justify-content-between ">
-                      <div style={{ width: "45%" }}>
-                        <span>{item.title}</span>
-                      </div>
+                    <motion.div
+                      className="data-container"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={showDataUpcoming ? { opacity: 1, y: 0 } : {}}
+                    >
+                      <div className="d-flex justify-content-between ">
+                        <div style={{ width: "45%" }}>
+                          <span>{item.title}</span>
+                        </div>
 
-                      <div style={{ width: "20%" }}>
-                        <img
-                          className="rounded-circle header-profile-user "
-                          src={item.assignee_avatar}
-                          alt="Header Avatar"
-                        />
-                        <span style={{ paddingLeft: "8px" }}>
-                          {item.assigned_to}
-                        </span>
-                      </div>
+                        <div style={{ width: "20%" }}>
+                          <img
+                            className="rounded-circle header-profile-user "
+                            src={item.assignee_avatar}
+                            alt="Header Avatar"
+                          />
+                          <span style={{ paddingLeft: "8px" }}>
+                            {item.assigned_to}
+                          </span>
+                        </div>
 
-                      <div style={{ width: "20%" }}>
-                        <i className="ti-calendar"></i>
-                        <span style={{ paddingLeft: "5px" }}>
-                          {item.due_date}
-                        </span>
-                      </div>
+                        <div style={{ width: "20%" }}>
+                          <i className="ti-calendar"></i>
+                          <span style={{ paddingLeft: "5px" }}>
+                            {item.due_date}
+                          </span>
+                        </div>
 
-                      <div style={{ width: "15%", marginLeft: "20px" }}>
-                        <span
-                          className={`text-${item.variant} `}
-                          style={{
-                            backgroundColor:
-                              item.variant === "success"
-                                ? "#D1FAE5"
-                                : item.variant === "danger"
-                                ? "#FECACA"
-                                : item.variant === "info"
-                                ? "#D1E5F0"
-                                : "#E0E7FF",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          {item.priority}
-                        </span>
+                        <div style={{ width: "15%", marginLeft: "20px" }}>
+                          <span
+                            className={`text-${item.variant} `}
+                            style={{
+                              backgroundColor:
+                                item.variant === "success"
+                                  ? "#D1FAE5"
+                                  : item.variant === "danger"
+                                  ? "#FECACA"
+                                  : item.variant === "info"
+                                  ? "#D1E5F0"
+                                  : "#E0E7FF",
+                              padding: "5px",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            {item.priority}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <hr />
-                  </motion.div>
+                      <hr />
+                    </motion.div>
+                  </Link>
                 </div>
               )
             })}
@@ -178,63 +183,68 @@ function RequestList() {
               style={iconstyle}
               onClick={toggleShowDataOthers}
             ></i>
-            <h5>Others({OtherRequestListData.length})</h5>
+            <h5>Others({RequestListData.OtherRequestListData.length})</h5>
           </div>
 
           {showDataOthers &&
-            OtherRequestListData.map((item, index) => {
+            RequestListData.OtherRequestListData.map((item, index) => {
               return (
                 <div key={index}>
-                  <motion.div
-                    className="data-container"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={showDataOthers ? { opacity: 1, y: 0 } : {}}
+                  <Link
+                    to={`/dashboard/otherlist/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <div className="d-flex justify-content-between ">
-                      <div style={{ width: "45%" }}>
-                        <span>{item.title}</span>
-                      </div>
+                    <motion.div
+                      className="data-container"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={showDataOthers ? { opacity: 1, y: 0 } : {}}
+                    >
+                      <div className="d-flex justify-content-between ">
+                        <div style={{ width: "45%" }}>
+                          <span>{item.title}</span>
+                        </div>
 
-                      <div style={{ width: "20%" }}>
-                        <img
-                          className="rounded-circle header-profile-user "
-                          src={item.assignee_avatar}
-                          alt="Header Avatar"
-                        />
-                        <span style={{ paddingLeft: "8px" }}>
-                          {item.assigned_to}
-                        </span>
-                      </div>
+                        <div style={{ width: "20%" }}>
+                          <img
+                            className="rounded-circle header-profile-user "
+                            src={item.assignee_avatar}
+                            alt="Header Avatar"
+                          />
+                          <span style={{ paddingLeft: "8px" }}>
+                            {item.assigned_to}
+                          </span>
+                        </div>
 
-                      <div style={{ width: "20%" }}>
-                        <i className="ti-calendar"></i>
-                        <span style={{ paddingLeft: "5px" }}>
-                          {item.due_date}
-                        </span>
-                      </div>
+                        <div style={{ width: "20%" }}>
+                          <i className="ti-calendar"></i>
+                          <span style={{ paddingLeft: "5px" }}>
+                            {item.due_date}
+                          </span>
+                        </div>
 
-                      <div style={{ width: "15%", marginLeft: "20px" }}>
-                        <span
-                          className={`text-${item.variant} `}
-                          style={{
-                            backgroundColor:
-                              item.variant === "success"
-                                ? "#D1FAE5"
-                                : item.variant === "danger"
-                                ? "#FECACA"
-                                : item.variant === "info"
-                                ? "#D1E5F0"
-                                : "#E0E7FF",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          {item.priority}
-                        </span>
+                        <div style={{ width: "15%", marginLeft: "20px" }}>
+                          <span
+                            className={`text-${item.variant} `}
+                            style={{
+                              backgroundColor:
+                                item.variant === "success"
+                                  ? "#D1FAE5"
+                                  : item.variant === "danger"
+                                  ? "#FECACA"
+                                  : item.variant === "info"
+                                  ? "#D1E5F0"
+                                  : "#E0E7FF",
+                              padding: "5px",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            {item.priority}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <hr />
-                  </motion.div>
+                      <hr />
+                    </motion.div>
+                  </Link>
                 </div>
               )
             })}

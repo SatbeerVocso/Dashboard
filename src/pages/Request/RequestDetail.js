@@ -11,16 +11,22 @@ import { GrStatusUnknown } from "react-icons/gr"
 import { AiOutlineUser, AiOutlinePullRequest } from "react-icons/ai"
 import { MdOutlineDetails } from "react-icons/md"
 import { useParams } from "react-router-dom"
-import { TodayRequestListData } from "pages/Dashboard/RequestListData"
+import { RequestListData } from "pages/Dashboard/RequestListData"
 function RequestDetail() {
-  const { id } = useParams();
-  const requestId = parseInt(id);
-  const item = TodayRequestListData.find((r) => r.id === requestId);
-
-  if (!item ){
-    return <div>Request not found</div>;
+  const { id, listType } = useParams()
+  const requestId = parseInt(id)
+  let selectedList
+  if (listType === "todaylist") {
+    selectedList = RequestListData.TodayRequestListData || []
+  } else if (listType === "upcominglist") {
+    selectedList = RequestListData.UpcomingRequestListData || []
+  } else if (listType === "otherlist") {
+    selectedList = RequestListData.OtherRequestListData || []
+  } else {
+    selectedList = []
   }
 
+  const item = selectedList.find(r => r.id === requestId)
   const picstyle = {
     display: "flex",
     alignItems: "center",
@@ -34,6 +40,7 @@ function RequestDetail() {
   const iconst = {
     fontSize: "1.4em",
   }
+
   return (
     <div className="page-content">
       <div
@@ -87,7 +94,7 @@ function RequestDetail() {
                   <i style={iconst} className="mb-2">
                     <GrStatusUnknown />
                   </i>
-                  <span className="text-danger">High</span>
+                  <span>{item.priority}</span>
                 </div>
               </div>
             </CardBody>
@@ -144,7 +151,7 @@ function RequestDetail() {
           <Card className="mt-4">
             <CardBody>
               <ActivityList />
-              <Comments username={item}/>
+              <Comments username={item} />
             </CardBody>
           </Card>
         </div>

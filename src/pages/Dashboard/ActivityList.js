@@ -9,7 +9,7 @@ function ActivityList() {
         className="mini-stat bg-white text-dark shadow-sm"
         style={{ height: "600px"}}
       >
-        <h4 className="d-flex justify-content-center mt-2">
+        <h4 className="d-flex justify-content-center mt-4">
           PROJECT ACTIVITES
         </h4>
 
