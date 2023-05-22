@@ -17,14 +17,12 @@ function RequestDetail() {
   const requestId = parseInt(id)
   let selectedList
   if (listType === "todaylist") {
-    selectedList = RequestListData.TodayRequestListData || []
+    selectedList = RequestListData.TodayRequestListData 
   } else if (listType === "upcominglist") {
-    selectedList = RequestListData.UpcomingRequestListData || []
+    selectedList = RequestListData.UpcomingRequestListData
   } else if (listType === "otherlist") {
-    selectedList = RequestListData.OtherRequestListData || []
-  } else {
-    selectedList = []
-  }
+    selectedList = RequestListData.OtherRequestListData 
+  } 
 
   const item = selectedList.find(r => r.id === requestId)
   const picstyle = {
@@ -100,7 +98,7 @@ function RequestDetail() {
             </CardBody>
           </Card>
           <Card className="mt-">
-            <h4 className="mt-2" style={{ marginLeft: "1em" }}>
+            <h4 className="mt-3 text-center" style={{ marginLeft: "1em" }}>
               RequestList ProgressBar
             </h4>
             <CardBody>

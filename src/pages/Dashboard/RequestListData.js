@@ -111,8 +111,8 @@ export const RequestListData = {
     {
       id: 10,
       title: "Draft the new contract document for vendor Abc",
-      assigned_to: "Kevin C",
-      assignee_avatar: avatarImg6,
+      assigned_to: "Maria D",
+      assignee_avatar: avatarImg4,
       due_date: "2 Sep 10am",
       completed: false,
       stage: "Done",

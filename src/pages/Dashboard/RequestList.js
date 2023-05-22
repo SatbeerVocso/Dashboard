@@ -27,7 +27,7 @@ function RequestList() {
     <div>
       <Card className=" bg-white text-dark">
         <CardBody>
-          <h4 className="mb-4" style={{textAlign:'center'}}>REQUEST LIST</h4>
+          <h4 className="mb-4 text-center">REQUEST LIST</h4>
 
           <div className="d-flex justify-content-start align-items-center mb-3">
             <i
