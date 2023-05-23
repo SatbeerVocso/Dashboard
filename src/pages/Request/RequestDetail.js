@@ -1,44 +1,47 @@
 import React from "react"
-import { Card, CardBody } from "reactstrap"
+import { Card, CardBody,Button } from "reactstrap"
 import { Checkmark } from "react-checkmark"
-import avatarImg2 from "../../assets/images/users/avatar-2.jpg"
 import avatarImg3 from "../../assets/images/users/avatar-3.jpg"
 import avatarImg4 from "../../assets/images/users/avatar-4.jpg"
 import avatarImg5 from "../../assets/images/users/avatar-5.jpg"
-import ActivityList from "./ActivityList"
-import Comments from "./Comments"
-import { GrStatusUnknown } from "react-icons/gr"
-import { AiOutlineUser, AiOutlinePullRequest } from "react-icons/ai"
-import { MdOutlineDetails } from "react-icons/md"
+import ActivityList from "./ActivityListComment"
+import { AiOutlineArrowRight } from "react-icons/ai"
 import { useParams } from "react-router-dom"
 import { RequestListData } from "pages/Dashboard/RequestListData"
+import DataField from "./DataField"
 
 function RequestDetail() {
   const { id, listType } = useParams()
   const requestId = parseInt(id)
   let selectedList
   if (listType === "todaylist") {
-    selectedList = RequestListData.TodayRequestListData 
+    selectedList = RequestListData.TodayRequestListData
   } else if (listType === "upcominglist") {
     selectedList = RequestListData.UpcomingRequestListData
   } else if (listType === "otherlist") {
-    selectedList = RequestListData.OtherRequestListData 
-  } 
+    selectedList = RequestListData.OtherRequestListData
+  }
 
   const item = selectedList.find(r => r.id === requestId)
-  
+
   const picstyle = {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
+    width: "25%",
   }
   const iconstyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   }
-  const iconst = {
-    fontSize: "1.4em",
+  const vertical = {
+    borderLeft: "2px solid #5b626b",
+    height: "65px",
+  }
+  const arrowstyle = {
+    display: "flex",
+    alignItems: "center",
   }
 
   return (
@@ -53,36 +56,33 @@ function RequestDetail() {
           <Card className="mt-4">
             <CardBody>
               <div className="d-flex justify-content-between ">
-                <div style={{ width: "45%", ...iconstyle }}>
-                  <i style={iconst} className="mb-2">
-                    <MdOutlineDetails />
-                  </i>
-                  <span>{item.title}</span>
+                <div style={{ width: "10%", ...iconstyle }}>
+                  <h5 className="mb-2">#Id</h5>
+                  <div>{item.id}</div>
                 </div>
-
+                <div style={vertical}></div>
                 <div
                   style={{
-                    width: "20%",
+                    width: "30%",
                     ...iconstyle,
                   }}
                 >
-                  <i style={iconst} className="mb-2">
-                    <AiOutlinePullRequest />
-                  </i>
+                  <h5 className="mb-2">Type of Request</h5>
                   <span style={{ paddingLeft: "8px" }}>Finance Request</span>
                 </div>
+                <div style={vertical}></div>
 
                 <div
                   style={{
-                    width: "20%",
+                    width: "30%",
                     ...iconstyle,
                   }}
                 >
-                  <i style={iconst} className="mb-2">
-                    <AiOutlineUser />
-                  </i>
+                  <h5 className="mb-2">Iniatiting Name</h5>
+
                   <span style={{ paddingLeft: "5px" }}>{item.assigned_to}</span>
                 </div>
+                <div style={vertical}></div>
 
                 <div
                   style={{
@@ -91,14 +91,24 @@ function RequestDetail() {
                     ...iconstyle,
                   }}
                 >
-                  <i style={iconst} className="mb-2">
-                    <GrStatusUnknown />
-                  </i>
+                  <h5 className="mb-2">Priority</h5>
                   <span>{item.priority}</span>
+                </div>
+                <div style={vertical}></div>
+                <div
+                  style={{
+                    width: "15%",
+                    marginLeft: "20px",
+                    ...iconstyle,
+                  }}
+                >
+                  <h5 className="mb-2">Status</h5>
+                  <span>In Progress</span>
                 </div>
               </div>
             </CardBody>
           </Card>
+
           <Card className="mt-">
             <h4 className="mt-3 text-center" style={{ marginLeft: "1em" }}>
               RequestList ProgressBar
@@ -113,8 +123,10 @@ function RequestDetail() {
                       src={item.assignee_avatar}
                     />
                   </div>
-
                   <Checkmark size="medium" />
+                </div>
+                <div style={arrowstyle}>
+                  <AiOutlineArrowRight size={25} />
                 </div>
 
                 <div style={picstyle}>
@@ -126,12 +138,18 @@ function RequestDetail() {
 
                   <Checkmark size="medium" />
                 </div>
+                <div style={arrowstyle}>
+                  <AiOutlineArrowRight size={25} />
+                </div>
                 <div style={picstyle}>
                   <h6>Approval by: James B</h6>
                   <img
                     className="avatar-sm rounded-circle mb-2"
                     src={avatarImg4}
                   />
+                </div>
+                <div style={arrowstyle}>
+                  <AiOutlineArrowRight size={25} />
                 </div>
                 <div style={picstyle}>
                   <h6>Approval by: James C</h6>
@@ -143,15 +161,21 @@ function RequestDetail() {
               </div>
             </CardBody>
           </Card>
+
           <Card>
-            <CardBody></CardBody>
+            <CardBody>
+              <DataField />
+            </CardBody>
           </Card>
         </div>
         <div style={{ width: "33%" }}>
           <Card className="mt-4">
             <CardBody>
-              <ActivityList />
-              <Comments username={item} />
+              <ActivityList username={item} />
+              <div className="d-flex justify-content-around">
+                <Button color="danger">Reject</Button>
+                <Button color="success">Appoval</Button>
+              </div>
             </CardBody>
           </Card>
         </div>
