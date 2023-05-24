@@ -1,51 +1,86 @@
-// import React, { useEffect, useState } from "react"
-// import { EmployeeData } from "./EmployeeData"
-// import EmployeeModal from "./EmployeeModal"
-// import EmployeeMaping from "./EmployeeMaping"
-// import { motion } from "framer-motion"
-
-// function Employees() {
-//   const [empData, setempData] = useState(EmployeeData)
-//   const [loading, setloading] = useState(false)
-
-//   const onAddempDatahandler = formdata => {
-//     const AllEmployeedata = [...empData, formdata]
-//     setempData(AllEmployeedata)
-//   }
-
-//   return (
-//     <div className="page-content">
-//       {loading ? (
-//         <h1>Loading Data....</h1>
-//       ) : (
-//         <motion.div
-//           initial={{ opacity: 0 }}
-//           animate={{ opacity: 1 }}
-//           transition={{ duration: 0.5 }}
-//         >
-//           <EmployeeMaping empldata={empData} />
-//         </motion.div>
-//       )}
-
-//       <EmployeeModal onAddData={onAddempDatahandler} />
-//     </div>
-//   )
-// }
-
-// export default Employees
-
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { MDBDataTable } from "mdbreact"
 import { Row, Col, Card, CardBody } from "reactstrap"
-import { EmployeeData } from "./EmployeeData"
 import EmployeeModal from "./EmployeeModal"
 import { motion } from "framer-motion"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 function Employees() {
-  const [empData, setempData] = useState(EmployeeData)
+  const [empData, setempData] = useState([])
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
 
+  useEffect(() => {
+    fetch("http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=10", requestOptions)
+      .then(response => {
+        // console.log(response.status); // Access the status code
+        return response.json();
+      })
+      .then(result => {
+        console.log(result.data);
+        setempData(result.data);
+      })
+      .catch(error => console.log('error', error));
+  }, []);
+const dataTableData = {
+  columns: [
+    {
+      label: "Name",
+      field: "name",
+      sort: "asc",
+      width: 150,
+    },
+    {
+      label: "Profile",
+      field: "profile",
+      sort: "asc",
+      width: 270,
+    },
+    {
+      label: "Number",
+      field: "number",
+      sort: "asc",
+      width: 200,
+    },
+    {
+      label: "Email",
+      field: "email",
+      sort: "asc",
+      width: 100,
+    },
+    {
+      label: "Department",
+      field: "department",
+      sort: "asc",
+      width: 150,
+    },
+    {
+      label: "Designation",
+      field: "designation",
+      sort: "asc",
+      width: 100,
+    },
+    {
+      label: "Status",
+      field: "status",
+      sort: "asc",
+      width: 100,
+      
+    },
+  ],
+  rows:empData.map((item,i)=>({
+    name:item.attributes.name,
+    // profile:item.attributes.profile.data.attributes.url,
+    number:item.attributes.mobileno,
+    email:item.attributes.email,
+    // department:item.attributes.department.data.attributes.name,
+    // designation:item.attributes.designation.data.attributes.name,
+    status:item.attributes.status
+  }))
+}
   return (
     <React.Fragment>
       <div className="page-content">
@@ -60,7 +95,7 @@ function Employees() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <MDBDataTable responsive bordered data={empData} />
+                    <MDBDataTable responsive bordered   data={dataTableData}/>
                   </motion.div>
                 </CardBody>
               </Card>

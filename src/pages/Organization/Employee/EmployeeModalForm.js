@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import DepartmentCheckboxes from "./DepartmentCheckboxes"
 import DesignationCheckboxes from "./DesignationCheckboxes"
+import axios from "axios"
 
 function EmployeeModalForm(props) {
   const [fname, setfname] = useState("")
@@ -21,12 +22,12 @@ function EmployeeModalForm(props) {
   const [showDesignation, setShowDesignation] = useState(false)
 
   const [checkboxDataDesignation, setCheckboxDataDesignation] = useState("")
-  const checkboxDatafunctionDesignation = (checkboxvaluefromdesignation) => {
+  const checkboxDatafunctionDesignation = checkboxvaluefromdesignation => {
     setCheckboxDataDesignation(checkboxvaluefromdesignation)
   }
-  const [checkboxDataDepartment,setcheckboxDataDepartment]=useState("")
-  const checkboxDatafunctionDepartment = (checkboxDataDepartment) =>{
-  setcheckboxDataDepartment(checkboxDataDepartment)
+  const [checkboxDataDepartment, setcheckboxDataDepartment] = useState("")
+  const checkboxDatafunctionDepartment = checkboxDataDepartment => {
+    setcheckboxDataDepartment(checkboxDataDepartment)
   }
 
   const [isFormValid, setIsFormValid] = useState(false)
@@ -41,42 +42,111 @@ function EmployeeModalForm(props) {
     setShowDesignation(!showDesignation)
   }
   useEffect(() => {
-    if (fname && isEmailValid && lname && Pnumber && Selecttedfile && checkboxDataDepartment&&checkboxDataDesignation) {
+    if (
+      fname &&
+      isEmailValid &&
+      lname &&
+      Pnumber &&
+      Selecttedfile &&
+      checkboxDataDepartment &&
+      checkboxDataDesignation
+    ) {
       setIsFormValid(true)
       setButtonStyle({ backgroundColor: "#02A499", color: "white" })
     } else {
       setIsFormValid(false)
       setButtonStyle({ backgroundColor: "lightgrey" })
     }
-  }, [fname, lname, isEmailValid, Pnumber, Selecttedfile,checkboxDataDepartment,checkboxDataDesignation])
+  }, [
+    fname,
+    lname,
+    isEmailValid,
+    Pnumber,
+    Selecttedfile,
+    checkboxDataDepartment,
+    checkboxDataDesignation,
+  ])
 
-  const FormSubmithandler = e => {
+  const FormSubmithandler = async e => {
     e.preventDefault()
     let fullname = fname + " " + lname
+    var myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
 
-    const formdata = {
-      // userId: Math.floor(Math.random() * 100 + 10),
-      name: fullname,
-      profile: Selecttedfile,
-      number: Pnumber,
-      email: email,
-      designation: checkboxDataDesignation,
-      department:checkboxDataDepartment,
-      Status: "Active",
-    }
-    console.log(formdata)
-    toast.success("Data Submitted Successfuly ", {
-      position: toast.POSITION.TOP_RIGHT,
+    var raw = JSON.stringify({
+      data: {
+        name: fullname,
+        email: email,
+        mobileno: Pnumber,
+        status: "Active",
+        // department: checkboxDataDepartment,
+        // designation: checkboxDataDesignation,
+      },
     })
-    setfname("")
-    setlname("")
-    setemail("")
-    setPnumber("")
-    setCheckboxDataDesignation("")
-    setcheckboxDataDepartment("")
-    setIsFormValid(false) // disable the button after submission
-    props.onClose()
+    const requestOptions = {
+      headers: myHeaders,
+      method: "POST",
+      body: raw,
+      redirect: "follow",
+    }
+    fetch(
+      "http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=10",
+      requestOptions
+    )
+      .then(response => {
+        console.log(response.status) // Access the status code
+        return response.json()
+      })
+      .then(result => {
+        console.log(result)
+        toast.success("Data Submitted Successfully ", {
+          position: toast.POSITION.TOP_RIGHT,
+        })
+
+        // Reset form fields and state
+        setfname("")
+        setlname("")
+        setemail("")
+        setPnumber("")
+        setCheckboxDataDesignation("")
+        setcheckboxDataDepartment("")
+        setIsFormValid(false)
+        props.onClose()
+      })
+      .catch(error => {
+        console.log("error", error)
+        toast.error("Failed to submit data", {
+          position: toast.POSITION.TOP_RIGHT,
+        })
+      })
   }
+
+  // const FormSubmithandler = e => {
+  //   e.preventDefault()
+  //   let fullname = fname + " " + lname
+  //   const formdata = {
+  //     name: fullname,
+  //     email: email,
+  //     mobileno: Pnumber,
+  //     status: "Active",
+  //     department: checkboxDataDepartment,
+  //     designation: checkboxDataDesignation,
+  //   }
+  //   console.log(formdata)
+  //   toast.success("Data Submitted Successfully ", {
+  //     position: toast.POSITION.TOP_RIGHT,
+  //   })
+
+  //   // Reset form fields and state
+  //   setfname("")
+  //   setlname("")
+  //   setemail("")
+  //   setPnumber("")
+  //   setCheckboxDataDesignation("")
+  //   setcheckboxDataDepartment("")
+  //   setIsFormValid(false)
+  //   props.onClose()
+  // }
 
   const iconstyle = {
     cursor: "pointer",
@@ -201,7 +271,9 @@ function EmployeeModalForm(props) {
               animate={showDepartment ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <DepartmentCheckboxes  checkboxvalue={checkboxDatafunctionDepartment}/>
+                <DepartmentCheckboxes
+                  checkboxvalue={checkboxDatafunctionDepartment}
+                />
               </div>
             </motion.div>
           )}
@@ -221,7 +293,9 @@ function EmployeeModalForm(props) {
               animate={showDesignation ? { opacity: 1, y: 0 } : {}}
             >
               <div style={{ marginLeft: "1em" }}>
-                <DesignationCheckboxes checkboxvalue={checkboxDatafunctionDesignation} />
+                <DesignationCheckboxes
+                  checkboxvalue={checkboxDatafunctionDesignation}
+                />
               </div>
             </motion.div>
           )}

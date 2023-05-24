@@ -14,11 +14,11 @@ function ActivityList(props) {
     console.log(newComments)
     setComments(newComments)
   }
-  const deletecomment = i => {
-    const comment = [...comments]
-    comment.splice(i, 1)
-    setComments(comment)
-  }
+  // const deletecomment = i => {
+  //   const comment = [...comments]
+  //   comment.splice(i, 1)
+  //   setComments(comment)
+  // }
   return (
     <div>
       <Card className="mini-stat bg-white text-dark shadow-sm">
@@ -63,14 +63,14 @@ function ActivityList(props) {
               </div>
               <div className="d-flex justify-content-between">
                 <div>{item.comment}</div>{" "}
-                {i !== 0 && (
+                {/* {i !== 0 && (
                   <span className="text-danger" style={{ cursor: "pointer" }}>
                     <i
                       className="ti-trash"
                       onClick={() => deletecomment(i)}
                     ></i>
                   </span>
-                )}
+                )} */}
               </div>
             </div>
           ))}

@@ -172,9 +172,9 @@ function RequestDetail() {
           <Card className="mt-4">
             <CardBody>
               <ActivityList username={item} />
-              <div className="d-flex justify-content-around">
-                <Button color="danger">Reject</Button>
-                <Button color="success">Appoval</Button>
+              <div className="d-flex justify-content-between">
+                <Button color="danger" style={{fontSize:'1.2em'}}>Reject</Button>
+                <Button color="success" style={{fontSize:'1.2em'}}>Appoval</Button>
               </div>
             </CardBody>
           </Card>
