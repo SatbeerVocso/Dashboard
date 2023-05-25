@@ -21,7 +21,7 @@ function RequestProgressBar(props) {
 
   return (
     <div style={{ marginLeft: "2em" }}>
-      <ArcherContainer strokeColor="blue" strokeWidth={1}>
+      <ArcherContainer strokeColor="#31376d" strokeWidth={1.3}>
         <div style={rowStyle}>
           <div>
             <div style={picstyle}>

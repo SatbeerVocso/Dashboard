@@ -9,77 +9,89 @@ import "react-toastify/dist/ReactToastify.css"
 function Employees() {
   const [empData, setempData] = useState([])
   var requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
+    method: "GET",
+    redirect: "follow",
+  }
 
   useEffect(() => {
-    fetch("http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=100", requestOptions)
+    fetch(
+      "http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=100",
+      requestOptions
+    )
       .then(response => {
         // console.log(response.status); // Access the status code
-        return response.json();
+        return response.json()
       })
       .then(result => {
-        setempData(result.data);
+        setempData(result.data)
+        console.log(result.data)
       })
-      .catch(error => console.log('error', error));
-  }, []);
-const dataTableData = {
-  columns: [
-    {
-      label: "Name",
-      field: "name",
-      sort: "asc",
-      width: 150,
-    },
-    {
-      label: "Profile",
-      field: "profile",
-      sort: "asc",
-      width: 270,
-    },
-    {
-      label: "Number",
-      field: "number",
-      sort: "asc",
-      width: 200,
-    },
-    {
-      label: "Email",
-      field: "email",
-      sort: "asc",
-      width: 100,
-    },
-    {
-      label: "Department",
-      field: "department",
-      sort: "asc",
-      width: 150,
-    },
-    {
-      label: "Designation",
-      field: "designation",
-      sort: "asc",
-      width: 100,
-    },
-    {
-      label: "Status",
-      field: "status",
-      sort: "asc",
-      width: 100,
-      
-    },
-  ],
-  rows:empData.map((item,i)=>({
-    name:item.attributes.name,
-    // profile:item.attributes.profile.data.attributes.url,
-    number:item.attributes.mobileno,
-    email:item.attributes.email,
-    // department:item.attributes.department.data.attributes.name,
-    // designation:item.attributes.designation.data.attributes.name,
-    status:item.attributes.status
-  }))
-}
+      .catch(error => console.log("error", error))
+  }, [])
+  const dataTableData = {
+    columns: [
+      {
+        label: "Name",
+        field: "name",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Profile",
+        field: "profile",
+        sort: "asc",
+        width: 270,
+      },
+      {
+        label: "Number",
+        field: "number",
+        sort: "asc",
+        width: 200,
+      },
+      {
+        label: "Email",
+        field: "email",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "Department",
+        field: "department",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Designation",
+        field: "designation",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "Status",
+        field: "status",
+        sort: "asc",
+        width: 100,
+      },
+    ],
+    rows: empData.map((item, i) => ({
+      name: item.attributes.name,
+      profile: item.attributes.profile && item.attributes.profile.data && item.attributes.profile.data.attributes && item.attributes.profile.data.attributes.url ? (
+        <img
+          src={`http://example.com${item.attributes.profile.data.attributes.url}`}
+          alt="Profile"
+          style={{ width: '50px', height: '50px' }}
+        />
+      ) : (
+        <span>No Image</span>
+      ),
+      number: item.attributes.mobileno,
+      email: item.attributes.email,
+      department: item.attributes.department && item.attributes.department.data && item.attributes.department.data.attributes ? item.attributes.department.data.attributes.name : '',
+      designation: item.attributes.designation && item.attributes.designation.data && item.attributes.designation.data.attributes ? item.attributes.designation.data.attributes.name : '',
+      status: item.attributes.status
+    }))
+    
+  }
   return (
     <React.Fragment>
       <div className="page-content">
@@ -94,7 +106,7 @@ const dataTableData = {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <MDBDataTable responsive bordered   data={dataTableData}/>
+                    <MDBDataTable responsive bordered data={dataTableData} />
                   </motion.div>
                 </CardBody>
               </Card>

@@ -79,7 +79,8 @@ function EmployeeModalForm(props) {
         email: email,
         mobileno: Pnumber,
         status: "Active",
-        // designation: checkboxDataDesignation,
+        designation: checkboxDataDesignation,
+        department:checkboxDataDepartment
       },
     })
     const requestOptions1 = {
