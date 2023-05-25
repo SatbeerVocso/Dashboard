@@ -1,15 +1,10 @@
 import React from "react"
-import { Card, CardBody,Button } from "reactstrap"
-import { Checkmark } from "react-checkmark"
-import avatarImg3 from "../../assets/images/users/avatar-3.jpg"
-import avatarImg4 from "../../assets/images/users/avatar-4.jpg"
-import avatarImg5 from "../../assets/images/users/avatar-5.jpg"
+import { Card, CardBody, Button } from "reactstrap"
 import ActivityList from "./ActivityListComment"
-import { AiOutlineArrowRight } from "react-icons/ai"
 import { useParams } from "react-router-dom"
 import { RequestListData } from "pages/Dashboard/RequestListData"
 import DataField from "./DataField"
-
+import RequestProgressBar from "./RequestProgressBar"
 function RequestDetail() {
   const { id, listType } = useParams()
   const requestId = parseInt(id)
@@ -24,12 +19,6 @@ function RequestDetail() {
 
   const item = selectedList.find(r => r.id === requestId)
 
-  const picstyle = {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    width: "25%",
-  }
   const iconstyle = {
     display: "flex",
     flexDirection: "column",
@@ -38,10 +27,6 @@ function RequestDetail() {
   const vertical = {
     borderLeft: "2px solid #5b626b",
     height: "65px",
-  }
-  const arrowstyle = {
-    display: "flex",
-    alignItems: "center",
   }
 
   return (
@@ -109,56 +94,10 @@ function RequestDetail() {
             </CardBody>
           </Card>
 
-          <Card className="mt-">
-            <h4 className="mt-3 text-center" style={{ marginLeft: "1em" }}>
-              RequestList ProgressBar
-            </h4>
+          <Card>
             <CardBody>
-              <div className="d-flex justify-content-between">
-                <div style={picstyle}>
-                  <h6>Initiated By: {item.assigned_to}</h6>
-                  <div>
-                    <img
-                      className="avatar-sm rounded-circle mb-2"
-                      src={item.assignee_avatar}
-                    />
-                  </div>
-                  <Checkmark size="medium" />
-                </div>
-                <div style={arrowstyle}>
-                  <AiOutlineArrowRight size={25} />
-                </div>
-
-                <div style={picstyle}>
-                  <h6>Approval by: James A</h6>
-                  <img
-                    className="avatar-sm rounded-circle mb-2"
-                    src={avatarImg3}
-                  />
-
-                  <Checkmark size="medium" />
-                </div>
-                <div style={arrowstyle}>
-                  <AiOutlineArrowRight size={25} />
-                </div>
-                <div style={picstyle}>
-                  <h6>Approval by: James B</h6>
-                  <img
-                    className="avatar-sm rounded-circle mb-2"
-                    src={avatarImg4}
-                  />
-                </div>
-                <div style={arrowstyle}>
-                  <AiOutlineArrowRight size={25} />
-                </div>
-                <div style={picstyle}>
-                  <h6>Approval by: James C</h6>
-                  <img
-                    className="avatar-sm rounded-circle mb-2"
-                    src={avatarImg5}
-                  />
-                </div>
-              </div>
+              <h2 className="text-center mt-3 mb-2">RequestList Progressbar</h2>
+              <RequestProgressBar user={item} />
             </CardBody>
           </Card>
 
@@ -173,8 +112,12 @@ function RequestDetail() {
             <CardBody>
               <ActivityList username={item} />
               <div className="d-flex justify-content-between">
-                <Button color="danger" style={{fontSize:'1.2em'}}>Reject</Button>
-                <Button color="success" style={{fontSize:'1.2em'}}>Appoval</Button>
+                <Button color="danger" style={{ fontSize: "1.2em" }}>
+                  Reject
+                </Button>
+                <Button color="success" style={{ fontSize: "1.2em" }}>
+                  Appoval
+                </Button>
               </div>
             </CardBody>
           </Card>

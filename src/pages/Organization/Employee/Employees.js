@@ -14,13 +14,12 @@ function Employees() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=10", requestOptions)
+    fetch("http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=100", requestOptions)
       .then(response => {
         // console.log(response.status); // Access the status code
         return response.json();
       })
       .then(result => {
-        console.log(result.data);
         setempData(result.data);
       })
       .catch(error => console.log('error', error));

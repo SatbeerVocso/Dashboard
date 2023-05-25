@@ -20,7 +20,6 @@ function Designation() {
         return response.json()
       })
       .then(result => {
-        console.log(result.data)
         setdata(result.data)
       })
       .catch(error => console.log("error", error))

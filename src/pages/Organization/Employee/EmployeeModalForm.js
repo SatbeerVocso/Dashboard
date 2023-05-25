@@ -73,25 +73,25 @@ function EmployeeModalForm(props) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
-    var raw = JSON.stringify({
+    var raw1 = JSON.stringify({
       data: {
         name: fullname,
         email: email,
         mobileno: Pnumber,
         status: "Active",
-        // department: checkboxDataDepartment,
         // designation: checkboxDataDesignation,
       },
     })
-    const requestOptions = {
+    const requestOptions1 = {
       headers: myHeaders,
       method: "POST",
-      body: raw,
+      body: raw1,
       redirect: "follow",
     }
+  
     fetch(
       "http://localhost:1337/api/user-profiles?populate=*&pagination[page]=1&pagination[pageSize]=10",
-      requestOptions
+      requestOptions1
     )
       .then(response => {
         console.log(response.status) // Access the status code
@@ -99,19 +99,6 @@ function EmployeeModalForm(props) {
       })
       .then(result => {
         console.log(result)
-        toast.success("Data Submitted Successfully ", {
-          position: toast.POSITION.TOP_RIGHT,
-        })
-
-        // Reset form fields and state
-        setfname("")
-        setlname("")
-        setemail("")
-        setPnumber("")
-        setCheckboxDataDesignation("")
-        setcheckboxDataDepartment("")
-        setIsFormValid(false)
-        props.onClose()
       })
       .catch(error => {
         console.log("error", error)
@@ -119,34 +106,21 @@ function EmployeeModalForm(props) {
           position: toast.POSITION.TOP_RIGHT,
         })
       })
+
+ 
+    toast.success("Data Submitted Successfully ", {
+      position: toast.POSITION.TOP_RIGHT,
+    })
+    // Reset form fields and state
+    setfname("")
+    setlname("")
+    setemail("")
+    setPnumber("")
+    setCheckboxDataDesignation("")
+    setcheckboxDataDepartment("")
+    setIsFormValid(false)
+    props.onClose()
   }
-
-  // const FormSubmithandler = e => {
-  //   e.preventDefault()
-  //   let fullname = fname + " " + lname
-  //   const formdata = {
-  //     name: fullname,
-  //     email: email,
-  //     mobileno: Pnumber,
-  //     status: "Active",
-  //     department: checkboxDataDepartment,
-  //     designation: checkboxDataDesignation,
-  //   }
-  //   console.log(formdata)
-  //   toast.success("Data Submitted Successfully ", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //   })
-
-  //   // Reset form fields and state
-  //   setfname("")
-  //   setlname("")
-  //   setemail("")
-  //   setPnumber("")
-  //   setCheckboxDataDesignation("")
-  //   setcheckboxDataDepartment("")
-  //   setIsFormValid(false)
-  //   props.onClose()
-  // }
 
   const iconstyle = {
     cursor: "pointer",
