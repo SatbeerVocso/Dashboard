@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Card, CardBody } from "reactstrap"
 import { RequestListData } from "./RequestListData"
 import { motion } from "framer-motion"
@@ -16,6 +16,22 @@ function RequestList() {
   const toggleShowDataOthers = () => {
     setshowDataOthers(!showDataOthers)
   }
+
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  }
+  useEffect(() => {
+    fetch(
+      "http://localhost:1337/api/requestlists?populate=*&pagination[page]=1&pagination[pageSize]=25",
+      requestOptions
+    )
+      .then(response => response.json())
+      .then((result) => {
+        console.log(result.data)
+      })
+      .catch(error => console.log("error", error))
+  }, [])
 
   const iconstyle = {
     cursor: "pointer",

@@ -34,7 +34,6 @@ function Processes() {
 
     // Save the form data to local storage
     localStorage.setItem(formId, JSON.stringify(formData))
-
     setSubmit(true)
     setRequest("")
     setDescription("")
@@ -56,6 +55,7 @@ function Processes() {
       description,
     }
     localStorage.setItem("formdata", JSON.stringify(formData))
+    
   }, [request, description])
 
   useEffect(() => {

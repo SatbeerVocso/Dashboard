@@ -80,11 +80,11 @@ const Register = props => {
               <Card className="overflow-hidden">
                 <div className="bg-primary">
                   <div className="text-primary text-center p-4">
-                    <h5 className="text-white font-size-20">Free Register</h5>
-                    <p className="text-white-50">Get your free Veltrix account now.</p>
-                    <Link to="/index" className="logo logo-admin">
+                    <h5 className="text-white font-size-20">Sign up</h5>
+                    <p className="text-white-50">Create your account </p>
+                    <div className="logo logo-admin">
                       <img src={logoSm} height="24" alt="logo" />
-                    </Link>
+                    </div>
                   </div>
                 </div>
                 <CardBody className="p-4">
@@ -169,7 +169,6 @@ const Register = props => {
 
                       <div className="mt-2 mb-0 row">
                         <div className="col-12 mt-4">
-                          <p className="mb-0">By registering you agree to the Veltrix <Link to="#" className="text-primary">Terms of Use</Link></p>
                         </div>
                       </div>
                     </Form>
@@ -183,10 +182,6 @@ const Register = props => {
                     {" "}
                     Login
                   </Link>{" "}
-                </p>
-                <p>
-                  © {new Date().getFullYear()} Veltrix. Crafted with{" "}
-                  <i className="mdi mdi-heart text-danger" /> by Themesbrand
                 </p>
               </div>
             </Col>

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { RequestListData } from "pages/Dashboard/RequestListData"
 import DataField from "./DataField"
 import RequestProgressBar from "./RequestProgressBar"
+
 function RequestDetail() {
   const { id, listType } = useParams()
   const requestId = parseInt(id)

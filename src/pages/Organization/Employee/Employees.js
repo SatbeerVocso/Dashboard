@@ -24,7 +24,6 @@ function Employees() {
       })
       .then(result => {
         setempData(result.data)
-        console.log(result.data)
       })
       .catch(error => console.log("error", error))
   }, [])
@@ -75,11 +74,11 @@ function Employees() {
     ],
     rows: empData.map((item, i) => ({
       name: item.attributes.name,
-      profile: item.attributes.profile && item.attributes.profile.data && item.attributes.profile.data.attributes && item.attributes.profile.data.attributes.url ? (
+      profile: item.attributes.profile && item.attributes.profile.data && item.attributes.profile.data[0].attributes && item.attributes.profile.data[0].attributes.url ? (
         <img
-          src={`http://example.com${item.attributes.profile.data.attributes.url}`}
+          src={`http://localhost:1337${item.attributes.profile.data[0].attributes.url}`}
           alt="Profile"
-          style={{ width: '50px', height: '50px' }}
+          className="rounded-circle header-profile-user"
         />
       ) : (
         <span>No Image</span>

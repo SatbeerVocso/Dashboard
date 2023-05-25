@@ -16,7 +16,7 @@ function RequestProgressBar(props) {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    width: "30%",
+    width: "25%",
   }
 
   return (
@@ -25,7 +25,7 @@ function RequestProgressBar(props) {
         <div style={rowStyle}>
           <div>
             <div style={picstyle}>
-              <h6>Initiated By: {props.user.assigned_to}</h6>
+              <h6 >Initiated By: {props.user.assigned_to}</h6>
               <div>
                 <ArcherElement
                   id="element1"

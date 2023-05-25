@@ -72,11 +72,11 @@ const Login = props => {
                       Welcome Back !
                     </h5>
                     <p className="text-white-50">
-                      Sign in to continue to Veltrix.
+                      Sign in to continue to WorkFlow
                     </p>
-                    <Link to="/" className="logo logo-admin">
+                    <div  className="logo logo-admin">
                       <img src={logoSm} height="24" alt="logo" />
-                    </Link>
+                    </div>
                   </div>
                 </div>
 
@@ -161,10 +161,6 @@ const Login = props => {
                     {" "}
                     Signup now{" "}
                   </Link>{" "}
-                </p>
-                <p>
-                  © {new Date().getFullYear()} Veltrix. Crafted with{" "}
-                  <i className="mdi mdi-heart text-danger" /> by Themesbrand
                 </p>
               </div>
             </Col>
