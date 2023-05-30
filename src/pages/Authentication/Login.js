@@ -50,7 +50,6 @@
 //     }),
 //     onSubmit: (values) => {
 //       dispatch(loginUser(values, props.router.navigate));
-//       console.log(props.router.navigate)
 //     }
 //   });
 
