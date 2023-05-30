@@ -1,71 +1,72 @@
-import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { Row, Col, CardBody, Card, Container, Form, FormFeedback, Label, Input, Alert } from "reactstrap";
+import React, { useState } from "react"
+import {
+  Row,
+  Col,
+  CardBody,
+  Card,
+  Container,
+  Form,
+  Label,
+  Input,
+  Alert,
+} from "reactstrap"
+import logoSm from "../../assets/images/logo-sm.png"
+import { Link } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { useNavigate } from "react-router-dom"
+function Register() {
+  const navigate = useNavigate()
+  const [email, setEmail] = useState("")
+  const handleEmailChange = event => {
+    setEmail(event.target.value)
+  }
 
-// Formik validation
-import * as Yup from "yup";
-import { useFormik } from "formik";
+  const [password, setPassword] = useState("")
+  const handlePasswordChange = event => {
+    setPassword(event.target.value)
+  }
 
-// action
-import { registerUser, apiError, registerUserFailed } from "../../store/actions";
+  const [username, setUsername] = useState("")
+  const handleUsernameChange = event => {
+    setUsername(event.target.value)
+  }
 
-// Redux
-import { connect, useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+  const submithandler = async e => {
+    e.preventDefault()
+    try {
+      const response = await fetch(
+        "http://localhost:1337/api/auth/local/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+          }),
+        }
+      )
 
-// import images
-import logoSm from "../../assets/images/logo-sm.png";
-
-const Register = props => {
-  const history = useNavigate();
-
-  const dispatch = useDispatch();
-
-  const { user } = useSelector(state => ({
-    user: state.Account.user,
-  }));
-
-  useEffect(() => {
-    if (user) {
-      setTimeout(() => history("/login"), 3000);
+      if (response.ok) {
+        const data = await response.json()
+        console.log(data)
+        navigate('/login')
+        toast.success("Registration successful!") // Display success toast message
+      } else {
+        toast.error("Registration failed. Please try again.") // Display error toast message
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error("Registration failed. Please try again.") // Display error toast message
     }
+    setEmail("")
+    setPassword("")
+    setUsername("")
+  }
 
-    // setTimeout(() => {
-    //     dispatch(resetRegisterFlag());
-    // }, 3000);
-
-  }, [dispatch, user, history]);
-
-
-  const validation = useFormik({
-    // enableReinitialize : use this flag when initial values needs to be changed
-    enableReinitialize: true,
-
-    initialValues: {
-      email: '',
-      username: '',
-      password: '',
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().required("Please Enter Your Email"),
-      username: Yup.string().required("Please Enter Your User Name"),
-      password: Yup.string().required("Please Enter Your Password"),
-    }),
-    onSubmit: (values) => {
-      dispatch(registerUser(values));
-    }
-  });
-
-  // handleValidSubmit
-  const handleValidSubmit = (event, values) => {
-    props.registerUser(values);
-  };
-
-  useEffect(() => {
-    props.apiError("");
-  }, []);
-
-  document.title = "Register | Veltrix - React Admin & Dashboard Template";
   return (
     <React.Fragment>
       <div className="home-btn d-none d-sm-block">
@@ -81,131 +82,86 @@ const Register = props => {
                 <div className="bg-primary">
                   <div className="text-primary text-center p-4">
                     <h5 className="text-white font-size-20">Sign up</h5>
-                    <p className="text-white-50">Create your account </p>
+                    <p className="text-white-50">Create your account</p>
                     <div className="logo logo-admin">
                       <img src={logoSm} height="24" alt="logo" />
                     </div>
                   </div>
                 </div>
                 <CardBody className="p-4">
-                  <div className="p-3">
-                    {user ? (
-                      <Alert color="success" style={{ marginTop: "13px" }} className="mt-5">
-                        Register User Successful
-                      </Alert>
-                    ) : null}
-                    <Form className="mt-4" onSubmit={(e) => {
-                      e.preventDefault();
-                      validation.handleSubmit();
-                      return false;
-                    }}
-                      action="#">
+                  <Form className="mt-4" onSubmit={submithandler}>
+                    <div className="mb-3">
+                      <Label className="form-label" htmlFor="useremail">
+                        Email
+                      </Label>
+                      <Input
+                        name="email"
+                        className="form-control"
+                        placeholder="Enter Email"
+                        type="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        required
+                      ></Input>
+                    </div>
 
-                      <div className="mb-3">
-                        <Label className="form-label" htmlFor="useremail">Email</Label>
-                        <Input
-                          name="email"
-                          className="form-control"
-                          placeholder="Enter Email"
-                          type="email"
-                          id="useremail"
-                          onChange={validation.handleChange}
-                          onBlur={validation.handleBlur}
-                          value={validation.values.email || ""}
-                          invalid={
-                            validation.touched.email && validation.errors.email ? true : false
-                          }
-                        />
-                        {validation.touched.email && validation.errors.email ? (
-                          <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
-                        ) : null}
-                      </div>
+                    <div className="mb-3">
+                      <Label className="form-label" htmlFor="username">
+                        Name
+                      </Label>
+                      <Input
+                        name="username"
+                        className="form-control"
+                        placeholder="Enter Username"
+                        type="text"
+                        value={username}
+                        onChange={handleUsernameChange}
+                        required
+                      ></Input>
+                    </div>
 
-                      <div className="mb-3">
-                        <Label className="form-label" htmlFor="username">Username</Label>
-                        <Input
-                          name="username"
-                          className="form-control"
-                          placeholder="Enter Username"
-                          type="text"
-                          id="username"
-                          onChange={validation.handleChange}
-                          onBlur={validation.handleBlur}
-                          value={validation.values.username || ""}
-                          invalid={
-                            validation.touched.username && validation.errors.username ? true : false
-                          }
-                        />
-                        {validation.touched.username && validation.errors.username ? (
-                          <FormFeedback type="invalid">{validation.errors.username}</FormFeedback>
-                        ) : null}
+                    <div className="mb-3">
+                      <Label className="form-label" htmlFor="userpassword">
+                        Password
+                      </Label>
+                      <Input
+                        name="userpassword"
+                        className="form-control"
+                        placeholder="Enter Userpassword"
+                        type="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        required
+                      ></Input>
+                    </div>
+                    <div className="mb-3 row">
+                      <div className="col-12 text-end">
+                        <button
+                          className="btn btn-primary w-md waves-effect waves-light"
+                          type="submit"
+                        >
+                          Register
+                        </button>
                       </div>
-
-                      <div className="mb-3">
-                        <Label className="form-label" htmlFor="userpassword">Password</Label>
-                        <Input
-                          name="password"
-                          value={validation.values.password || ""}
-                          type="password"
-                          id="userpassword"
-                          className="form-control"
-                          placeholder="Enter Password"
-                          onChange={validation.handleChange}
-                          onBlur={validation.handleBlur}
-                          invalid={
-                            validation.touched.password && validation.errors.password ? true : false
-                          }
-                        />
-                        {validation.touched.password && validation.errors.password ? (
-                          <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
-                        ) : null}
-                      </div>
-
-                      <div className="mb-3 row">
-                        <div className="col-12 text-end">
-                          <button className="btn btn-primary w-md waves-effect waves-light" type="submit">Register</button>
-                        </div>
-                      </div>
-
-                      <div className="mt-2 mb-0 row">
-                        <div className="col-12 mt-4">
-                        </div>
-                      </div>
-                    </Form>
-                  </div>
+                    </div>
+                  </Form>
                 </CardBody>
               </Card>
               <div className="mt-5 text-center">
                 <p>
-                  Already have an account ?{" "}
+                  Already have an account?
                   <Link to="/login" className="fw-medium text-primary">
-                    {" "}
                     Login
-                  </Link>{" "}
+                  </Link>
                 </p>
               </div>
             </Col>
           </Row>
         </Container>
+        <ToastContainer />
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-Register.propTypes = {
-  registerUser: PropTypes.func,
-  registerUserFailed: PropTypes.func,
-  registrationError: PropTypes.any,
-  user: PropTypes.any,
-};
-
-const mapStatetoProps = state => {
-  const { user, registrationError, loading } = state.Account;
-  return { user, registrationError, loading };
-};
-
-export default connect(mapStatetoProps, {
-  registerUser,
-  apiError,
-  registerUserFailed,
-})(Register);
+export default Register

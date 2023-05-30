@@ -70,6 +70,7 @@ const App = () => {
           ))}
         </Route>
       </Routes>
+      
     </React.Fragment>
   );
 };
