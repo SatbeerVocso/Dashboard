@@ -203,13 +203,15 @@ import { Link } from "react-router-dom"
 import logoSm from "../../assets/images/logo-sm.png"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-// import { useDispatch } from "react-redux"
-// import { loginUser } from "store/actions"
+
+//FromUserSlice
+import { useDispatch } from "react-redux"
+import { setUserName } from "../../store/UserSlice/UserSlice"
 
 import { useNavigate } from "react-router-dom"
 
 function Login() {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [password, setPassword] = useState("")
   const handlePasswordChange = event => {
@@ -236,8 +238,8 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json()
+        dispatch(setUserName(username))
         console.log(data)
-        // dispatch(loginUser(props.router.navigate))
         navigate('/dashboard')
         toast.success("Login successfully!") // Display success toast message
       } else {
@@ -323,14 +325,14 @@ function Login() {
                   </Form>
                 </CardBody>
               </Card>
-              <div className="mt-5 text-center">
+              {/* <div className="mt-5 text-center">
                 <p>
                   Don&#39;t have an account ?{" "}
                   <Link to="/register" className="fw-medium text-primary">
                     Signup now
                   </Link>
                 </p>
-              </div>
+              </div> */}
             </Col>
           </Row>
         </Container>

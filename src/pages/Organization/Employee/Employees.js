@@ -74,23 +74,55 @@ function Employees() {
     ],
     rows: empData.map((item, i) => ({
       name: item.attributes.name,
-      profile: item.attributes.profile && item.attributes.profile.data && item.attributes.profile.data[0].attributes && item.attributes.profile.data[0].attributes.url ? (
-        <img
-          src={`http://localhost:1337${item.attributes.profile.data[0].attributes.url}`}
-          alt="Profile"
-          className="rounded-circle header-profile-user"
-        />
-      ) : (
-        <span>No Image</span>
-      ),
+      profile:
+        item.attributes.profile &&
+        item.attributes.profile.data &&
+        item.attributes.profile.data[0].attributes &&
+        item.attributes.profile.data[0].attributes.url ? (
+          <img
+            src={`http://localhost:1337${item.attributes.profile.data[0].attributes.url}`}
+            alt="Profile"
+            className="rounded-circle header-profile-user"
+          />
+        ) : (
+          <span>No Image</span>
+        ),
       number: item.attributes.mobileno,
       email: item.attributes.email,
-      department: item.attributes.department && item.attributes.department.data && item.attributes.department.data.attributes ? item.attributes.department.data.attributes.name : '',
-      designation: item.attributes.designation && item.attributes.designation.data && item.attributes.designation.data.attributes ? item.attributes.designation.data.attributes.name : '',
-      status: item.attributes.status
-    }))
-    
+      department:
+        item.attributes.department &&
+        item.attributes.department.data &&
+        item.attributes.department.data.attributes
+          ? item.attributes.department.data.attributes.name
+          : "",
+      designation:
+        item.attributes.designation &&
+        item.attributes.designation.data &&
+        item.attributes.designation.data.attributes
+          ? item.attributes.designation.data.attributes.name
+          : "",
+          status: (
+            <div
+              style={{ cursor: "pointer" }}
+              onMouseEnter={e =>
+                e.currentTarget.querySelector(".ti-email").style.visibility = "visible"
+              }
+              onMouseLeave={e =>
+                e.currentTarget.querySelector(".ti-email").style.visibility = "hidden"
+              }
+            >
+              <span className="me-2">{item.attributes.status}</span>
+              <span className="ti-email" style={{ visibility: "hidden" }} onClick={()=>sendemailhandler(item)}></span>
+            </div>
+          ),          
+    })),
   }
+
+  const sendemailhandler = (item) =>{
+      console.log(item.attributes.email)
+  }
+  
+
   return (
     <React.Fragment>
       <div className="page-content">

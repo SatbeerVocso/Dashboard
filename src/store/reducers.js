@@ -11,6 +11,8 @@ import Profile from "./auth/profile/reducer"
 
 //Calendar
 import calendar from "./calendar/reducer"
+// username
+import userReducer from './UserSlice/UserSlice'
 
 const rootReducer = combineReducers({
   // public
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
   ForgetPassword,
   Profile,
   calendar,
+  user: userReducer
 })
 
 export default rootReducer

@@ -29,33 +29,17 @@ import avatar from "../../assets/images/users/user-4.jpg";
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions";
 
-const UserProfile = props => {
-  const dispatch = useDispatch();
+import { useSelector } from 'react-redux';
 
+const UserProfile = props => {
+
+  const dispatch = useDispatch();
+  const username = useSelector((state) => state.user.username);
+  console.log(username);
+  
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
   const [idx, setidx] = useState(1);
-
-  useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"));
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        setname(obj.displayName);
-        setemail(obj.email);
-        setidx(obj.uid || 1);
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        setname(obj.username);
-        setemail(obj.email);
-        setidx(obj.uid || 1);
-      }
-      setTimeout(() => {
-        props.resetProfileFlag();
-      }, 3000);
-    }
-  }, [props.success]);
 
 
   const validation = useFormik({
@@ -102,7 +86,7 @@ const UserProfile = props => {
                     </div>
                     <div className="align-self-center flex-1">
                       <div className="text-muted">
-                        <h5>{name}</h5>
+                        <h5>{username}</h5>
                         <p className="mb-1">{email}</p>
                         <p className="mb-0">Id no: #{idx}</p>
                       </div>
@@ -164,12 +148,11 @@ UserProfile.propTypes = {
   error: PropTypes.any,
   success: PropTypes.any
 };
-
-const mapStatetoProps = state => {
-  const { error, success } = state.Profile;
-  return { error, success };
+const mapStateToProps = state => {
+  return {
+    username: state.user.username
+  };
 };
 
-export default withRouter(
-  connect(mapStatetoProps, { editProfile, resetProfileFlag })(UserProfile)
-);
+
+export default connect(mapStateToProps)(UserProfile);
