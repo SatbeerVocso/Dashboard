@@ -8,13 +8,11 @@ function ProcessesForm(props) {
 
   const [fields, setFields] = useState([])
   const [fieldCount, setFieldCount] = useState(0) // New state variable for field count
-  
+
   const handleAddField = () => {
     const newField = {
       id: fieldCount + 1, // Increment fieldCount for unique ID
       type: "processfield",
-      fieldName: "", // Initialize with an empty value
-      fieldType: "",
     }
     setFields(prevFields => {
       const updatedfield = [...prevFields, newField]
@@ -38,12 +36,25 @@ function ProcessesForm(props) {
       setHasSeparator(true)
     }
   }
-  const SaveFormDatahandler = () => {
+  const InitiateFormDatahandler = () => {
     console.log(fields)
   }
   const RecivedDataProcessField = (fieldType, fieldName) => {
-   console.log(fieldName,fieldType)
+    console.log(fieldName, fieldType)
+    const newField = {
+      id: fieldCount + 1, // Increment fieldCount for unique ID
+      type: "processfield",
+      fieldname: fieldName,
+      fieldType: fieldType,
+    }
+    setFields(prevFields => {
+      const updatedfield = [...prevFields, newField]
+      console.log(updatedfield)
+      return updatedfield
+    })
+    setFieldCount(prevCount => prevCount + 1) // Increment fieldCount
   }
+
   return (
     <div style={{ marginTop: "2em" }}>
       <Card style={{ width: "100%", margin: "auto" }}>
@@ -91,7 +102,7 @@ function ProcessesForm(props) {
               </div>
             ))}
             <div style={{ position: "absolute", right: "0" }}>
-              <Button color="warning" onClick={SaveFormDatahandler}>
+              <Button color="warning" onClick={InitiateFormDatahandler}>
                 Initiate
               </Button>
             </div>
