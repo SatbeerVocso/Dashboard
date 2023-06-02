@@ -44,6 +44,8 @@ function ProcessesField(props) {
       return
     }
     setFieldSubmit(true)
+    props.onUpdate(FieldType, FieldName);
+
   }
 
   const deleteComponent = () => {

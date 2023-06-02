@@ -21,6 +21,7 @@ function Department() {
       })
       .then(result => {
         setdata(result.data)
+        console.log(result)
       })
       .catch(error => console.log("error", error))
   }, [])

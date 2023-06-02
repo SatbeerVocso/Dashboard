@@ -8,15 +8,17 @@ function ProcessesForm(props) {
 
   const [fields, setFields] = useState([])
   const [fieldCount, setFieldCount] = useState(0) // New state variable for field count
-
+  
   const handleAddField = () => {
     const newField = {
       id: fieldCount + 1, // Increment fieldCount for unique ID
       type: "processfield",
+      fieldName: "", // Initialize with an empty value
+      fieldType: "",
     }
     setFields(prevFields => {
       const updatedfield = [...prevFields, newField]
-      console.log(newField.id , updatedfield)
+      console.log(updatedfield)
       return updatedfield
     })
     setFieldCount(prevCount => prevCount + 1) // Increment fieldCount
@@ -29,17 +31,21 @@ function ProcessesForm(props) {
   const [hasSeparator, setHasSeparator] = useState(false)
   // Update addSeparator function to set hasSeparator state to true
   const addSeparator = () => {
-    const lastField = fields[fields.length - 1];
+    const lastField = fields[fields.length - 1]
     console.log(lastField)
     if (lastField && lastField.type === "processfield") {
-      setFields(prevFields => [...prevFields, { type: "separator" }]);
-      setHasSeparator(true);
+      setFields(prevFields => [...prevFields, { type: "separator" }])
+      setHasSeparator(true)
     }
-  };
-  
-
+  }
+  const SaveFormDatahandler = () => {
+    console.log(fields)
+  }
+  const RecivedDataProcessField = (fieldType, fieldName) => {
+   console.log(fieldName,fieldType)
+  }
   return (
-    <div style={{marginTop:'2em'}}>
+    <div style={{ marginTop: "2em" }}>
       <Card style={{ width: "100%", margin: "auto" }}>
         <CardBody>
           <Input
@@ -67,7 +73,11 @@ function ProcessesForm(props) {
               <div key={index}>
                 {/* Conditionally render the horizontal line if hasSeparator is true */}
                 {field.type === "processfield" && (
-                  <ProcessesField id={field.id} onDelete={handleDeleteField} />
+                  <ProcessesField
+                    id={field.id}
+                    onDelete={handleDeleteField}
+                    onUpdate={RecivedDataProcessField}
+                  />
                 )}
                 {field.type === "separator" && hasSeparator && (
                   <hr
@@ -80,7 +90,11 @@ function ProcessesForm(props) {
                 )}
               </div>
             ))}
-
+            <div style={{ position: "absolute", right: "0" }}>
+              <Button color="warning" onClick={SaveFormDatahandler}>
+                Initiate
+              </Button>
+            </div>
             <Button
               color="success"
               onClick={handleAddField}

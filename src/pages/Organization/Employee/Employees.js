@@ -5,6 +5,7 @@ import EmployeeModal from "./EmployeeModal"
 import { motion } from "framer-motion"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { json } from "react-router-dom"
 
 function Employees() {
   const [empData, setempData] = useState([])
@@ -101,27 +102,52 @@ function Employees() {
         item.attributes.designation.data.attributes
           ? item.attributes.designation.data.attributes.name
           : "",
-          status: (
-            <div
-              style={{ cursor: "pointer" }}
-              onMouseEnter={e =>
-                e.currentTarget.querySelector(".ti-email").style.visibility = "visible"
-              }
-              onMouseLeave={e =>
-                e.currentTarget.querySelector(".ti-email").style.visibility = "hidden"
-              }
-            >
-              <span className="me-2">{item.attributes.status}</span>
-              <span className="ti-email" style={{ visibility: "hidden" }} onClick={()=>sendemailhandler(item)}></span>
-            </div>
-          ),          
+      status: (
+        <div
+          style={{ cursor: "pointer" }}
+          onMouseEnter={e =>
+            (e.currentTarget.querySelector(".ti-email").style.visibility =
+              "visible")
+          }
+          onMouseLeave={e =>
+            (e.currentTarget.querySelector(".ti-email").style.visibility =
+              "hidden")
+          }
+        >
+          <span className="me-2">{item.attributes.status}</span>
+          <span
+            className="ti-email"
+            style={{ visibility: "hidden" }}
+            onClick={() => sendemailhandler(item)}
+          ></span>
+        </div>
+      ),
     })),
   }
 
-  const sendemailhandler = (item) =>{
-      console.log(item.attributes.email)
+  var myHeaders = new Headers()
+  myHeaders.append("Content-Type", "application/json")
+  const sendemailhandler = item => {
+    var raw = JSON.stringify({
+      data: {
+        Sender: "satbeer@vocso.com",
+        Recipient: item.attributes.email,
+        Message: "Testing Email!!!",
+      },
+    })
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    }
+
+    fetch("http://localhost:1337/api/", requestOptions)
+      .then(response => response.json())
+      .then(result => console.log(result,'success'))
+      .catch(error => console.log("error", error))
   }
-  
 
   return (
     <React.Fragment>
