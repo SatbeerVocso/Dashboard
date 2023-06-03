@@ -36,25 +36,47 @@ function ProcessesForm(props) {
       setHasSeparator(true)
     }
   }
-  const InitiateFormDatahandler = () => {
-    console.log(fields)
-  }
+
   const RecivedDataProcessField = (fieldType, fieldName) => {
-    console.log(fieldName, fieldType)
     const newField = {
-      id: fieldCount + 1, // Increment fieldCount for unique ID
-      type: "processfield",
-      fieldname: fieldName,
-      fieldType: fieldType,
+      id: fieldCount + 1,
+      type: fieldType,
+      name: fieldName,
     }
-    setFields(prevFields => {
-      const updatedfield = [...prevFields, newField]
-      console.log(updatedfield)
-      return updatedfield
-    })
+    setFields(prevFields => [...prevFields, newField])
     setFieldCount(prevCount => prevCount + 1) // Increment fieldCount
   }
 
+  const InitiateFormDatahandler = () => {
+    const filterResult = fields.filter(f => f.id % 2 === 0);
+  
+    const requestData = filterResult.map(obj => ({
+      data: {
+        Label: obj.name,
+        Heading: text,
+        Type: obj.type,
+      },
+    }));
+  console.log(requestData)
+    Promise.all(
+      requestData.map(data =>
+        fetch("http://localhost:1337/api/createddataprocesses", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }).then(response => response.json())
+      )
+    )
+      .then(results => {
+        console.log(results, "Success!!!");
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
+  };
+  
   return (
     <div style={{ marginTop: "2em" }}>
       <Card style={{ width: "100%", margin: "auto" }}>

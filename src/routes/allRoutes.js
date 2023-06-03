@@ -43,6 +43,7 @@ import Dashboard from "../pages/Dashboard/index"
 
 // Request Component
 import RequestDetail from "pages/Request/RequestDetail"
+import GettingRequest from "pages/GettingRequest/GettingRequest"
 
 // Processes Component
  import MainProcesses from "pages/Processes/MainProcess"
@@ -132,8 +133,10 @@ import PagesProfile from "pages/Utility/pages-profile"
 const userRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
 
-  // Request Component
+  // RequestDetail Component by clicking of RequestList of Dashboard
   { path: "/dashboard/:listType/:id", component: <RequestDetail/> },
+  
+  {path:'/request', component:<GettingRequest/> },
 
   // Processes
   { path: "/processes", component: <MainProcesses /> },
