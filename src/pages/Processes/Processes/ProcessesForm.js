@@ -1,8 +1,12 @@
 import React, { useState } from "react"
 import { Card, CardBody, Button, Input, Label } from "reactstrap"
 import ProcessesField from "./ProcessesField"
+import { useEffect } from "react"
+import { json } from "react-router-dom"
 
 function ProcessesForm(props) {
+  const [request, setRequest] = useState("")
+
   const [text, settext] = useState("")
   const [isInputClicked, setisInputClicked] = useState(false)
 
@@ -57,7 +61,6 @@ function ProcessesForm(props) {
         Type: obj.type,
       },
     }));
-  console.log(requestData)
     Promise.all(
       requestData.map(data =>
         fetch("http://localhost:1337/api/createddataprocesses", {
@@ -76,9 +79,17 @@ function ProcessesForm(props) {
         console.log("Error:", error);
       });
   };
-  
+ useEffect(()=>{
+  const storedFormData = JSON.parse(localStorage.getItem("formdata"))
+  if(storedFormData){
+    const { request, description } = storedFormData
+      setRequest(request)
+     
+  }
+ },[])
   return (
     <div style={{ marginTop: "2em" }}>
+      <h4>{request}</h4>
       <Card style={{ width: "100%", margin: "auto" }}>
         <CardBody>
           <Input
@@ -123,7 +134,7 @@ function ProcessesForm(props) {
                 )}
               </div>
             ))}
-            <div style={{ position: "absolute", right: "0" }}>
+            <div style={{ position: "absolute", right: "0",marginRight:'2em' }}>
               <Button color="warning" onClick={InitiateFormDatahandler}>
                 Initiate
               </Button>

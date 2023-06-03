@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import TextInput from "common/TextInput"
 import { Button, Card, CardBody } from "reactstrap"
+import { motion } from "framer-motion"
 
 function GettingRequest() {
   const [data, SetData] = useState([])
@@ -29,7 +30,7 @@ function GettingRequest() {
     const updatedTexts = [...texts]
     updatedTexts[index] = value
     setTexts(updatedTexts)
-  } 
+  }
 
   const Submithandler = e => {
     e.preventDefault()
@@ -38,43 +39,52 @@ function GettingRequest() {
 
   return (
     <div className="page-content">
-      <div className="mt-3" style={{ marginLeft: "3em" }}>
-        <h2>Getting Request</h2>
-        <div style={{ width: "60%", margin: "auto" }}>
-          <Card className="mt-4">
-            <CardBody>
-              {data.length === 0 && (
-                <h2 className="text-center">No Request Found</h2>
-              )}
-              {data.length > 0 && (
-                <>
-                  <h4 style={{ textDecoration: "underline" }}>
-                    {data[0].attributes ? data[0].attributes.Heading : ""}
-                  </h4>
-                  {data.map((item, i) => {
-                    return (
-                      <div key={i} className="mt-4">
-                        <TextInput
-                          label={item.attributes.Label}
-                          type={item.attributes.Type}
-                          value={texts[i]}
-                          onChange={e => handleTextChange(i, e.target.value)}
-                        />
-                      </div>
-                    )
-                  })}
-                </>
-              )}
-              {
-                data.length > 0 &&<Button color="primary" onClick={Submithandler} className="mt-4">
-                Approved
-              </Button>
-              }
-              
-            </CardBody>
-          </Card>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="mt-3" style={{ marginLeft: "3em" }}>
+          <h2>Getting Request</h2>
+          <div style={{ width: "60%", margin: "auto" }}>
+            <Card className="mt-4">
+              <CardBody>
+                {data.length === 0 && (
+                  <h2 className="text-center">No Request Found</h2>
+                )}
+                {data.length > 0 && (
+                  <>
+                    <h4 style={{ textDecoration: "underline" }}>
+                      {data[0].attributes ? data[0].attributes.Heading : ""}
+                    </h4>
+                    {data.map((item, i) => {
+                      return (
+                        <div key={i} className="mt-4">
+                          <TextInput
+                            label={item.attributes.Label}
+                            type={item.attributes.Type}
+                            value={texts[i]}
+                            onChange={e => handleTextChange(i, e.target.value)}
+                          />
+                        </div>
+                      )
+                    })}
+                  </>
+                )}
+                {data.length > 0 && (
+                  <Button
+                    color="primary"
+                    onClick={Submithandler}
+                    className="mt-4"
+                  >
+                   Submit
+                  </Button>
+                )}
+              </CardBody>
+            </Card>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

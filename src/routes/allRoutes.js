@@ -46,7 +46,9 @@ import RequestDetail from "pages/Request/RequestDetail"
 import GettingRequest from "pages/GettingRequest/GettingRequest"
 
 // Processes Component
- import MainProcesses from "pages/Processes/MainProcess"
+import MainProcesses from "pages/Processes/MainProcess"
+
+import ProcessListPopUp from "pages/Processes/ProcessList"
 
 //OrganizationChart
 import Employees from "pages/Organization/Employee/Employees"
@@ -134,12 +136,13 @@ const userRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
 
   // RequestDetail Component by clicking of RequestList of Dashboard
-  { path: "/dashboard/:listType/:id", component: <RequestDetail/> },
-  
-  {path:'/request', component:<GettingRequest/> },
+  { path: "/dashboard/:listType/:id", component: <RequestDetail /> },
+
+  { path: "/request", component: <GettingRequest /> },
 
   // Processes
-  { path: "/processes", component: <MainProcesses /> },
+  { path: "/processes", component: <ProcessListPopUp /> },
+  { path: "/processes/addprocesses", component: <MainProcesses /> },
 
   //Organization
   { path: "/designation", component: <Designation /> },

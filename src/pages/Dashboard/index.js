@@ -207,14 +207,17 @@ const Dashboard = props => {
           </Row>
 
           <Button
-            color="success"
             style={{
               position: "fixed",
-              bottom: "10px",
+              bottom: "20px",
               right: "20px",
+              fontSize: "1.5em",
+              borderRadius: "50%",
+              background: "#ff6239",
+              color: "whitesmoke",
             }}
           >
-          <i className="ti-plus"></i>
+            <i className="ti-plus"></i>
           </Button>
         </Container>
       </div>

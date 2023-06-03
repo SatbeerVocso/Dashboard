@@ -31,7 +31,6 @@ function Processes() {
     }
 
     const formId = Date.now().toString() // Generate a unique ID for the form submission
-
     // Save the form data to local storage
     localStorage.setItem(formId, JSON.stringify(formData))
     setSubmit(true)
@@ -91,7 +90,7 @@ function Processes() {
               <ProcessesForm
                 key={index}
                 sectionIndex={index}
-                // requestname={request}
+                requestname={request}
               />
             ))}
 
