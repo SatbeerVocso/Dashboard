@@ -1,43 +1,31 @@
-import PropTypes from 'prop-types';
-import React from "react";
-import { Routes, Route, Switch } from 'react-router-dom';
-import { connect } from "react-redux";
+import PropTypes from "prop-types"
+import React from "react"
+import { Routes, Route, Switch } from "react-router-dom"
+import { connect } from "react-redux"
+import { Button } from "reactstrap"
 
 // Import Routes all
-import { userRoutes, authRoutes } from "./routes/allRoutes";
+import { userRoutes, authRoutes } from "./routes/allRoutes"
 
 // Import all middleware
-import Authmiddleware from "./routes/middleware/Authmiddleware";
+import Authmiddleware from "./routes/middleware/Authmiddleware"
 
 // layouts Format
-import NonAuthLayout from "./components/NonAuthLayout";
+import NonAuthLayout from "./components/NonAuthLayout"
 
 // Import scss
-import "./assets/scss/theme.scss";
+import "./assets/scss/theme.scss"
 
-// Import Firebase Configuration file
-// import { initFirebaseBackend } from "./helpers/firebase_helper"
+//FloatingButton
+import FloatingButton from "pages/FloatingButton/FloatingButton"
 
-import fakeBackend from "./helpers/AuthType/fakeBackend";
-
-// Activating fake backend
-fakeBackend();
-
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_APIKEY,
-//   authDomain: process.env.REACT_APP_AUTHDOMAIN,
-//   databaseURL: process.env.REACT_APP_DATABASEURL,
-//   projectId: process.env.REACT_APP_PROJECTID,
-//   storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-//   messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
-//   appId: process.env.REACT_APP_APPID,
-//   measurementId: process.env.REACT_APP_MEASUREMENTID,
-// }
-
-// init firebase backend
-// initFirebaseBackend(firebaseConfig)
+import { useLocation } from "react-router-dom"
 
 const App = () => {
+  const location = useLocation()
+  const islogin = location.pathname === "/login"
+  const isregister = location.pathname === "/register"
+
   return (
     <React.Fragment>
       <Routes>
@@ -45,44 +33,45 @@ const App = () => {
           {authRoutes.map((route, idx) => (
             <Route
               path={route.path}
-              element={
-                <NonAuthLayout>
-                  {route.component}
-                </NonAuthLayout>
-              }
+              element={<NonAuthLayout>{route.component}</NonAuthLayout>}
               key={idx}
               exact={true}
             />
           ))}
         </Route>
-        
+
         <Route>
           {userRoutes.map((route, idx) => (
             <Route
               path={route.path}
-              element={
-                <Authmiddleware>
-                  {route.component}
-                </Authmiddleware>}
+              element={<Authmiddleware>{route.component}</Authmiddleware>}
               key={idx}
               exact={true}
             />
           ))}
         </Route>
       </Routes>
-      
+      {!islogin && !isregister && (
+      <FloatingButton/>
+      )}
     </React.Fragment>
-  );
-};
+  )
+}
 
 App.propTypes = {
-  layout: PropTypes.any
-};
+  layout: PropTypes.any,
+}
 
 const mapStateToProps = state => {
   return {
     layout: state.Layout,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, null)(App)
+
+
+// !islogin checks if the current location is not the login page.
+// !isregister checks if the current location is not the register page.
+// If both conditions are true, meaning the current location is neither the login page nor the register page, the FloatingButton component is rendered.
+// In other words, the FloatingButton component will only be rendered if the user is not on the login or register page. This allows the FloatingButton to appear on other pages throughout the application.

@@ -11,8 +11,11 @@ import Profile from "./auth/profile/reducer"
 
 //Calendar
 import calendar from "./calendar/reducer"
-// username
-import userReducer from './UserSlice/UserSlice'
+// ProcessListMessage
+import ProcessMessageListSlice from "./ProcessMessageListSlice.js/ProcessMessageListSlice"
+
+//UserName
+import UserNameSlice from "./UserNameSlice/UserNameSlice"
 
 const rootReducer = combineReducers({
   // public
@@ -22,7 +25,8 @@ const rootReducer = combineReducers({
   ForgetPassword,
   Profile,
   calendar,
-  user: userReducer
+  processMessages: ProcessMessageListSlice,
+  userName:UserNameSlice
 })
 
 export default rootReducer

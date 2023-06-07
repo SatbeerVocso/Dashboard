@@ -8,7 +8,7 @@ function RequestList() {
   const [showData, setShowData] = useState(true)
   const [showDataUpcoming, setShowDataUpcoming] = useState(true)
   const [showDataOthers, setshowDataOthers] = useState(false)
-  const [RequestList,setRequestlist]=useState([])
+  const [RequestList, setRequestlist] = useState([])
   const toggleShowData = () => {
     setShowData(!showData)
   }
@@ -27,7 +27,7 @@ function RequestList() {
       requestOptions
     )
       .then(response => response.json())
-      .then((result) => {
+      .then(result => {
         console.log(result.data)
       })
       .catch(error => console.log("error", error))
@@ -68,10 +68,6 @@ function RequestList() {
                       animate={showData ? { opacity: 1, y: 0 } : {}}
                     >
                       <div className="d-flex justify-content-between ">
-                        <div style={{ width: "45%" }}>
-                          <span>{item.title}</span>
-                        </div>
-
                         <div style={{ width: "20%" }}>
                           <img
                             className="rounded-circle header-profile-user "
@@ -81,6 +77,9 @@ function RequestList() {
                           <span style={{ paddingLeft: "8px" }}>
                             {item.assigned_to}
                           </span>
+                        </div>
+                        <div style={{ width: "45%" }}>
+                          <span>{item.title}</span>
                         </div>
 
                         <div style={{ width: "20%" }}>
@@ -143,10 +142,6 @@ function RequestList() {
                       animate={showDataUpcoming ? { opacity: 1, y: 0 } : {}}
                     >
                       <div className="d-flex justify-content-between ">
-                        <div style={{ width: "45%" }}>
-                          <span>{item.title}</span>
-                        </div>
-
                         <div style={{ width: "20%" }}>
                           <img
                             className="rounded-circle header-profile-user "
@@ -156,6 +151,9 @@ function RequestList() {
                           <span style={{ paddingLeft: "8px" }}>
                             {item.assigned_to}
                           </span>
+                        </div>
+                        <div style={{ width: "45%" }}>
+                          <span>{item.title}</span>
                         </div>
 
                         <div style={{ width: "20%" }}>
@@ -216,10 +214,6 @@ function RequestList() {
                       animate={showDataOthers ? { opacity: 1, y: 0 } : {}}
                     >
                       <div className="d-flex justify-content-between ">
-                        <div style={{ width: "45%" }}>
-                          <span>{item.title}</span>
-                        </div>
-
                         <div style={{ width: "20%" }}>
                           <img
                             className="rounded-circle header-profile-user "
@@ -229,6 +223,10 @@ function RequestList() {
                           <span style={{ paddingLeft: "8px" }}>
                             {item.assigned_to}
                           </span>
+                        </div>
+                        
+                        <div style={{ width: "45%" }}>
+                          <span>{item.title}</span>
                         </div>
 
                         <div style={{ width: "20%" }}>

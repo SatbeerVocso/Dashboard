@@ -60,12 +60,12 @@ function Designation() {
   }
   return (
     <div className="page-content">
-      <div className="container-fluid">
+      <div className="container-fluid mt-4">
         <Row>
           <Col className="col-12">
             <Card>
               <CardBody>
-                <h2 className="mt-0 mb-3">Designation</h2>
+                <h2 className="mt-0 mb-4">Designation</h2>
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

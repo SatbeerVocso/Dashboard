@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types"
+import React, { useState, useEffect } from "react"
 import {
   Container,
   Row,
@@ -11,53 +11,52 @@ import {
   Form,
   FormFeedback,
   Label,
-  Input
-} from "reactstrap";
+  Input,
+} from "reactstrap"
 
 // Formik validation
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import * as Yup from "yup"
+import { useFormik } from "formik"
 
 // Redux
-import { connect, useDispatch } from "react-redux";
-import withRouter from 'components/Common/withRouter';
+import { connect, useDispatch } from "react-redux"
+import withRouter from "components/Common/withRouter"
 
 //Import Breadcrumb
-import Breadcrumb from "../../components/Common/Breadcrumb";
+import Breadcrumb from "../../components/Common/Breadcrumb"
 
-import avatar from "../../assets/images/users/user-4.jpg";
+import avatar from "../../assets/images/users/user-4.jpg"
 // actions
-import { editProfile, resetProfileFlag } from "../../store/actions";
+import { editProfile, resetProfileFlag } from "../../store/actions"
 
-import { useSelector } from 'react-redux';
 
 const UserProfile = props => {
+  //from usernameslice redux
 
-  const dispatch = useDispatch();
-  const username = useSelector((state) => state.user.username);
-  console.log(username);
-  
-  const [email, setemail] = useState("");
-  const [name, setname] = useState("");
-  const [idx, setidx] = useState(1);
-
+  const dispatch = useDispatch()
+  const [email, setemail] = useState("")
+  const [name, setname] = useState("")
+  const [idx, setidx] = useState(1)
 
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
 
     initialValues: {
-      username: name || '',
-      idx: idx || '',
+      username: name || "",
+      idx: idx || "",
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Please Enter Your User Name"),
     }),
-    onSubmit: (values) => {
-      dispatch(editProfile(values));
-    }
-  });
-
+    onSubmit: values => {
+      dispatch(editProfile(values))
+    },
+  })
+  useEffect(() => {
+    const StoredUsername = localStorage.getItem("username")
+    setname(StoredUsername)
+  }, [])
   return (
     <React.Fragment>
       <div className="page-content">
@@ -86,7 +85,7 @@ const UserProfile = props => {
                     </div>
                     <div className="align-self-center flex-1">
                       <div className="text-muted">
-                        <h5>{username}</h5>
+                        <h5>{name}</h5>
                         <p className="mb-1">{email}</p>
                         <p className="mb-0">Id no: #{idx}</p>
                       </div>
@@ -101,13 +100,12 @@ const UserProfile = props => {
 
           <Card>
             <CardBody>
-
               <Form
                 className="form-horizontal"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  validation.handleSubmit();
-                  return false;
+                onSubmit={e => {
+                  e.preventDefault()
+                  validation.handleSubmit()
+                  return false
                 }}
               >
                 <div className="form-group">
@@ -121,11 +119,15 @@ const UserProfile = props => {
                     onBlur={validation.handleBlur}
                     value={validation.values.username || ""}
                     invalid={
-                      validation.touched.username && validation.errors.username ? true : false
+                      validation.touched.username && validation.errors.username
+                        ? true
+                        : false
                     }
                   />
                   {validation.touched.username && validation.errors.username ? (
-                    <FormFeedback type="invalid">{validation.errors.username}</FormFeedback>
+                    <FormFeedback type="invalid">
+                      {validation.errors.username}
+                    </FormFeedback>
                   ) : null}
                   <Input name="idx" value={idx} type="hidden" />
                 </div>
@@ -140,19 +142,20 @@ const UserProfile = props => {
         </Container>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-UserProfile.propTypes = {
-  editProfile: PropTypes.func,
-  error: PropTypes.any,
-  success: PropTypes.any
-};
-const mapStateToProps = state => {
-  return {
-    username: state.user.username
-  };
-};
+// UserProfile.propTypes = {
+//   editProfile: PropTypes.func,
+//   error: PropTypes.any,
+//   success: PropTypes.any
+// };
+// const mapStateToProps = state => {
+//   return {
+//     username: state.user.username
+//   };
+// };
 
+export default UserProfile
 
-export default connect(mapStateToProps)(UserProfile);
+// export default connect(mapStateToProps)(UserProfile);

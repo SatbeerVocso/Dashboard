@@ -92,9 +92,9 @@ function Publish() {
                     Priority <i className="mdi mdi-chevron-right" />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>Action</DropdownItem>
-                    <DropdownItem>Another action</DropdownItem>
-                    <DropdownItem>Something else here</DropdownItem>
+                    <DropdownItem>High</DropdownItem>
+                    <DropdownItem>Low</DropdownItem>
+                    <DropdownItem>Medium</DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
 

@@ -1,5 +1,4 @@
 import React from 'react'
-
 function EmailSettings() {
   return (
     <div className='page-content'>

@@ -203,10 +203,10 @@ import { Link } from "react-router-dom"
 import logoSm from "../../assets/images/logo-sm.png"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-
-//FromUserSlice
 import { useDispatch } from "react-redux"
-import { setUserName } from "../../store/UserSlice/UserSlice"
+
+//FromUserNameSlice
+import { addUsername } from "store/UserNameSlice/UserNameSlice"
 
 import { useNavigate } from "react-router-dom"
 
@@ -224,6 +224,7 @@ function Login() {
   }
   const submithandler = async e => {
     e.preventDefault()
+    dispatch(addUsername(username))
     try {
       const response = await fetch("http://localhost:1337/api/auth/local", {
         method: "POST",
@@ -237,9 +238,9 @@ function Login() {
       })
 
       if (response.ok) {
-        const data = await response.json()
-        dispatch(setUserName(username))
+        const data = await response.json() 
         console.log(data)
+        localStorage.setItem("username",username)
         navigate('/dashboard')
         toast.success("Login successfully!") // Display success toast message
       } else {

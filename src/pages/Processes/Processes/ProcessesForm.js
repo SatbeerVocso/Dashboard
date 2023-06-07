@@ -2,12 +2,13 @@ import React, { useState } from "react"
 import { Card, CardBody, Button, Input, Label } from "reactstrap"
 import ProcessesField from "./ProcessesField"
 import { useEffect } from "react"
-import { json } from "react-router-dom"
-
+import { ToastContainer, toast } from "react-toastify"
 function ProcessesForm(props) {
-  const [request, setRequest] = useState("")
 
-  const [text, settext] = useState("")
+  console.log(props.requestname)
+
+  const [request, setRequest] = useState("")
+  const [heading, setHeading] = useState("")
   const [isInputClicked, setisInputClicked] = useState(false)
 
   const [fields, setFields] = useState([])
@@ -51,16 +52,24 @@ function ProcessesForm(props) {
     setFieldCount(prevCount => prevCount + 1) // Increment fieldCount
   }
 
-  const InitiateFormDatahandler = () => {
-    const filterResult = fields.filter(f => f.id % 2 === 0);
-  
+  useEffect(() => {
+    const storedFormData = JSON.parse(localStorage.getItem("formdata"))
+    if (storedFormData) {
+      const { request, description } = storedFormData
+      setRequest(request)
+    }
+  }, [])
+
+  const SubmitFormDatahandler = () => {
+    const filterResult = fields.filter(f => f.id % 2 === 0)
     const requestData = filterResult.map(obj => ({
       data: {
         Label: obj.name,
-        Heading: text,
+        Heading: heading,
         Type: obj.type,
+        Request: request,
       },
-    }));
+    }))
     Promise.all(
       requestData.map(data =>
         fetch("http://localhost:1337/api/createddataprocesses", {
@@ -73,28 +82,28 @@ function ProcessesForm(props) {
       )
     )
       .then(results => {
-        console.log(results, "Success!!!");
+        console.log(results, "Success!!!")
       })
       .catch(error => {
-        console.log("Error:", error);
-      });
-  };
- useEffect(()=>{
-  const storedFormData = JSON.parse(localStorage.getItem("formdata"))
-  if(storedFormData){
-    const { request, description } = storedFormData
-      setRequest(request)
-     
+        console.log("Error:", error)
+        toast.error("Failed to submit data", {
+          position: toast.POSITION.TOP_RIGHT,
+        })
+      })
+    toast.success("Data Submitted Successfully ", {
+      position: toast.POSITION.TOP_RIGHT,
+    })
   }
- },[])
+
   return (
     <div style={{ marginTop: "2em" }}>
+      <ToastContainer />
       <h4>{request}</h4>
       <Card style={{ width: "100%", margin: "auto" }}>
         <CardBody>
           <Input
             className="mb-4 mt-2"
-            type="text"
+            type="heading"
             style={{
               width: "26%",
               border: "none",
@@ -102,12 +111,12 @@ function ProcessesForm(props) {
               transition: "border-bottom-color 0.1s ease",
               borderBottomColor: isInputClicked ? "#02a499" : "",
             }}
-            value={text}
+            value={heading}
             onClick={() => {
               setisInputClicked(!isInputClicked)
             }}
             onChange={e => {
-              settext(e.target.value)
+              setHeading(e.target.value)
             }}
             placeholder="Untitled Section"
           ></Input>
@@ -134,9 +143,11 @@ function ProcessesForm(props) {
                 )}
               </div>
             ))}
-            <div style={{ position: "absolute", right: "0",marginRight:'2em' }}>
-              <Button color="warning" onClick={InitiateFormDatahandler}>
-                Initiate
+            <div
+              style={{ position: "absolute", right: "0", marginRight: "2em" }}
+            >
+              <Button color="warning" onClick={SubmitFormDatahandler}>
+                Done
               </Button>
             </div>
             <Button

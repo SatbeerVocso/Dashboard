@@ -24,6 +24,7 @@ function Employees() {
         return response.json()
       })
       .then(result => {
+        console.log(result.data)
         setempData(result.data)
       })
       .catch(error => console.log("error", error))
@@ -152,12 +153,12 @@ function Employees() {
   return (
     <React.Fragment>
       <div className="page-content">
-        <div className="container-fluid">
+        <div className="container-fluid mt-4">
           <Row>
             <Col className="col-12">
               <Card>
                 <CardBody>
-                  <h2 className="mt-1 mb-1">Employee Data</h2>
+                  <h2 className="mt-1 mb-4">Employee Data</h2>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

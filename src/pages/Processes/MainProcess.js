@@ -92,7 +92,7 @@ const MainProcesses = () => {
                   </TabPane>
                 </TabContent>
               </div>
-
+     
               <div className="actions clearfix">
                 <ul>
                   <li

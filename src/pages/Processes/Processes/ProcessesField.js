@@ -44,7 +44,8 @@ function ProcessesField(props) {
       return
     }
     setFieldSubmit(true)
-    props.onUpdate(FieldType, FieldName)
+    props.onUpdate(FieldType, FieldName);
+
   }
 
   const deleteComponent = () => {
@@ -66,19 +67,7 @@ function ProcessesField(props) {
     fontSize: "1.3em",
     cursor: "pointer",
   }
-  useEffect(() => {
-    const handleBeforeUnload = event => {
-      event.preventDefault()
-      // Cancel the event to prevent the page from navigating back to the parent component
-      event.returnValue = ""
-    }
-
-    window.addEventListener("beforeunload", handleBeforeUnload)
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload)
-    }
-  }, [])
+  
   return (
     <div>
       <motion.div
@@ -243,7 +232,7 @@ function ProcessesField(props) {
                       </div>
 
                       <div>
-                        <span className="text-danger">
+                        <span  className="text-danger">
                           <i
                             className="ti-trash "
                             style={iconstyle}

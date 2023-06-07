@@ -10,7 +10,7 @@ export const RequestListData = {
   TodayRequestListData:[
     {
       id: 1,
-      title: "Draft the new contract document for sales team",
+      title: "Purchase Request",
       assigned_to: "Arya Stark",
       assignee_avatar: avatarImg2,
       due_date: "Today 10am",
@@ -20,7 +20,7 @@ export const RequestListData = {
     },
     {
       id: 2,
-      title: "iOS App home page",
+      title: "Employee Data Info",
       assigned_to: "James B",
       assignee_avatar: avatarImg3,
       due_date: "Today 4pm",
@@ -31,7 +31,7 @@ export const RequestListData = {
     },
     {
       id: 3,
-      title: "Write a release note",
+      title: "Vacation Request",
       assigned_to: "Kevin C",
       assignee_avatar: avatarImg6,
       due_date: "Today 4pm",

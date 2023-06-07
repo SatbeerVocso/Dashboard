@@ -164,7 +164,7 @@ const SidebarContent = props => {
             </li>
 
             <li>
-              <Link to="/request" className=" waves-effect">
+              <Link to="/Listedrequest" className=" waves-effect">
                 <i className="ti-exchange-vertical"></i>
                 <span>{props.t("Request")}</span>
               </Link>
