@@ -6,7 +6,8 @@ import ReactFlow, {
 } from "react-flow-renderer"
 import "./processflow.css"
 import Option from "./Option"
-
+import Approval from "./Approval"
+import Inputs from "./Input"
 const ProcessFlow = () => {
   const [showComponent, setShowComponent] = useState(false)
   const [nodes, setNodes, onNodesChange] = useNodesState([
@@ -14,7 +15,7 @@ const ProcessFlow = () => {
       id: "1",
       type: "input",
       data: { label: "Purchase Request" },
-      position: { x: 0, y: 100 },
+      position: { x: 500, y: 0 },
       style: {
         fontSize: 18,
         backgroundColor: "#00888b",
@@ -27,8 +28,14 @@ const ProcessFlow = () => {
     {
       id: "2",
       type: "default",
-      data: { label: <i className="ti-plus"></i> },
-      position: { x: 95, y: 300 },
+      data: {
+        label: (
+          <div className="label">
+            <i className="ti-plus"></i>
+          </div>
+        ),
+      },
+      position: { x: 606, y: 200 },
       className: "custom-node",
     },
   ])
@@ -57,22 +64,43 @@ const ProcessFlow = () => {
     }
   }
 
-  const addNode = (label, ThirdNodeposition, FourthNodeposition) => {
-    const newNode = [
-      {
-        id: (nodes.length + 1).toString(),
-        type: "default",
-        data: { label: label },
-        position: ThirdNodeposition,
-      },
-      {
-        id: (nodes.length + 2).toString(),
-        type: "default",
-        data: { label: <i className="ti-plus"></i> },
-        position: FourthNodeposition,
-        className: "custom-node",
-      },
-    ]
+  const addNode = (
+    label,
+    ThirdNodeposition,
+    FourthNodeposition,
+    thirdnodeStyle
+  ) => {
+    let newNode =[]
+    if(label==='Approval'){
+      newNode = [
+        {
+          id: (nodes.length + 1).toString(),
+          type: "default",
+          data: { label: <Approval/> },
+          position: ThirdNodeposition,
+          style: thirdnodeStyle
+        },
+        // {
+        //   id: (nodes.length + 2).toString(),
+        //   type: "default",
+        //   data: { label: <i className="ti-plus"></i> },
+        //   position: FourthNodeposition,
+        //   className: "custom-node",
+        // },
+      ]
+    }
+    else if(label==="Input"){
+      newNode = [
+        {
+          id: (nodes.length + 1).toString(),
+          type: "default",
+          data: { label: <Inputs/> },
+          position: ThirdNodeposition,
+          style: thirdnodeStyle
+        },
+      ]
+    }
+    
     const newEdge = [
       {
         id: `e2-${newNode[0].id}`,
@@ -80,12 +108,12 @@ const ProcessFlow = () => {
         target: newNode[0].id,
         type: "straight",
       },
-      {
-        id: `e3-${newNode[1].id}`,
-        source: (nodes.length + 1).toString(),
-        target: newNode[1].id,
-        type: "straight",
-      },
+      // {
+      //   id: `e3-${newNode[1].id}`,
+      //   source: (nodes.length + 1).toString(),
+      //   target: newNode[1].id,
+      //   type: "straight",
+      // },
     ]
     setNodes(nds => nds.concat(newNode))
     setEdges(eds => eds.concat(newEdge))

@@ -1,42 +1,60 @@
 import React, { useState } from "react"
 import Draggable from "react-draggable"
 import "./processflow.css"
+
 function Option(props) {
   
   const handleClick = (label, e) => {
     e.stopPropagation()
     let ThirdNodeposition
     let FourthNodeposition
-
+    let thirdnodeStyle 
     if (label === "Input") {
       ThirdNodeposition = {
-        x: -100,
+        x: 700,
         y: 300,
       }
       FourthNodeposition = {
-        x: -100,
-        y: 400,
+        x: 805,
+        y: 500,
+      }
+      thirdnodeStyle ={
+        fontSize: 18,
+        // backgroundColor: "#00888b",
+        color: "whitesmoke",
+        width: "350px",
+        height: "250px",
+        border: "none",
       }
     } else if (label === "Approval") {
       ThirdNodeposition = {
-        x: -300,
+        x: 200,
         y: 300,
       }
       FourthNodeposition = {
-        x: -300,
-        y: 400,
+        x: 405,
+        y: 500,
       }
-    } else {
-      ThirdNodeposition = {
-        x: 300,
-        y: 300,
+      thirdnodeStyle ={
+        fontSize: 18,
+        // backgroundColor: "#0166a2",
+        width: "350px",
+        height: "250px",
+        border: "none",
+        color: "whitesmoke",
       }
-      FourthNodeposition = {
-        x: 300,
-        y: 400,
-      }
-    }
-    props.onAddNode(label, ThirdNodeposition, FourthNodeposition)
+    } 
+    // else {
+    //   ThirdNodeposition = {
+    //     x: 300,
+    //     y: 300,
+    //   }
+    //   FourthNodeposition = {
+    //     x: 300,
+    //     y: 400,
+    //   }
+    // }
+    props.onAddNode(label, ThirdNodeposition, FourthNodeposition,thirdnodeStyle)
   }
 
   return (
