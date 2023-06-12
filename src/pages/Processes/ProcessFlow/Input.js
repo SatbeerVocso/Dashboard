@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Button, Input } from "reactstrap"
 import "./processflow.css"
 import InputDone from "./InputDone"
-
 function Inputs() {
   const [heading, setHeading] = useState("")
   const [isInputClicked, setisInputClicked] = useState(false)
@@ -11,7 +10,6 @@ function Inputs() {
   const [searchText, setSearchText] = useState("")
   const [results, setResults] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(null)
-  const [showNoDataFound, setShowNoDataFound] = useState(false)
 
   const [submit, setSubmit] = useState(false)
 
@@ -36,7 +34,6 @@ function Inputs() {
       email.toLowerCase().includes(value.toLowerCase())
     )
     setResults(filteredResults)
-    setShowNoDataFound(filteredResults.length === 0)
   }
   const handleResultSelect = result => {
     const index = emails.indexOf(result)
@@ -125,7 +122,7 @@ function Inputs() {
                 setisInputClicked2(!isInputClicked2)
               }}
             />
-            {results.length > 0 ? (
+            {results.length > 0 && (
               <div
                 style={{
                   display: "flex",
@@ -145,9 +142,10 @@ function Inputs() {
                   </span>
                 ))}
               </div>
-            ) : showNoDataFound ? (
-              <p>No data found</p>
-            ) : null}
+            )}
+            {results.length === 0 && (
+              <p>{results.length === 0 ? "" : "No Data Found"}</p>
+            )}
           </div>
 
           <div
