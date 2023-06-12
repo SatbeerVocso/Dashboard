@@ -9,7 +9,7 @@ function InputDone(props) {
     <div>
       <h5 style={{ color: "#9d40ab" }}>{props.heading}</h5>
       <div style={{ textAlign: "left", fontSize: "15px" }} className="mt-3">
-        <span>Who can Approve this ?</span>
+        <span>Who can Input this ?</span>
       </div>
       <div
         style={{

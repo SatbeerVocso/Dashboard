@@ -17,6 +17,7 @@ function Publish() {
   const [showDepartment, setShowDepartment] = useState(false)
   const [showDesignation, setShowDesignation] = useState(false)
   const [info_dropup1, setInfo_dropup1] = useState(false);
+  const[selectedPriority,setselectedPriority]= useState('')
 
   const togglehandlerDepartment = () => {
     setShowDepartment(!showDepartment)
@@ -26,6 +27,10 @@ function Publish() {
   }
  const Submithandler =(e)=>{
   e.preventDefault()
+ }
+
+ const handleTypeclick = (clicked)=>{
+  setselectedPriority(clicked)
  }
   const iconstyle = {
     cursor: "pointer",
@@ -86,15 +91,17 @@ function Publish() {
                 <Dropdown
                   isOpen={info_dropup1}
                   direction="right"
-                  toggle={() => setInfo_dropup1(!info_dropup1)}
+                  toggle={() => {
+                    setInfo_dropup1(!info_dropup1) 
+                  }}
                 >
                   <DropdownToggle className="btn btn-info" caret>
-                    Priority <i className="mdi mdi-chevron-right" />
+                  {selectedPriority === "" ? 'Prirority' : selectedPriority}<i className="mdi mdi-chevron-right" />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>High</DropdownItem>
-                    <DropdownItem>Low</DropdownItem>
-                    <DropdownItem>Medium</DropdownItem>
+                    <DropdownItem onClick={()=>handleTypeclick('High')}>High</DropdownItem>
+                    <DropdownItem onClick={()=>handleTypeclick('Low')}>Low</DropdownItem>
+                    <DropdownItem onClick={()=>handleTypeclick('Medium')}>Medium</DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
 

@@ -5,11 +5,11 @@ import ApprovalDone from "./ApprovalDone"
 function Approval() {
   const [heading, setHeading] = useState("")
   const [isInputClicked, setisInputClicked] = useState(false)
+  const [isInputClicked2, setisInputClicked2] = useState(false)
 
   const [searchText, setSearchText] = useState("")
   const [results, setResults] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(null)
-  const [showNoDataFound, setShowNoDataFound] = useState(false)
 
   const [submit, setSubmit] = useState(false)
 
@@ -34,7 +34,6 @@ function Approval() {
       email.toLowerCase().includes(value.toLowerCase())
     )
     setResults(filteredResults)
-    setShowNoDataFound(filteredResults.length === 0)
   }
   const handleResultSelect = result => {
     const index = emails.indexOf(result)
@@ -112,9 +111,18 @@ function Approval() {
               value={searchText}
               onChange={handleInputChange}
               placeholder="Start typing..."
-              style={{ ...InputStyle, width: "75%" }}
+              style={{
+                border: "none",
+                borderBottom: "2px solid",
+                transition: "border-bottom-color 0.1s ease",
+                borderBottomColor: isInputClicked2 ? "#02a499" : "",
+                width: "75%",
+              }}
+              onClick={() => {
+                setisInputClicked2(!isInputClicked2)
+              }}
             />
-            {results.length > 0 ? (
+            {results.length > 0 && (
               <div
                 style={{
                   display: "flex",
@@ -134,9 +142,10 @@ function Approval() {
                   </span>
                 ))}
               </div>
-            ) : showNoDataFound ? (
-              <p>No data found</p>
-            ) : null}
+            )}
+            {results.length === 0 && (
+              <p>{results.length === 0 ? "" : "No Data Found"}</p>
+            )}
           </div>
 
           <div
